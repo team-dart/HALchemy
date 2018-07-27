@@ -55,4 +55,24 @@ describe('Ship model', () => {
         assert.equal(errors.hull.kind, 'min');
     });
 
+    it('validates fields that have max of 100', () => {
+        const ship = new Ship({
+            name: 'Shape Shipster',
+            oxygen: 101,
+            lifeSupport: 185, 
+            fuel: 110,
+            hal: 160,
+            payload: 195,
+            hull: 160
+        });
+
+        const errors = getErrors(ship.validateSync(), 6);
+        assert.equal(errors.oxygen.kind, 'max');
+        assert.equal(errors.lifeSupport.kind, 'max');
+        assert.equal(errors.fuel.kind, 'max');
+        assert.equal(errors.hal.kind, 'max');
+        assert.equal(errors.payload.kind, 'max');
+        assert.equal(errors.hull.kind, 'max');
+    });
+
 });
