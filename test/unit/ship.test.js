@@ -14,7 +14,7 @@ describe('Ship model', () => {
             payload: 95,
             hull: 100
         };
-        
+
         const ship = new Ship(data);
     
         const json = ship.toJSON();
@@ -22,5 +22,11 @@ describe('Ship model', () => {
         assert.deepEqual(json, data);
         assert.isUndefined(ship.validateSync());
     });
+
+    it('name, oxygen, lifeSupport, fuel, hal, payload, hull all required', () => {
+        const ship = new Ship({});
+        const errors = getErrors(ship.validateSync(), 7);
+        assert.equal(errors.name.kind, 'required');
+    }); 
 
 });
