@@ -5,6 +5,7 @@ describe('User Model', () => {
 
     it('Verifies a good user model', () => {
         const data = {
+            name: 'username',
             email: 'example@example.com',
             password: 'abc123',
             stage: 2,
