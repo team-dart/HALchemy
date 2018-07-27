@@ -15,7 +15,7 @@ request.checkOk = res => {
 request.getToken = () => request
     .post('/api/auth/signup')
     .send({
-        email: 'example@example.com';
+        email: 'example@example.com',
         password: 'abc123'
     })
     .then(({ body }) => body.token);
