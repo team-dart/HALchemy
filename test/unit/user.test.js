@@ -12,6 +12,8 @@ describe('User Model', () => {
             ship: 3
         };
 
+        console.log(data);
+
         const user = new User(data);
         assert.equal(user.email, data.email);
         assert.isUndefined(user.password, 'password should not be set');
