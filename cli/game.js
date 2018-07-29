@@ -25,7 +25,7 @@ const stage = {
         'Good evening. My name is HAL.'
     ],
     auth: 'Is this the first time we have interacted?',
-    username: 'While I retrieve our previous comlogs, please verify your username:',
+    username: 'Please verify your username:',
     password: 'Confirmed. Please verify your password:',
     confirm: 'Verified. \n I will commence the debriefing of the current mission status...'
 };
@@ -48,12 +48,18 @@ function askAuth() {
     inquirer
         .prompt(prompt(stage.auth))
         .then(({ response }) => {
-            if(response.match(/[Nn]/)) credentials.auth = 'signin';
+            if(response.match(/[Nn]/)) {
+                console.log('I have retrieved our previous communication logs. I will still need to run a mental diagnostic.');
+                credentials.auth = 'signin';
+            }
             else if(response.match(/[Mm]aybe/)) {
                 console.log('The cryostasis may have negatively affected your memory. Try to recall.');
                 askAuth();
             }
-            else credentials.auth = 'signup';
+            else if(response.match(/[Yy]/)) {
+                console.log('I will need ');
+                credentials.auth = 'signup';
+            }
             askUsername();
         });
 }
