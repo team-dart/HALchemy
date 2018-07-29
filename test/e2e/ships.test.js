@@ -4,7 +4,7 @@ const request = require('./request');
 const { dropCollection } = require('./db');
 const { checkOk } = request;
 
-describe('Ships API', () => {
+describe.only('Ships API', () => {
 
     beforeEach(() => dropCollection('ships'));
 
