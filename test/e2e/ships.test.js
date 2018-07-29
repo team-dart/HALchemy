@@ -37,4 +37,12 @@ describe.only('Ships API', () => {
     it('saves a ship', () => {
         assert.isOk(spaceTitanic._id);
     });
+
+    it('gets a ship by id', () => {
+        return request
+            .get(`/api/ships/${spaceTitanic._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, spaceTitanic);
+            });
+    });
 });
