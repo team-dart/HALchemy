@@ -4,7 +4,7 @@ const request = require('./request');
 const { dropCollection } = require('./db');
 const { checkOk } = request;
 
-describe.only('Ships API', () => {
+describe('Ships API', () => {
 
     beforeEach(() => dropCollection('ships'));
 
@@ -33,7 +33,7 @@ describe.only('Ships API', () => {
                 spaceTitanic = data;
             });
     });
-
+    
     it('saves a ship', () => {
         assert.isOk(spaceTitanic._id);
     });
