@@ -1,5 +1,6 @@
 const { assert } = require('chai');
 const User = require('../../lib/models/user');
+const { Types } = require('mongoose');
 
 describe('User Model', () => {
 
@@ -9,10 +10,8 @@ describe('User Model', () => {
             email: 'example@example.com',
             password: 'abc123',
             stage: 2,
-            ship: 3
+            ship: Types.ObjectId()
         };
-
-        console.log(data);
 
         const user = new User(data);
         assert.equal(user.email, data.email);
