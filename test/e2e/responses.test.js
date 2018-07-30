@@ -57,7 +57,22 @@ describe('Responses API', () => {
             .then(({ body }) => {
                 assert.isDefined(body[0].output);
             });
+    });
 
+    it('gets a response by multi query', () => {
+        return request
+            .get('/api/responses?input=hi+hello&mood=100')
+            .then(({ body }) => {
+                assert.isDefined(body[0].output);
+            });
+    });
+
+    it.only('parses user inputs to only keywords', () => {
+        const input = 'i choose to go through the asteroids';
+        const sentence = input.split(' ');
+        const answer = sentence.filter(w => w.match('asteroids' || /through/));
+
+        assert.deepEqual(answer, ['asteroid', 'through']);
     });
 
 });

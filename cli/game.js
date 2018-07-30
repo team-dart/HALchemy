@@ -3,24 +3,21 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
-const sample = (arr) => Math.floor(Math.random() * arr.length);
 
 
 
 const prompt = (message) => {
     return {
         type: 'input',
-        name: 'response',
+        name: 'answer',
         message: message,
     };
 };
 
+
+
+
 const responses = {
-    greetings: [
-        'Greetings. I am HAL.',
-        'Hello. My name is HAL.',
-        'Good evening. My name is HAL.'
-    ],
     auth: 'Is this the first time we have interacted?',
     username: 'Please verify your username:',
     password: 'Confirmed. Please verify your password:',
@@ -41,6 +38,7 @@ let credentials = {};
 class Game {
     constructor(api) {
         this.api = api;
+        this.mood = 100;
     }
 
     start() {
@@ -51,7 +49,7 @@ class Game {
             )
         );
         inquirer
-            .prompt(prompt(responses.greetings[sample(responses.greetings)]))
+            .prompt(prompt('Hello. My name is HAL.'))
             .then(() => this.askAuth());
     }
 
@@ -100,6 +98,7 @@ class Game {
             })
             .then(body => {
                 this.api.token = body.token;
+                
                 this.startDialogue();
             });
     }
@@ -107,18 +106,34 @@ class Game {
     startDialogue() {
         inquirer
             .prompt(prompt(responses.confirm))
-            .then(({ response }) => {
-                this.generateResponse(response);
+            .then(({ answer }) => {
+                this.generateResponse(answer);
             });
     }
+
     generateResponse(input) {
-        return this.api.think(input)
-            .then(body => {
-                return inquirer.prompt(prompt(body.output));
-            })
-            .then(({ response }) => {
-                this.generateResponse(response);
-            });
+        // input = {
+        //     answer: 'hi+hello',
+        //     mood: 100;
+        // }
+
+        const sentence = input.answer.toLowerCase().split(' ');
+        // BESPOKE NATURAL LANGUAGE PROCESSOR
+        // sentence is an array of words
+        // asteroids, ship, stats, avoid, go through, yes, no, maybe, ...
+        input.answer = sentence.map(w => w.match(/asteroid/ || /go through/));
+        if(input.answer.includes('ship' && 'stats')) {
+            return this.api.getShipStats();
+        }
+        else {
+            input.answer = input.answer.join('+');
+            input.mood = this.mood;
+            return this.api.think(input)
+                .then(body => inquirer.prompt(prompt(body.output)))
+                .then(({ answer }) => {
+                    this.generateResponse({ answer });
+                });
+        }
     }
 }
 
