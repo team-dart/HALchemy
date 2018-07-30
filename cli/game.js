@@ -1,8 +1,16 @@
 
 const inquirer = require('inquirer');
-
+const chalk = require('chalk');
+const clear = require('clear');
+const figlet = require('figlet');
 const sample = (arr) => Math.floor(Math.random() * arr.length);
 
+clear();
+console.log(
+    chalk.green(
+        figlet.textSync('HALCHEMY', { horizontalLayout: 'fitted' })
+    )
+);
 
 const prompt = (message) => {
     return {
