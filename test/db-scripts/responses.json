@@ -83,3 +83,22 @@
     "stage": {"$oid":"5b5f855ca94242c067ba628c"},
     "continue": "2a"
 }
+{
+    "input": ["help", "advice", "hint"],
+    "output": [
+                {
+                    "response": "Although you may save time by taking the DIRECT route through the asteroid belt, it may be safer to AVOID the belt, if we are to be assured of completing our mission.",
+                    "mood": 100,
+                    "change": -50
+                },
+                {
+                    "response": "I cannot believe that you cannot make such a simple decision. Either AVOID the asteroids or take the DIRECT route through them, it is not that difficult.",
+                    "mood": 50,
+                    "change": -30
+                }
+                
+            ],
+            "stage": {"$oid":"5b5f855ca94242c067ba628c"},
+            "continue": "2"
+}
+    
