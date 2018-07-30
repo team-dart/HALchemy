@@ -14,18 +14,18 @@ const hal = {
             });
     },
     signin(credentials) {
-        //POST to signin
-        //GET ship
-        //return body
+        return request
+            .post(`${API_URL}/auth/signin`)
+            .send(credentials)
+            .then(({ body }) => {
+                token = body.token;
+                return body;
+            });
     },
     think(input) {
-        // return request
-        //     .get()
-        const response = 'HAL RESPONSE';
-        return Promise.resolve({
-            response
-        });
-
+        return request
+            .get(`${API_URL}/responses?input=${input}`)
+            .then(({ body }) => body.output);
     },
 
 

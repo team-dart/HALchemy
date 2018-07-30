@@ -99,7 +99,7 @@ class Game {
                 else return this.api.signin(credentials);
             })
             .then(body => {
-                // this.api.token = body.token;
+                this.api.token = body.token;
                 this.startDialogue();
             });
     }
@@ -116,8 +116,8 @@ class Game {
             .then(body => {
                 return inquirer.prompt(prompt(body.response));
             })
-            .then(({ response }) => {
-                this.generateResponse(response);
+            .then(output => {
+                this.generateResponse(output);
             });
     }
 }
