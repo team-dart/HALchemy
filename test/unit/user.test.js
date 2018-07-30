@@ -9,7 +9,7 @@ describe('User Model', () => {
             name: 'username',
             email: 'example@example.com',
             password: 'abc123',
-            stage: 2,
+            stage: Types.ObjectId(),
             ship: Types.ObjectId()
         };
 
