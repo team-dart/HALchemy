@@ -13,7 +13,7 @@ request.checkOk = res => {
 };
 
 request.getToken = () => request
-    .post('/api/auth/signup')
+    .post('/api/signup')
     .send({
         email: 'example@example.com',
         password: 'abc123'
