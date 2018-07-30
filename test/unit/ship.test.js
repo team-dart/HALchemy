@@ -35,26 +35,6 @@ describe('Ship model', () => {
         assert.equal(errors.hull.kind, 'required');
     }); 
 
-    it('validates fields that have min of 0', () => {
-        const ship = new Ship({
-            name: 'Shape Shipster',
-            oxygen: -1,
-            lifeSupport: -85, 
-            fuel: -100,
-            hal: -60,
-            payload: -95,
-            hull: -60
-        });
-
-        const errors = getErrors(ship.validateSync(), 6);
-        assert.equal(errors.oxygen.kind, 'min');
-        assert.equal(errors.lifeSupport.kind, 'min');
-        assert.equal(errors.fuel.kind, 'min');
-        assert.equal(errors.hal.kind, 'min');
-        assert.equal(errors.payload.kind, 'min');
-        assert.equal(errors.hull.kind, 'min');
-    });
-
     it('validates fields that have max of 100', () => {
         const ship = new Ship({
             name: 'Shape Shipster',
