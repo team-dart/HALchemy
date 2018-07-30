@@ -27,7 +27,7 @@
             "change": 10
         },
         {
-            "response": "I have not been oin agreement with your judgement up to now. However, this is a wise decision. Updating route.",
+            "response": "I have not been in agreement with your judgement up to now. However, this is a wise decision. Updating route.",
             "mood": 50,
             "change": 50
         },
@@ -37,10 +37,7 @@
             "change": 50
         }
     ],
-    "stage": {
-        "type": "Schema.Types.ObjectId",
-        "ref": "Stage"
-    },
+    "stage": {"$oid":"5b5f855ca94242c067ba628c"},
     "continue": "2b"
 }
 
@@ -83,6 +80,6 @@
             "change": -30
         }
     ],
-    "stage": "5b5f855ca94242c067ba628c",
+    "stage": {"$oid":"5b5f855ca94242c067ba628c"},
     "continue": "2a"
 }
