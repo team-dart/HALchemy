@@ -1,13 +1,17 @@
 const Game = require('./game');
 const request = require('superagent');
-const API_URL = 'something'
+const API_URL = 'localhost:3000/api';
 
 let token = '';
 const hal = {
     signup(credentials) {
-        //POST to signup
-        //POST to ship
-        //return body
+        return request
+            .post(`${API_URL}/auth/signup`)
+            .send(credentials)
+            .then(({ body }) => {
+                token = body.token;
+                return body;
+            });
     },
     signin(credentials) {
         //POST to signin
