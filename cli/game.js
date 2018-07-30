@@ -38,6 +38,7 @@ let credentials = {};
 class Game {
     constructor(api) {
         this.api = api;
+        this.mood = 100;
     }
 
     start() {
@@ -111,13 +112,28 @@ class Game {
     }
 
     generateResponse(input) {
-        input = input.toLowerCase();
-        
-        return this.api.think(input)
-            .then(body => inquirer.prompt(prompt(body.output)))
-            .then(({ answer }) => {
-                this.generateResponse(answer);
-            });
+        // input = {
+        //     answer: 'hi+hello',
+        //     mood: 100;
+        // }
+
+        const sentence = input.answer.toLowerCase().split(' ');
+        // BESPOKE NATURAL LANGUAGE PROCESSOR
+        // sentence is an array of words
+        // asteroids, ship, stats, avoid, go through, yes, no, maybe, ...
+        input.answer = sentence.map(w => w.match(/asteroid/ || /go through/));
+        if(input.answer.includes('ship' && 'stats')) {
+            return this.api.getShipStats();
+        }
+        else {
+            input.answer = input.answer.join('+');
+            input.mood = this.mood;
+            return this.api.think(input)
+                .then(body => inquirer.prompt(prompt(body.output)))
+                .then(({ answer }) => {
+                    this.generateResponse({ answer });
+                });
+        }
     }
 }
 

@@ -24,7 +24,7 @@ const hal = {
     },
     think(input) {
         return request
-            .get(`${API_URL}/responses?input=${input}`)
+            .get(`${API_URL}/responses?input=${input.answer}&mood=${input.mood}`)
             .then(({ body }) => body[0]);
     },
 };
