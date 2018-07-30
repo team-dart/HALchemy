@@ -1,4 +1,3 @@
-
 const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
@@ -28,7 +27,6 @@ describe.only('Ships API', () => {
             payload: 100,
             hull: 100
         })
-
             .then(data => {
                 spaceTitanic = data;
             });
@@ -45,4 +43,25 @@ describe.only('Ships API', () => {
                 assert.deepEqual(body, spaceTitanic);
             });
     });
-});
+
+    it('updates ship stats', () => {
+        spaceTitanic.oxygen = 60;
+        return request
+            .put(`/api/ships/${spaceTitanic._id}`)
+            .send(spaceTitanic)
+            .then(checkOk)
+            .then(({ body }) => {
+                assert.deepEqual(body, spaceTitanic);
+            });
+    });
+
+    it('deletes a ship', () => {
+        return request
+            .delete(`/api/ships/${spaceTitanic._id}`)
+            .then(checkOk)
+            .then(res => {
+                assert.deepEqual(res.body, { removed: true });
+                return request.get('/api/ships');
+            });
+    });
+}); 
