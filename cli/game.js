@@ -114,10 +114,10 @@ class Game {
     generateResponse(input) {
         return this.api.think(input)
             .then(body => {
-                return inquirer.prompt(prompt(body.response));
+                return inquirer.prompt(prompt(body.output));
             })
-            .then(output => {
-                this.generateResponse(output);
+            .then(({ response }) => {
+                this.generateResponse(response);
             });
     }
 }
