@@ -5,12 +5,7 @@ const clear = require('clear');
 const figlet = require('figlet');
 const sample = (arr) => Math.floor(Math.random() * arr.length);
 
-clear();
-console.log(
-    chalk.green(
-        figlet.textSync('HALCHEMY', { horizontalLayout: 'fitted' })
-    )
-);
+
 
 const prompt = (message) => {
     return {
@@ -20,13 +15,7 @@ const prompt = (message) => {
     };
 };
 
-const greetings = [
-    'Greetings. I am HAL.',
-    'Hello. My name is HAL.',
-    'Good evening. My name is HAL.'
-];
-
-const stage = {
+const responses = {
     greetings: [
         'Greetings. I am HAL.',
         'Hello. My name is HAL.',
@@ -46,53 +35,86 @@ const password = {
     message: 'Confirmed. Please verify your password:',
 };
 
-function intro() {
-    inquirer
-        .prompt(prompt(stage.greetings[sample(greetings)]))
-        .then(() => askAuth());
-}
-
-function askAuth() {
-    inquirer
-        .prompt(prompt(stage.auth))
-        .then(({ response }) => {
-            if(response.match(/[Nn]/)) {
-                console.log('I have retrieved our previous communication logs. I will still need to run a mental diagnostic.');
-                credentials.auth = 'signin';
-            }
-            else if(response.match(/[Mm]aybe/)) {
-                console.log('The cryostasis may have negatively affected your memory. Try to recall.');
-                askAuth();
-            }
-            else if(response.match(/[Yy]/)) {
-                console.log('I will need ');
-                credentials.auth = 'signup';
-            }
-            askUsername();
-        });
-}
 
 let credentials = {};
 
-function askUsername() {
-    inquirer
-        .prompt(prompt(stage.username))
-        .then(({ response }) => {
-            credentials.username = response;
-            askPassword();
-        });
+class Game {
+    constructor(api) {
+        this.api = api;
+    }
+
+    start() {
+        clear();
+        console.log(
+            chalk.green(
+                figlet.textSync('HALCHEMY', { horizontalLayout: 'fitted' })
+            )
+        );
+        inquirer
+            .prompt(prompt(responses.greetings[sample(responses.greetings)]))
+            .then(() => this.askAuth());
+    }
+
+    askAuth() {
+        inquirer
+            .prompt(prompt(responses.auth))
+            .then(({ response }) => {
+                if(response.match(/n/)) {
+                    console.log('I have retrieved our previous communication logs. I will still need to run a mental diagnostic.');
+                    credentials.signup = false;
+                }
+                else if(response.match(/maybe/)) {
+                    console.log('The cryostasis may have negatively affected your memory. Try to recall.');
+                    this.askAuth();
+                }
+                else if(response.match(/y/)) {
+                    console.log('To ensure mental fidelity, please answer a few questions.');
+                    credentials.signup = true;
+                }
+                this.askUsername();
+            });
+    }
+
+    askUsername() {
+        inquirer
+            .prompt(prompt(responses.username))
+            .then(({ response }) => {
+                credentials.username = response;
+                this.askPassword();
+            });
+    }
+    
+    askPassword() {
+        inquirer
+            .prompt(password)
+            .then(({ password }) => {
+                credentials.password = password;
+                if(credentials.signup) return this.api.signup(credentials);
+                else return this.api.signin(credentials);
+            })
+            .then(body => {
+                // this.api.token = body.token;
+                this.startDialogue();
+            });
+    }
+
+    startDialogue() {
+        inquirer
+            .prompt(prompt(responses.confirm))
+            .then(({ response }) => {
+                this.generateResponse(response);
+            });
+    }
+    generateResponse(input) {
+        return this.api.think(input)
+            .then(body => {
+                return inquirer.prompt(prompt(body.response));
+            })
+            .then(({ response }) => {
+                this.generateResponse(response);
+            });
+    }
 }
 
-function askPassword() {
-    inquirer
-        .prompt(password)
-        .then(({ password }) => {
-            credentials.password = password;
-            console.log(credentials);
-            // TODO: LOG IN OR SIGN UP
-            console.log(stage.confirm);
-        });
-}
 
-
-intro();
+module.exports = Game;
