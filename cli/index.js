@@ -27,11 +27,8 @@ const hal = {
             .get(`${API_URL}/responses?input=${input}`)
             .then(({ body }) => body[0]);
     },
-
-
-
 };
 
 
 const game = new Game(hal);
-game.start();
+game.startDialogue();

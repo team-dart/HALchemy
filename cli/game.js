@@ -3,24 +3,21 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
-const sample = (arr) => Math.floor(Math.random() * arr.length);
 
 
 
 const prompt = (message) => {
     return {
         type: 'input',
-        name: 'response',
+        name: 'answer',
         message: message,
     };
 };
 
+
+
+
 const responses = {
-    greetings: [
-        'Greetings. I am HAL.',
-        'Hello. My name is HAL.',
-        'Good evening. My name is HAL.'
-    ],
     auth: 'Is this the first time we have interacted?',
     username: 'Please verify your username:',
     password: 'Confirmed. Please verify your password:',
@@ -51,7 +48,7 @@ class Game {
             )
         );
         inquirer
-            .prompt(prompt(responses.greetings[sample(responses.greetings)]))
+            .prompt(prompt('Hello. My name is HAL.'))
             .then(() => this.askAuth());
     }
 
@@ -100,6 +97,7 @@ class Game {
             })
             .then(body => {
                 this.api.token = body.token;
+                
                 this.startDialogue();
             });
     }
@@ -107,17 +105,18 @@ class Game {
     startDialogue() {
         inquirer
             .prompt(prompt(responses.confirm))
-            .then(({ response }) => {
-                this.generateResponse(response);
+            .then(({ answer }) => {
+                this.generateResponse(answer);
             });
     }
+
     generateResponse(input) {
+        input = input.toLowerCase();
+        
         return this.api.think(input)
-            .then(body => {
-                return inquirer.prompt(prompt(body.output));
-            })
-            .then(({ response }) => {
-                this.generateResponse(response);
+            .then(body => inquirer.prompt(prompt(body.output)))
+            .then(({ answer }) => {
+                this.generateResponse(answer);
             });
     }
 }
