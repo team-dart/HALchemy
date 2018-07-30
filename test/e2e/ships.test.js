@@ -45,4 +45,16 @@ describe.only('Ships API', () => {
                 assert.deepEqual(body, spaceTitanic);
             });
     });
-});
+    it('updates ship stats', () => {
+        spaceTitanic.oxygen = 60;
+        return request
+            .put(`/api/ships/${spaceTitanic._id}`)
+            .send(spaceTitanic)
+            .then(checkOk)
+            .then(({ body }) => {
+                assert.deepEqual(body, spaceTitanic);
+            });
+
+    });
+
+}); 
