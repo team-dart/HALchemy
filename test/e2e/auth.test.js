@@ -4,7 +4,7 @@ const { dropCollection } = require('./db');
 
 const { checkOk } = request;
 
-describe('Auth API', () => {
+describe.only('Auth API', () => {
 
     beforeEach(() => dropCollection('users'));
 
@@ -13,6 +13,7 @@ describe('Auth API', () => {
         return request
             .post('/api/auth/signup')
             .send({
+                name: 'joe blow',
                 email: 'me@me.com',
                 password: 'abc'
             })
