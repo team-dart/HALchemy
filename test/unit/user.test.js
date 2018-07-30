@@ -7,14 +7,13 @@ describe('User Model', () => {
     it('Verifies a good user model', () => {
         const data = {
             name: 'username',
-            email: 'example@example.com',
             password: 'abc123',
-            stage: 2,
+            stage: Types.ObjectId(),
             ship: Types.ObjectId()
         };
 
         const user = new User(data);
-        assert.equal(user.email, data.email);
+        assert.equal(user.name, data.name);
         assert.isUndefined(user.password, 'password should not be set');
 
         user.generateHash(data.password);

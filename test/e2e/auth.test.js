@@ -13,7 +13,7 @@ describe('Auth API', () => {
         return request
             .post('/api/auth/signup')
             .send({
-                email: 'me@me.com',
+                name: 'joe blow',
                 password: 'abc'
             })
             .then(checkOk)
@@ -38,7 +38,7 @@ describe('Auth API', () => {
         return request
             .post('/api/auth/signin')
             .send({
-                email: 'me@me.com',
+                name: 'joe blow',
                 password: 'abc'
             })
             .then(checkOk)
@@ -51,39 +51,39 @@ describe('Auth API', () => {
         return request
             .post('/api/auth/signin')
             .send({
-                email: 'me@me.com',
+                name: 'joe blow',
                 password: 'bad'
             })
             .then(res => {
                 assert.equal(res.status, 401);
-                assert.equal(res.body.error, 'Invalid email or password');
+                assert.equal(res.body.error, 'Invalid username or password');
             });
     });
 
-    it('cannot signup with same email', () => {
+    it('cannot signup with same name', () => {
         return request
             .post('/api/auth/signup')
             .send({
-                email: 'me@me.com',
+                name: 'joe blow',
                 password: 'abc'
             })
             .then(res => {
                 assert.equal(res.status, 400);
-                assert.equal(res.body.error, 'Email already in use');
+                assert.equal(res.body.error, 'Username already in use');
             });        
     });
 
-    it('Gives 401 on bad email signin', () => {
-        return request
-            .post('/api/auth/signin')
-            .send({
-                email: 'bad@me.com',
-                password: 'abc'
-            })
-            .then(res => {
-                assert.equal(res.status, 401);
-                assert.equal(res.body.error, 'Invalid email or password');
-            });
-    });
+    // it('Gives 401 on bad username signin', () => {
+    //     return request
+    //         .post('/api/auth/signin')
+    //         .send({
+    //             email: 'joe blow',
+    //             password: 'abc'
+    //         })
+    //         .then(res => {
+    //             assert.equal(res.status, 401);
+    //             assert.equal(res.body.error, 'Invalid name or password');
+    //         });
+    // });
     
 });
