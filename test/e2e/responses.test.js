@@ -19,8 +19,8 @@ describe.only('Responses API', () => {
 
     beforeEach(() => {
         return saveResponse({
-            input: ['Hi'],
-            output: ['Greetings'],
+            input: ['hi', 'hello', 'hey'],
+            output: ['Greetings', 'Hello, human'],
             mood: 82,
             continue: true
         })
@@ -31,6 +31,15 @@ describe.only('Responses API', () => {
 
     it('saves a response', () => {
         assert.isOk(halResponseOne._id);
+    });
+
+    it('gets a response by query', () => {
+        return request
+            .get('/api/responses?input=hi')
+            .then(({ body }) => {
+                assert.equal(body[0].output, 'Greetings' || 'Hello, human');
+            });
+
     });
 
 });
