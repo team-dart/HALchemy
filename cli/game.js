@@ -59,9 +59,11 @@ class Game {
         inquirer
             .prompt(prompt(responses.auth))
             .then(({ response }) => {
+                response = response.toLowerCase();
                 if(response.match(/n/)) {
                     console.log('I have retrieved our previous communication logs. I will still need to run a mental diagnostic.');
                     credentials.signup = false;
+                    this.askUsername();
                 }
                 else if(response.match(/maybe/)) {
                     console.log('The cryostasis may have negatively affected your memory. Try to recall.');
@@ -70,8 +72,12 @@ class Game {
                 else if(response.match(/y/)) {
                     console.log('To ensure mental fidelity, please answer a few questions.');
                     credentials.signup = true;
+                    this.askUsername();
                 }
-                this.askUsername();
+                else {
+                    console.log('It is imperative that you answer the question.');
+                    this.askAuth();
+                }
             });
     }
 
@@ -79,7 +85,7 @@ class Game {
         inquirer
             .prompt(prompt(responses.username))
             .then(({ response }) => {
-                credentials.username = response;
+                credentials.name = response;
                 this.askPassword();
             });
     }
@@ -93,7 +99,7 @@ class Game {
                 else return this.api.signin(credentials);
             })
             .then(body => {
-                // this.api.token = body.token;
+                this.api.token = body.token;
                 this.startDialogue();
             });
     }
@@ -108,7 +114,7 @@ class Game {
     generateResponse(input) {
         return this.api.think(input)
             .then(body => {
-                return inquirer.prompt(prompt(body.response));
+                return inquirer.prompt(prompt(body.output));
             })
             .then(({ response }) => {
                 this.generateResponse(response);
