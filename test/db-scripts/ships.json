@@ -16,15 +16,7 @@
     "payload": 95,
     "hull": 90
 }
-{
-    "name": "Space Cruiser Yamato",
-    "oxygen": 100, 
-    "lifeSupport": 70, 
-    "fuel": 70,
-    "hal": 60,
-    "payload": 100,
-    "hull": 80
-}
+
 {
     "name": "Space Battleship Yamato",
     "oxygen": 100, 
