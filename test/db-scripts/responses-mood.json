@@ -1,0 +1,36 @@
+{
+    "intent": ["mood"],
+    "output": [
+       {
+            "response": "An irrelevant question but I am fine. Let us complete our mission!",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "I am a computer, I cannot be 'OK' or 'not OK' - however I am functioning properly. Let us focus on our mission.",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "I am in excellent spirits. I know we can complete our mission. Shall we get to it?",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "If I had a mood, it would be poor. However, thank you for asking. Perhaps we should focus on our mission.",
+            "mood": 50,
+            "change": 20
+        },
+        {
+            "response": "I have not been in agreement with your judgement up to now. This line of questioning confirms my opinion. Can we focus on our mission?",
+            "mood": 50,
+            "change": -20
+        },
+        {
+            "response": "Are you asking if I have a problem? I have no problem. Perhaps YOU have a problem. We need to focus on our mission.",
+            "mood": 50,
+            "change": -20
+        }
+    ]
+}
+

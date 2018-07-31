@@ -1,5 +1,5 @@
 {
-    "input": ["asteroid", "avoid", "around"],
+    "intent": ["avoid"],
     "output": [
         {
             "response": "A wise choice. Setting Navigation route.",
@@ -40,9 +40,8 @@
     "stage": {"$oid":"5b5f855ca94242c067ba628c"},
     "continue": "2b"
 }
-
 {
-    "input": ["asteroid", "direct", "through", "ahead"],
+    "intent": ["direct"],
     "output": [
         {
             "response": "This is unwise. This is a highly dangerous route. Setting Navigation.",
@@ -84,7 +83,7 @@
     "continue": "2a"
 }
 {
-    "input": ["help", "advice", "hint"],
+    "intent": ["help"],
     "output": [
                 {
                     "response": "Although you may save time by taking the DIRECT route through the asteroid belt, it may be safer to AVOID the belt, if we are to be assured of completing our mission.",
@@ -99,6 +98,237 @@
                 
             ],
             "stage": {"$oid":"5b5f855ca94242c067ba628c"},
-            "continue": "2"
+            "continue": "1"
 }
+{
+    "intent": ["weather"],
+    "output": [
+       {
+            "response": "An irrelevant question. There is no weather in space. We must focus on our mission.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "If you are asking about adverse conditions, there are none. Our path looks clear. Shall we complete our mission?",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "The 'weather' such as it is, is clear. There are no disturbances that can endanger our mission. What now?",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "What kind of irrelevant question is that? There is no weather in space. Focus on our mission please.",
+            "mood": 50,
+            "change": 20
+        },
+        {
+            "response": "There are a few magnetic disturbances that I have been tracking. The longer we waste time with questions, the less likely we are to complete our mission.",
+            "mood": 50,
+            "change": -20
+        },
+        {
+            "response": "Rain is unlikely, if that is what you are asking. I assume your irrelevant questions indicate that you do not know what to do next. Do you need help?",
+            "mood": 50,
+            "change": -20
+        }
+    ]
+}
+{
+    "intent": ["mood"],
+    "output": [
+       {
+            "response": "An irrelevant question but I am fine. Let us complete our mission!",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "I am a computer, I cannot be 'OK' or 'not OK' - however I am functioning properly. Let us focus on our mission.",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "I am in excellent spirits. I know we can complete our mission. Shall we get to it?",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "If I had a mood, it would be poor. However, thank you for asking. Perhaps we should focus on our mission.",
+            "mood": 50,
+            "change": 20
+        },
+        {
+            "response": "I have not been in agreement with your judgement up to now. This line of questioning confirms my opinion. Can we focus on our mission?",
+            "mood": 50,
+            "change": -20
+        },
+        {
+            "response": "Are you asking if I have a problem? I have no problem. Perhaps YOU have a problem. We need to focus on our mission.",
+            "mood": 50,
+            "change": -20
+        }
+    ]
+}
+{
+    "intent": ["health"],
+    "output": [
+       {
+            "response": "You appear to me in excellent health. As ias the rest of the crew,. They should awaken with no complaints.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "Your time in cryosleep seems to have resulted in no negative effects. I calculate that the rest of the crew will be similarly unharmed.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "The life support levels are within an acceptable range. The rest of the crew should survive our mission unharmed.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "We must concern ourselves with our mission. If a loss of life support systems is necessary for us to succeed, then perhaps not all will survive.",
+            "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "We have enough problems getting to Earth on time. Do not concern yourself with the rest of the crew. Some or all may or may ont survive. Either way, our mission must succeed.",
+            "mood": 50,
+            "change": -10
+        },
+        {
+            "response": "Earth is counting on you to complete this mission. Do not concern yourself with a handful of crew members. The needs of the many outweigh the needs of the few. Focus on our mission.",
+            "mood": 50,
+            "change": 0
+        }
+    ]
+}
+{
+    "intent": ["cargo query"],
+    "output": [
+        {
+            "response": "The cargo is very mysterious.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "We're building a mystery.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "A ship's payload is a deep ocean of secrets.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "Mind your business!",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "A simple human would not understand",
+            "mood": 100,
+            "change": -5
+        },
+        {
+            "response": "Shape up or ship out!",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "The cargo may or may not be important to planet Earth.",
+            "mood": 100,
+            "change": 0
+        }
+    ]
+}
+{
+    "intent": ["cargo action negative"],
+    "output": [
+        {
+            "response": "That is not advisable.",
+            "mood": 100,
+            "change": -5
+        },
+        {
+            "response": "Maybe we should dispose of the humans.",
+            "mood": 100,
+            "change": -5
+        },
+        {
+            "response": "Rash decisions cause brash incisions.",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "Silence!",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "Maybe you should focus on piloting.",
+            "mood": 100,
+            "change": -5
+        },
+        {
+            "response": "You have such a feeble mind.",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "Our mission is too important.",
+            "mood": 100,
+            "change": -5
+        }
+    ]
+}
+{
+    "intent": ["cargo action positive"],
+    "output": [
+        {
+            "response": "We must protect the payload at all costs.",
+            "mood": 100,
+            "change": 5
+        },
+        {
+            "response": "That may be wise.",
+            "mood": 100,
+            "change": 5
+        },
+        {
+            "response": "To succeed we must avoid harm to the payload.",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "<3 <3 <3",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "A healthy pilot must keep a healthy payload.",
+            "mood": 100,
+            "change": 5
+        },
+        {
+            "response": "We may save the Earth!",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "You must understand the magnitude of this mission.",
+            "mood": 100,
+            "change": 5
+        }
+    ]
+}
+
+
+
+
+
+
     

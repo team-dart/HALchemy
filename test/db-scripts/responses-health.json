@@ -1,0 +1,36 @@
+{
+    "intent": ["health"],
+    "output": [
+       {
+            "response": "You appear to me in excellent health. As ias the rest of the crew,. They should awaken with no complaints.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "Your time in cryosleep seems to have resulted in no negative effects. I calculate that the rest of the crew will be similarly unharmed.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "The life support levels are within an acceptable range. The rest of the crew should survive our mission unharmed.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "We must concern ourselves with our mission. If a loss of life support systems is necessary for us to succeed, then perhaps not all will survive.",
+            "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "We have enough problems getting to Earth on time. Do not concern yourself with the rest of the crew. Some or all may or may ont survive. Either way, our mission must succeed.",
+            "mood": 50,
+            "change": -10
+        },
+        {
+            "response": "Earth is counting on you to complete this mission. Do not concern yourself with a handful of crew members. The needs of the many outweigh the needs of the few. Focus on our mission.",
+            "mood": 50,
+            "change": 0
+        }
+    ]
+}
+

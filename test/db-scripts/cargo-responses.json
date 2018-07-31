@@ -1,0 +1,120 @@
+{
+    "intent": ["cargo query"],
+    "output": [
+        {
+            "response": "The cargo is very mysterious.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "We're building a mystery.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "A ship's payload is a deep ocean of secrets.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "Mind your business!",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "A simple human would not understand",
+            "mood": 100,
+            "change": -5
+        },
+        {
+            "response": "Shape up or ship out!",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "The cargo may or may not be important to planet Earth.",
+            "mood": 100,
+            "change": 0
+        }
+    ]
+}
+{
+    "intent": ["cargo action negative"],
+    "output": [
+        {
+            "response": "That is not advisable.",
+            "mood": 100,
+            "change": -5
+        },
+        {
+            "response": "Maybe we should dispose of the humans.",
+            "mood": 100,
+            "change": -5
+        },
+        {
+            "response": "Rash decisions cause brash incisions.",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "Silence!",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "Maybe you should focus on piloting.",
+            "mood": 100,
+            "change": -5
+        },
+        {
+            "response": "You have such a feeble mind.",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "Our mission is too important.",
+            "mood": 100,
+            "change": -5
+        }
+    ],
+}
+{
+    "intent": ["cargo action positive"],
+    "output": [
+        {
+            "response": "We must protect the payload at all costs.",
+            "mood": 100,
+            "change": 5
+        },
+        {
+            "response": "That may be wise.",
+            "mood": 100,
+            "change": 5
+        },
+        {
+            "response": "To succeed we must avoid harm to the payload.",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "<3 <3 <3",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "A healthy pilot must keep a healthy payload.",
+            "mood": 100,
+            "change": 5
+        },
+        {
+            "response": "We may save the Earth!",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "You must understand the magnitude of this mission.",
+            "mood": 100,
+            "change": 5
+        }
+    ],
+}
