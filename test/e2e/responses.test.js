@@ -2,6 +2,7 @@ const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
 const { checkOk } = request;
+const getWit = require('../../lib/util/wit');
 
 describe('Responses API', () => {
 
@@ -67,12 +68,12 @@ describe('Responses API', () => {
             });
     });
 
-    it('parses user inputs to only keywords', () => {
-        const input = 'i choose to go through the asteroids';
-        const sentence = input.split(' ');
-        const answer = sentence.filter(w => w.match('asteroids' || /through/));
+    it.only('uses wit.ai', () => {
+        return getWit('what\'s the status report?')
+            .then(data => {
+                assert.equal(data[0].value, 'stats');
+            });
 
-        assert.deepEqual(answer, ['asteroid', 'through']);
     });
 
 });
