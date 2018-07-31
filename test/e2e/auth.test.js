@@ -19,9 +19,7 @@ describe('Auth API', () => {
                 password: 'abc'
             })
             .then(checkOk)
-            .then(({ body }) => {
-                token = body.token;
-            });
+            .then(({ body }) => token = body.token);
     });
 
     it('signs up a user', () => {
@@ -73,6 +71,14 @@ describe('Auth API', () => {
                 assert.equal(res.status, 400);
                 assert.equal(res.body.error, 'Username already in use');
             });        
+    });
+
+    it('updates a user stage', () => {
+        return request
+            .put('/api/auth')
+            .set('Authorization', token)
+            .send({ stage: '2a' })
+            .then(({ body }) => assert.equal(body.stage, '2a'));
     });
 
     // it('Gives 401 on bad username signin', () => {

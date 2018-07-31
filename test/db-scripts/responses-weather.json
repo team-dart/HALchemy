@@ -1,5 +1,5 @@
 {
-    "intent": ["weather"],
+    "intent": "weather",
     "output": [
        {
             "response": "An irrelevant question. There is no weather in space. We must focus on our mission.",

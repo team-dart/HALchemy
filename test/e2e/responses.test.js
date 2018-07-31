@@ -5,7 +5,7 @@ const { checkOk } = request;
 const getWit = require('../../lib/util/wit');
 const { Types } = require('mongoose');
 
-describe('Responses API', () => {
+describe.only('Responses API', () => {
 
     beforeEach(() => dropCollection('users'));
     beforeEach(() => dropCollection('ships'));
@@ -68,31 +68,19 @@ describe('Responses API', () => {
 
     it('saves a response', () => {
         assert.isOk(halResponseOne._id);
+        assert.equal(halResponseOne.intent, 'direct');
     });
 
     it('gets a response by query', () => {
         return request
             .get('/api/responses?intent=direct&mood=100')
             .set('Authorization', token)
-            .then(({ body }) => {
-                assert.isDefined(body.output);
-            });
+            .then(({ body }) => assert.isDefined(body.output));
     });
 
-    // it('gets a response by multi query', () => {
-    //     return request
-    //         .get('/api/responses?input=hi+hello&mood=100')
-    //         .then(({ body }) => {
-    //             assert.isDefined(body[0].output);
-    //         });
-    // });
-
-    it('uses wit.ai', () => {
-          return getWit('what\'s the status report?')
-            .then(data => {
-                assert.equal(data[0].value, 'stats');
-            });
-
+    it.skip('uses wit.ai', () => {
+        return getWit('what\'s the status report?')
+            .then(data => assert.equal(data[0].value, 'stats'));
     });
 
 });

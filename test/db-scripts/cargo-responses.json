@@ -1,5 +1,5 @@
 {
-    "intent": ["cargo query"],
+    "intent": "cargo query",
     "output": [
         {
             "response": "The cargo is very mysterious.",
@@ -39,7 +39,7 @@
     ]
 }
 {
-    "intent": ["cargo action negative"],
+    "intent": "cargo action negative",
     "output": [
         {
             "response": "That is not advisable.",
@@ -79,7 +79,7 @@
     ],
 }
 {
-    "intent": ["cargo action positive"],
+    "intent": "cargo action positive",
     "output": [
         {
             "response": "We must protect the payload at all costs.",
