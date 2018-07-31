@@ -6,7 +6,7 @@ const { Types } = require('mongoose');
 describe('Response model', () => {
     it('validates a good response model', () => {
         const data = {
-            input: ['hi'],
+            intent: 'stats',
             output: [{
                 response: 'Greetings',
                 mood: 100,
