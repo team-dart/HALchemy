@@ -5,7 +5,7 @@ const { checkOk } = request;
 const getWit = require('../../lib/util/wit');
 const { Types } = require('mongoose');
 
-describe.only('Responses API', () => {
+describe('Responses API', () => {
 
     beforeEach(() => dropCollection('users'));
     beforeEach(() => dropCollection('ships'));
