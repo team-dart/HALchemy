@@ -79,7 +79,12 @@ class Game {
                 if(this.signup) return this.api.signup({ name, password });
                 else return this.api.signin({ name, password });
             })
-            .then(() => this.startDialogue());
+            .then(() => {
+                return this.api.getMood();
+            })
+            .then(() => {
+                this.startDialogue();
+            });
     }
 
     startDialogue() {
@@ -93,7 +98,7 @@ class Game {
     generateResponse(input) {
         return this.api.parseIntent(input)
             .then(intent => {
-                return this.api.think(intent[0].value);
+                return this.api.think(intent);
             })
             .then(body => {
                 // if(body.continue) {

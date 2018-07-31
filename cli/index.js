@@ -5,12 +5,7 @@ const getWit = require('../lib/util/wit');
 
 
 let token = '';
-//ship id, mood, name
-let ship = {
-    mood: 100
-};
-
-let user;
+let mood;
 
 const hal = {
     signup(credentials) {
@@ -32,8 +27,27 @@ const hal = {
             });
     },
 
+    getMood() {
+        return request
+            .get(`${API_URL}/ships`)
+            .set('Authorization', token)
+            .then(({ body }) => mood = body.mood);
+    },
+
+    updateMood(mood) {
+        return request
+            .put(`${API_URL}/ships`)
+            .set('Authorization', token)
+            .send({ mood: mood })
+            .then(({ body }) => mood = body.mood);
+    },
+
     parseIntent(input) {
-        return getWit(input);
+        return getWit(input)
+            .then(intent => {
+                if(!intent) return 'unrecognized';
+                else return intent[0].value;
+            });
     },
         
     think(input) {
@@ -47,32 +61,29 @@ const hal = {
 
         }
         else {
-
             const query = {
                 intent: input,
-                mood: ship.mood
+                mood: mood
             };
             let response;
             return request
-                .get(`${API_URL}/responses?intent=${query.intent}&mood=${query.mood}`)
+                .get(`${API_URL}/responses?intent=${query.intent}&mood=${mood}`)
                 .set('Authorization', token)
                 .then(({ body }) => {
                     response = body;
-                    // ship.mood += body.output.change;
-                    // return request
-                    //     .put(`${API_URL}/ships/${ship.id}`)
-                    //     .send(ship);
+                    mood += body.output.change;
+                    return this.updateMood(mood);
+                })
+                .then(() => {
                     return response;
                 });
-                // .then(() => {
-    
-                //     return response;
-                // });
         }
     },
 
-    deleteShip(id) {
-        return request.del(`${API_URL}/ships/${id}`);
+    deleteShip() {
+        return request
+            .del(`${API_URL}/ships`)
+            .set('Authorization', token);
     },
     //updateLeaderboard() {}
 
