@@ -20,10 +20,10 @@ describe('Ships API', () => {
     beforeEach(() => {
         return saveShip({
             name: 'Space Titanic',
-            oxygen: 100, 
+            oxygen: 60, 
             lifeSupport: 100, 
             fuel: 100,
-            hal: 100,
+            mood: 100,
             payload: 100,
             hull: 100
         })
@@ -44,6 +44,16 @@ describe('Ships API', () => {
             });
     });
 
+    it.only('gets a ship status', () => {
+        return request
+            .get(`/api/ships/${spaceTitanic._id}/stats`)
+            .then(({ body }) => {
+                assert.equal(body.avgStatus, '92');
+
+            });
+
+    });
+
     it('updates ship stats', () => {
         spaceTitanic.oxygen = 60;
         return request
@@ -55,7 +65,7 @@ describe('Ships API', () => {
             });
     });
 
-    it('deletes a ship', () => {
+    it.skip('deletes a ship', () => {
         return request
             .delete(`/api/ships/${spaceTitanic._id}`)
             .then(checkOk)
