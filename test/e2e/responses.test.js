@@ -67,7 +67,7 @@ describe('Responses API', () => {
             });
     });
 
-    it.only('parses user inputs to only keywords', () => {
+    it('parses user inputs to only keywords', () => {
         const input = 'i choose to go through the asteroids';
         const sentence = input.split(' ');
         const answer = sentence.filter(w => w.match('asteroids' || /through/));
