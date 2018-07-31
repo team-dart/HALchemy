@@ -1,5 +1,5 @@
 {
-    "intent": ["avoid"],
+    "intent": "avoid",
     "output": [
         {
             "response": "A wise choice. Setting Navigation route.",
@@ -41,7 +41,7 @@
     "continue": "2b"
 }
 {
-    "intent": ["direct"],
+    "intent": "direct",
     "output": [
         {
             "response": "This is unwise. This is a highly dangerous route. Setting Navigation.",
@@ -83,7 +83,7 @@
     "continue": "2a"
 }
 {
-    "intent": ["help"],
+    "intent": "help",
     "output": [
                 {
                     "response": "Although you may save time by taking the DIRECT route through the asteroid belt, it may be safer to AVOID the belt, if we are to be assured of completing our mission.",
@@ -97,11 +97,10 @@
                 }
                 
             ],
-            "stage": {"$oid":"5b5f855ca94242c067ba628c"},
-            "continue": "1"
+            "stage": {"$oid":"5b5f855ca94242c067ba628c"}
 }
 {
-    "intent": ["weather"],
+    "intent": "weather",
     "output": [
        {
             "response": "An irrelevant question. There is no weather in space. We must focus on our mission.",
@@ -136,7 +135,7 @@
     ]
 }
 {
-    "intent": ["mood"],
+    "intent": "mood",
     "output": [
        {
             "response": "An irrelevant question but I am fine. Let us complete our mission!",
@@ -171,7 +170,7 @@
     ]
 }
 {
-    "intent": ["health"],
+    "intent": "health",
     "output": [
        {
             "response": "You appear to me in excellent health. As ias the rest of the crew,. They should awaken with no complaints.",
@@ -206,7 +205,7 @@
     ]
 }
 {
-    "intent": ["cargo query"],
+    "intent": "cargo query",
     "output": [
         {
             "response": "The cargo is very mysterious.",
@@ -246,7 +245,7 @@
     ]
 }
 {
-    "intent": ["cargo action negative"],
+    "intent": "cargo action negative",
     "output": [
         {
             "response": "That is not advisable.",
@@ -286,7 +285,7 @@
     ]
 }
 {
-    "intent": ["cargo action positive"],
+    "intent": "cargo action positive",
     "output": [
         {
             "response": "We must protect the payload at all costs.",

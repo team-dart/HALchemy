@@ -1,5 +1,5 @@
 {
-    "intent": ["health"],
+    "intent": "health",
     "output": [
        {
             "response": "You appear to me in excellent health. As ias the rest of the crew,. They should awaken with no complaints.",

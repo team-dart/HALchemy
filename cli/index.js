@@ -51,10 +51,9 @@ const hal = {
     },
     updateStage(stage) {
         return request
-            .put(`${API_URL}/users`)
+            .put(`${API_URL}/auth`)
             .set('Authorization', token)
-            .send({ stage: stage })
-            .then(({ body }))
+            .send({ stage: stage });
     },
     think(input) {
         if(input === 'stats') {

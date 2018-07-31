@@ -1,5 +1,5 @@
 {
-    "intent": ["mood"],
+    "intent": "mood",
     "output": [
        {
             "response": "An irrelevant question but I am fine. Let us complete our mission!",

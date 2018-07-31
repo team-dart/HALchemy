@@ -103,6 +103,7 @@ class Game {
             .then(body => {
                 let response;
                 if(body.continue) {
+                    response = body.output.response;
                     console.log('MOVING ON TO STAGE', body.continue);
                     return this.api.updateStage(body.continue)
                         .then(() => inquirer.prompt(prompt(response)));

@@ -5,7 +5,7 @@ const { checkOk } = request;
 const getWit = require('../../lib/util/wit');
 const { Types } = require('mongoose');
 
-describe('Responses API', () => {
+describe.only('Responses API', () => {
 
     beforeEach(() => dropCollection('users'));
     beforeEach(() => dropCollection('ships'));
@@ -68,6 +68,7 @@ describe('Responses API', () => {
 
     it('saves a response', () => {
         assert.isOk(halResponseOne._id);
+        assert.equal(halResponseOne.intent, 'direct');
     });
 
     it('gets a response by query', () => {
