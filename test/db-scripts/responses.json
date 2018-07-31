@@ -1,5 +1,5 @@
 {
-    "input": ["asteroid", "avoid", "around"],
+    "intent": ["avoid"],
     "output": [
         {
             "response": "A wise choice. Setting Navigation route.",
@@ -42,7 +42,7 @@
 }
 
 {
-    "input": ["asteroid", "direct", "through", "ahead"],
+    "intent": ["direct"],
     "output": [
         {
             "response": "This is unwise. This is a highly dangerous route. Setting Navigation.",
@@ -84,7 +84,7 @@
     "continue": "2a"
 }
 {
-    "input": ["help", "advice", "hint"],
+    "intent": ["help"],
     "output": [
                 {
                     "response": "Although you may save time by taking the DIRECT route through the asteroid belt, it may be safer to AVOID the belt, if we are to be assured of completing our mission.",
@@ -99,6 +99,6 @@
                 
             ],
             "stage": {"$oid":"5b5f855ca94242c067ba628c"},
-            "continue": "2"
+            "continue": "1"
 }
     

@@ -1,0 +1,36 @@
+{
+    "intent": ["weather"],
+    "output": [
+       {
+            "response": "An irrelevant question. There is no weather in space. We must focus on our mission.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "If you are asking about adverse conditions, there are none. Our path looks clear. Shall we complete our mission?",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "The 'weather' such as it is, is clear. There are no disturbances that can endanger our mission. What now?",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "What kind of irrelevant question is that? There is no weather in space. Focus on our mission please.",
+            "mood": 50,
+            "change": 20
+        },
+        {
+            "response": "There are a few magnetic disturbances that I have been tracking. The longer we waste time with questions, the less likely we are to complete our mission.",
+            "mood": 50,
+            "change": -20
+        },
+        {
+            "response": "Rain is unlikely, if that is what you are asking. I assume your irrelevant questions indicate that you do not know what to do next. Do you need help?",
+            "mood": 50,
+            "change": -20
+        }
+    ]
+}
+
