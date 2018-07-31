@@ -87,8 +87,8 @@ describe.only('Responses API', () => {
     //         });
     // });
 
-    it.skip('uses wit.ai', () => {
-        return getWit('what\'s the status report?')
+    it('uses wit.ai', () => {
+          return getWit('what\'s the status report?')
             .then(data => {
                 assert.equal(data[0].value, 'stats');
             });
