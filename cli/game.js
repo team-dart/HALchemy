@@ -101,10 +101,13 @@ class Game {
                 return this.api.think(intent);
             })
             .then(body => {
-                // if(body.continue) {
-                    // update user.stage
-                // }
-                return inquirer.prompt(prompt(body.output.response));
+                let response;
+                if(body.continue) {
+                    console.log('MOVING ON TO STAGE', body.continue);
+                    return this.api.updateStage(body.continue)
+                        .then(() => inquirer.prompt(prompt(response)));
+                }
+                else return inquirer.prompt(prompt(body.output.response));
             })
             .then(({ answer }) => {
                 this.generateResponse(answer);

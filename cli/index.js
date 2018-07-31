@@ -49,7 +49,13 @@ const hal = {
                 else return intent[0].value;
             });
     },
-        
+    updateStage(stage) {
+        return request
+            .put(`${API_URL}/users`)
+            .set('Authorization', token)
+            .send({ stage: stage })
+            .then(({ body }))
+    },
     think(input) {
         if(input === 'stats') {
             return request 
