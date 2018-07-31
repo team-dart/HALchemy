@@ -3,14 +3,13 @@ const request = require('./request');
 const { dropCollection } = require('./db');
 const { checkOk } = request;
 
-let newUser;
 
 describe.only('Ships API', () => {
-
+    
     beforeEach(() => dropCollection('ships'));
     beforeEach(() => dropCollection('users'));
-
-
+    
+    
     function createUser(user) {
         return request
             .post('/api/auth/signup')
@@ -19,59 +18,71 @@ describe.only('Ships API', () => {
             .then(({ body }) => body);
     }
     
+    let token;
     beforeEach(() => {
         return createUser({
             name: 'N User',
-            password: '60', 
-            stage: 0,
-            ship: 'Space Titanic'
+            password: '60'
         })
-            .then(data => {
-                newUser = data;
+            .then(body => {
+                token = body.token;
+            });
+    });
+
+    let ship;
+    beforeEach('gets a ship by id', () => {
+        return request
+            .get('/api/ships')
+            .set('Authorization', token)
+            .then(({ body }) => {
+                assert.isDefined(body);
+                ship = body;
             });
     });
     
     it('checks that a new user includes a ship', () => {
-        assert.isOk(newUser.ship);
+        assert.isDefined(ship._id);
     });
 
-    
+    it('gets a ship\'s average status', () => {
+        return request
+            .get('/api/ships/stats/avg')
+            .set('Authorization', token)
+            .then(({ body }) => {
+                assert.equal(body.avgStatus, 74);
+            });
+    });
 
+    it('gets ship\'s lowest status value', () => {
+        return request
+            .get('/api/ships/stats/min')
+            .set('Authorization', token)
+            .then(({ body }) => {
+                assert.strictEqual(body.minStatus, 40);
+            });
+    });
 
-    // it('gets a ship by id', () => {
-    //     return request
-    //         .get(`/api/ships/${spaceTitanic._id}`)
-    //         .then(({ body }) => {
-    //             assert.deepEqual(body, spaceTitanic);
-    //         });
-    // });
+    it('updates ship stats', () => {
+        ship.oxygen = 50;
+        return request
+            .put('/api/ships')
+            .set('Authorization', token)
+            .send(ship)
+            .then(checkOk)
+            .then(({ body }) => {
+                assert.deepEqual(body, ship);
+            });
+    });
 
-    // it('gets a ship\'s average status', () => {
-    //     return request
-    //         .get(`/api/ships/${spaceTitanic._id}/stats`)
-    //         .then(({ body }) => {
-    //             assert.equal(body.avgStatus, '92');
-    //         });
-    // });
-
-    // it('gets ship\'s lowest status value', () => {
-    //     return request
-    //         .get(`/api/ships/${spaceTitanic._id}/min`)
-    //         .then(({ body }) => {
-    //             assert.equal(body.minStatus, '60');
-    //         });
-    // });
-
-    // it('updates ship stats', () => {
-    //     spaceTitanic.oxygen = 50;
-    //     return request
-    //         .put(`/api/ships/${spaceTitanic._id}`)
-    //         .send(spaceTitanic)
-    //         .then(checkOk)
-    //         .then(({ body }) => {
-    //             assert.deepEqual(body, spaceTitanic);
-    //         });
-    // });
+    it('deletes a ship', () => {
+        return request
+            .del('/api/ships')
+            .set('Authorization', token)
+            .then(checkOk)
+            .then(({ body }) => {
+                assert.isTrue(body.removed);
+            });
+    });
 
     
 });
