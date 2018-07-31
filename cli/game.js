@@ -14,9 +14,6 @@ const prompt = (message) => {
     };
 };
 
-
-
-
 const responses = {
     auth: 'Is this the first time we have interacted?',
     username: 'Please verify your username:',
@@ -56,18 +53,18 @@ class Game {
     askAuth() {
         inquirer
             .prompt(prompt(responses.auth))
-            .then(({ response }) => {
-                response = response.toLowerCase();
-                if(response.match(/n/)) {
+            .then(({ answer }) => {
+                answer = answer.toLowerCase();
+                if(answer.match(/n/)) {
                     console.log('I have retrieved our previous communication logs. I will still need to run a mental diagnostic.');
                     credentials.signup = false;
                     this.askUsername();
                 }
-                else if(response.match(/maybe/)) {
+                else if(answer.match(/maybe/)) {
                     console.log('The cryostasis may have negatively affected your memory. Try to recall.');
                     this.askAuth();
                 }
-                else if(response.match(/y/)) {
+                else if(answer.match(/y/)) {
                     console.log('To ensure mental fidelity, please answer a few questions.');
                     credentials.signup = true;
                     this.askUsername();
@@ -82,8 +79,8 @@ class Game {
     askUsername() {
         inquirer
             .prompt(prompt(responses.username))
-            .then(({ response }) => {
-                credentials.name = response;
+            .then(({ answer }) => {
+                credentials.name = answer;
                 this.askPassword();
             });
     }
@@ -107,29 +104,27 @@ class Game {
         inquirer
             .prompt(prompt(responses.confirm))
             .then(({ answer }) => {
-                this.generateResponse({ answer });
+                this.generateResponse(answer);
             });
     }
 
     generateResponse(input) {
-        const sentence = input.answer.toLowerCase().split(' ');
-        // BESPOKE NATURAL LANGUAGE PROCESSOR
-        const keywords = ['asteroids', 'ship', 'stats', 'avoid', 'through', 'hi', 'hey', 'hello'];
-        input.answer = sentence.filter(w => keywords.includes(w));
-        if(input.answer.includes('ship' && 'stats')) {
-            return this.api.getShipStats();
-        }
-        else {
-            input.answer = input.answer.join('+');
-            input.mood = this.mood;
-            return this.api.think(input)
-                .then(body => inquirer.prompt(prompt(body.output.response)))
-                .then((answer) => {
-                    this.generateResponse(answer);
-                });
-        }
+        return this.api.parseIntent(input)
+            .then(intent => {
+                return this.api.think(intent[0].value);
+            })
+            .then(body => {
+                console.log('BODY', body);
+                // if continue = true, do something different
+                return inquirer.prompt(prompt(body.output.response));
+            })
+            .then(({ answer }) => {
+                this.generateResponse(answer);
+            });
     }
 }
+
+
 
 
 module.exports = Game;

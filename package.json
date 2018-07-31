@@ -14,7 +14,8 @@
     "test:unit:watch": "nodemon --exec 'npm run -s test:unit'",
     "test:e2e:watch": "nodemon --exec 'npm run -s test:e2e'",
     "start": "node server.js",
-    "start:watch": "nodemon server.js"
+    "start:watch": "nodemon server.js",
+    "play": "node cli/index.js"
   },
   "repository": {
     "type": "git",
