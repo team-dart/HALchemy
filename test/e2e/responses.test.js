@@ -3,31 +3,48 @@ const request = require('./request');
 const { dropCollection } = require('./db');
 const { checkOk } = request;
 const getWit = require('../../lib/util/wit');
+const { Types } = require('mongoose');
 
-describe('Responses API', () => {
+describe.only('Responses API', () => {
 
+    beforeEach(() => dropCollection('users'));
+    beforeEach(() => dropCollection('ships'));
     beforeEach(() => dropCollection('responses'));
 
     let halResponseOne;
+    let token;
 
     function saveResponse(response) {
         return request
             .post('/api/responses')
+            .set('Authorization', token)
             .send(response)
             .then(checkOk)
             .then(({ body }) => body);       
     }
+    beforeEach(() => {
+        return request
+            .post('/api/auth/signup')
+            .send({
+                name: 'joe blow',
+                password: 'abc'
+            })
+            .then(checkOk)
+            .then(({ body }) => {
+                token = body.token;
+            });
+    });
 
     beforeEach(() => {
         return saveResponse({
-            input: ['hi', 'hello', 'hey'],
+            intent: 'direct',
             output: [{
-                response: 'Greetings',
+                response: 'Onward!',
                 mood: 100,
                 change: -30
             },
             {
-                response: 'Hey hey',
+                response: 'Setting the course.',
                 mood: 100,
                 change: -30
             },
@@ -41,7 +58,8 @@ describe('Responses API', () => {
                 mood: 50,
                 change: -30
             }],
-            continue: '2a'
+            continue: '2a',
+            stageId: Types.ObjectId()
         })
             .then(data => {
                 halResponseOne = data;
@@ -54,21 +72,22 @@ describe('Responses API', () => {
 
     it('gets a response by query', () => {
         return request
-            .get('/api/responses?input=hi&mood=100')
+            .get('/api/responses?intent=direct&mood=100')
+            .set('Authorization', token)
             .then(({ body }) => {
-                assert.isDefined(body[0].output);
+                assert.isDefined(body.output);
             });
     });
 
-    it('gets a response by multi query', () => {
-        return request
-            .get('/api/responses?input=hi+hello&mood=100')
-            .then(({ body }) => {
-                assert.isDefined(body[0].output);
-            });
-    });
+    // it('gets a response by multi query', () => {
+    //     return request
+    //         .get('/api/responses?input=hi+hello&mood=100')
+    //         .then(({ body }) => {
+    //             assert.isDefined(body[0].output);
+    //         });
+    // });
 
-    it.only('uses wit.ai', () => {
+    it.skip('uses wit.ai', () => {
         return getWit('what\'s the status report?')
             .then(data => {
                 assert.equal(data[0].value, 'stats');
