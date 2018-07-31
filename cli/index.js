@@ -38,26 +38,38 @@ const hal = {
     },
         
     think(input) {
-        const query = {
-            intent: input,
-            mood: ship.mood
-        };
-        let response;
-        return request
-            .get(`${API_URL}/responses?intent=${query.intent}&mood=${query.mood}`)
-            .set('Authorization', token)
-            .then(({ body }) => {
-                response = body;
-                // ship.mood += body.output.change;
-                // return request
-                //     .put(`${API_URL}/ships/${ship.id}`)
-                //     .send(ship);
-                return response;
-            });
-            // .then(() => {
+        if(input === 'stats') {
+            return request 
+                .get(`${API_URL}/ships`)
+                .set('Authorization', token)
+                .then(({ body }) => {
+                    return body;
+                });
 
-            //     return response;
-            // });
+        }
+        else {
+
+            const query = {
+                intent: input,
+                mood: ship.mood
+            };
+            let response;
+            return request
+                .get(`${API_URL}/responses?intent=${query.intent}&mood=${query.mood}`)
+                .set('Authorization', token)
+                .then(({ body }) => {
+                    response = body;
+                    // ship.mood += body.output.change;
+                    // return request
+                    //     .put(`${API_URL}/ships/${ship.id}`)
+                    //     .send(ship);
+                    return response;
+                });
+                // .then(() => {
+    
+                //     return response;
+                // });
+        }
     },
 
     deleteShip(id) {
