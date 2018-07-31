@@ -107,21 +107,15 @@ class Game {
         inquirer
             .prompt(prompt(responses.confirm))
             .then(({ answer }) => {
-                this.generateResponse(answer);
+                this.generateResponse({ answer });
             });
     }
 
     generateResponse(input) {
-        // input = {
-        //     answer: 'hi+hello',
-        //     mood: 100;
-        // }
-
         const sentence = input.answer.toLowerCase().split(' ');
         // BESPOKE NATURAL LANGUAGE PROCESSOR
-        // sentence is an array of words
-        // asteroids, ship, stats, avoid, go through, yes, no, maybe, ...
-        input.answer = sentence.map(w => w.match(/asteroid/ || /go through/));
+        const keywords = ['asteroids', 'ship', 'stats', 'avoid', 'through', 'hi', 'hey', 'hello'];
+        input.answer = sentence.filter(w => keywords.includes(w));
         if(input.answer.includes('ship' && 'stats')) {
             return this.api.getShipStats();
         }
@@ -129,9 +123,9 @@ class Game {
             input.answer = input.answer.join('+');
             input.mood = this.mood;
             return this.api.think(input)
-                .then(body => inquirer.prompt(prompt(body.output)))
-                .then(({ answer }) => {
-                    this.generateResponse({ answer });
+                .then(body => inquirer.prompt(prompt(body.output.response)))
+                .then((answer) => {
+                    this.generateResponse(answer);
                 });
         }
     }
