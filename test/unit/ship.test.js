@@ -10,7 +10,7 @@ describe('Ship model', () => {
             oxygen: 100, 
             lifeSupport: 85, 
             fuel: 100,
-            hal: 60,
+            mood: 60,
             payload: 95,
             hull: 100
         };
@@ -30,7 +30,7 @@ describe('Ship model', () => {
         assert.equal(errors.oxygen.kind, 'required');
         assert.equal(errors.lifeSupport.kind, 'required');
         assert.equal(errors.fuel.kind, 'required');
-        assert.equal(errors.hal.kind, 'required');
+        assert.equal(errors.mood.kind, 'required');
         assert.equal(errors.payload.kind, 'required');
         assert.equal(errors.hull.kind, 'required');
     }); 
@@ -41,7 +41,7 @@ describe('Ship model', () => {
             oxygen: 101,
             lifeSupport: 185, 
             fuel: 110,
-            hal: 160,
+            mood: 160,
             payload: 195,
             hull: 160
         });
@@ -50,7 +50,7 @@ describe('Ship model', () => {
         assert.equal(errors.oxygen.kind, 'max');
         assert.equal(errors.lifeSupport.kind, 'max');
         assert.equal(errors.fuel.kind, 'max');
-        assert.equal(errors.hal.kind, 'max');
+        assert.equal(errors.mood.kind, 'max');
         assert.equal(errors.payload.kind, 'max');
         assert.equal(errors.hull.kind, 'max');
     });
