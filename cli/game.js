@@ -114,8 +114,9 @@ class Game {
                 return this.api.think(intent[0].value);
             })
             .then(body => {
-                console.log('BODY', body);
-                // if continue = true, do something different
+                // if(body.continue) {
+                    // update user.stage
+                // }
                 return inquirer.prompt(prompt(body.output.response));
             })
             .then(({ answer }) => {

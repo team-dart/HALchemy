@@ -42,11 +42,22 @@ const hal = {
             intent: input,
             mood: ship.mood
         };
-        console.log('QUERY:', query);
+        let response;
         return request
             .get(`${API_URL}/responses?intent=${query.intent}&mood=${query.mood}`)
             .set('Authorization', token)
-            .then(({ body }) => body);
+            .then(({ body }) => {
+                response = body;
+                // ship.mood += body.output.change;
+                // return request
+                //     .put(`${API_URL}/ships/${ship.id}`)
+                //     .send(ship);
+                return response;
+            });
+            // .then(() => {
+
+            //     return response;
+            // });
     },
 
     deleteShip(id) {
