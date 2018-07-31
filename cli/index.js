@@ -33,8 +33,7 @@ const hal = {
     },
 
     parseIntent(input) {
-        return getWit(input)
-            .then(intent => intent);
+        return getWit(input);
     },
         
     think(input) {

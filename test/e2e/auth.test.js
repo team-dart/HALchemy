@@ -19,9 +19,7 @@ describe('Auth API', () => {
                 password: 'abc'
             })
             .then(checkOk)
-            .then(({ body }) => {
-                token = body.token;
-            });
+            .then(({ body }) => token = body.token);
     });
 
     it('signs up a user', () => {

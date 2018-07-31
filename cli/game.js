@@ -14,28 +14,25 @@ const prompt = (message) => {
     };
 };
 
-const responses = {
-    auth: 'Is this the first time we have interacted?',
-    username: 'Please verify your username:',
-    password: 'Confirmed. Please verify your password:',
-    confirm: 'Verified. \n I will commence the debriefing of the current mission status...'
-};
-
-
-const password = {
-    type: 'password',
-    name: 'password',
-    mask: '*',
-    message: 'Confirmed. Please verify your password:',
-};
-
-
-let credentials = {};
+const authPrompts = [
+    {
+        type: 'input',
+        name: 'name',
+        message: 'Please verify your username:'
+    },
+    {
+        type: 'password',
+        name: 'password',
+        mask: '*',
+        message: 'Confirmed. Please verify your password:',
+    }
+];
 
 class Game {
     constructor(api) {
         this.api = api;
         this.mood = 100;
+        this.signup = false;
     }
 
     start() {
@@ -47,62 +44,47 @@ class Game {
         );
         inquirer
             .prompt(prompt('Hello. My name is HAL.'))
-            .then(() => this.askAuth());
+            .then(() => this.askAuthChoice());
     }
 
-    askAuth() {
+    askAuthChoice() {
         inquirer
-            .prompt(prompt(responses.auth))
+            .prompt(prompt('Is this the first time we have interacted?'))
             .then(({ answer }) => {
                 answer = answer.toLowerCase();
                 if(answer.match(/n/)) {
                     console.log('I have retrieved our previous communication logs. I will still need to run a mental diagnostic.');
-                    credentials.signup = false;
-                    this.askUsername();
+                    this.askAuth();
                 }
                 else if(answer.match(/maybe/)) {
                     console.log('The cryostasis may have negatively affected your memory. Try to recall.');
-                    this.askAuth();
+                    this.askAuthChoice();
                 }
                 else if(answer.match(/y/)) {
                     console.log('To ensure mental fidelity, please answer a few questions.');
-                    credentials.signup = true;
-                    this.askUsername();
+                    this.signup = true;
+                    this.askAuth();
                 }
                 else {
                     console.log('It is imperative that you answer the question.');
-                    this.askAuth();
+                    this.askAuthChoice();
                 }
             });
     }
 
-    askUsername() {
+    askAuth() {
         inquirer
-            .prompt(prompt(responses.username))
-            .then(({ answer }) => {
-                credentials.name = answer;
-                this.askPassword();
-            });
-    }
-    
-    askPassword() {
-        inquirer
-            .prompt(password)
-            .then(({ password }) => {
-                credentials.password = password;
-                if(credentials.signup) return this.api.signup(credentials);
-                else return this.api.signin(credentials);
+            .prompt(authPrompts)
+            .then(({ name, password }) => {
+                if(this.signup) return this.api.signup({ name, password });
+                else return this.api.signin({ name, password });
             })
-            .then(body => {
-                this.api.token = body.token;
-                
-                this.startDialogue();
-            });
+            .then(() => this.startDialogue());
     }
 
     startDialogue() {
         inquirer
-            .prompt(prompt(responses.confirm))
+            .prompt(prompt('Excellent. Your identity has been verified. \n I will commence the debriefing of the current mission status...'))
             .then(({ answer }) => {
                 this.generateResponse(answer);
             });
