@@ -13,6 +13,8 @@
     "test:watch": "nodemon --exec 'npm run -s test:run'",
     "test:unit:watch": "nodemon --exec 'npm run -s test:unit'",
     "test:e2e:watch": "nodemon --exec 'npm run -s test:e2e'",
+    "db-load-heroku": "mongoimport -h ds023418.mlab.com:23418 -d heroku_pghxnmz8 -c responses -u heroku_pghxnmz8 -p 8rsomit7fcl091fttcv678e7e3 --file ./test/db-scripts/responses.json",
+    "db-load-local": "mongoimport -h localhost:27017 -d halchemy_test -c responses  --file ./test/db-scripts/responses.json",
     "start": "node server.js",
     "start:watch": "nodemon server.js",
     "play": "node cli/index.js"
