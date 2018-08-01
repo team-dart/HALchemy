@@ -11,6 +11,7 @@ const prompt = (message) => {
         type: 'input',
         name: 'answer',
         message: message,
+        default: '?'
     };
 };
 
@@ -93,8 +94,8 @@ class Game {
         return this.api.getStage(this.ship.stage)
             .then(data => {
                 console.log('Excellent. Your identity has been verified. \n I will commence the debriefing of the current mission status...');
-                return inquirer
-                    .prompt(prompt('data.intro'))
+                inquirer
+                    .prompt(prompt(data.intro))
                     .then(({ answer }) => {
                         this.generateResponse(answer);
                     });
@@ -107,6 +108,7 @@ class Game {
                 return this.api.think(intent, this.ship.mood);
             })
             .then(body => {
+                this.ship.mood += body.output.change;
                 const response = body.output.response;
                 if(body.continue === '2a') {
                     this.flyThroughAsteroids(body);

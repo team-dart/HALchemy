@@ -9,8 +9,6 @@ let token = '';
 
 
 function getResponse(intent, mood) {
-    
-    let response;
     return request
         .get(`${API_URL}/responses?intent=${intent}&mood=${mood}`)
         .set('Authorization', token)
