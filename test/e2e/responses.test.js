@@ -1,11 +1,11 @@
 const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
-const { checkOk } = request;
+const { save } = request;
 const getWit = require('../../lib/util/wit');
 const { Types } = require('mongoose');
 
-describe.only('Responses API', () => {
+describe('Responses API', () => {
 
     beforeEach(() => dropCollection('users'));
     beforeEach(() => dropCollection('ships'));
@@ -14,29 +14,18 @@ describe.only('Responses API', () => {
     let halResponseOne;
     let token;
 
-    function saveResponse(response) {
-        return request
-            .post('/api/responses')
-            .set('Authorization', token)
-            .send(response)
-            .then(checkOk)
-            .then(({ body }) => body);       
-    }
     beforeEach(() => {
-        return request
-            .post('/api/auth/signup')
-            .send({
-                name: 'joe blow',
-                password: 'abc'
-            })
-            .then(checkOk)
-            .then(({ body }) => {
+        return save({
+            name: 'N User',
+            password: '60'
+        }, 'auth/signup')
+            .then(body => {
                 token = body.token;
             });
     });
 
     beforeEach(() => {
-        return saveResponse({
+        return save({
             intent: 'direct',
             output: [{
                 response: 'Onward!',
@@ -55,12 +44,12 @@ describe.only('Responses API', () => {
             },
             {
                 response: 'I loathe you',
-                mood: 50,
+                mood: 0,
                 change: -30
             }],
-            continue: '2a',
-            stageId: Types.ObjectId()
-        })
+            continue: 'Asteroids-Direct',
+            stageId: ['Asteroids']
+        }, 'responses', token)
             .then(data => {
                 halResponseOne = data;
             });
@@ -73,9 +62,11 @@ describe.only('Responses API', () => {
 
     it('gets a response by query', () => {
         return request
-            .get('/api/responses?intent=direct&mood=100')
+            .get('/api/responses?intent=direct&mood=-20&stage=Asteroids')
             .set('Authorization', token)
-            .then(({ body }) => assert.isDefined(body.output));
+            .then(({ body }) => {
+                assert.isDefined(body.output);
+            });
     });
 
     it.skip('uses wit.ai', () => {

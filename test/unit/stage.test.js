@@ -6,7 +6,6 @@ describe('Stage model', () => {
 
     it('validates a good stage model', () => {
         const data = {
-            number: 1,
             name: 'Asteroids',
             intro: 'You are approaching a dangerous asteroid belt. You could choose to avoid the asteroids, but that will take time, perhaps too much time. Do you dare navigate through the belt?'
         };

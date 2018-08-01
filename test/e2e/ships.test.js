@@ -1,7 +1,7 @@
 const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
-const { checkOk } = request;
+const { checkOk, save } = request;
 
 
 describe('Ships API', () => {
@@ -9,24 +9,14 @@ describe('Ships API', () => {
     beforeEach(() => dropCollection('ships'));
     beforeEach(() => dropCollection('users'));
     
-    
-    function createUser(user) {
-        return request
-            .post('/api/auth/signup')
-            .send(user)
-            .then(checkOk)
-            .then(({ body }) => body);
-    }
-    
+
     let token;
     beforeEach(() => {
-        return createUser({
+        return save({
             name: 'N User',
             password: '60'
-        })
-            .then(body => {
-                token = body.token;
-            });
+        }, 'auth/signup')
+            .then(body => token = body.token);
     });
 
     let ship;
