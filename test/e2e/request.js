@@ -12,6 +12,15 @@ request.checkOk = res => {
     return res;
 };
 
+request.save = (data, path, token = '') => {
+    return request
+        .post(`/api/${path}`)
+        .set('Authorization', token)
+        .send(data)
+        .then(request.checkOk)
+        .then(({ body }) => body);
+};
+
 request.getToken = () => request
     .post('/api/signup')
     .send({

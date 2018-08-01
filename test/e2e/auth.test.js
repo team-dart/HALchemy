@@ -2,7 +2,7 @@ const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
 
-const { checkOk } = request;
+const { checkOk, save } = request;
 
 describe('Auth API', () => {
 
@@ -12,14 +12,11 @@ describe('Auth API', () => {
 
     let token;
     beforeEach(() => {
-        return request
-            .post('/api/auth/signup')
-            .send({
-                name: 'joe blow',
-                password: 'abc'
-            })
-            .then(checkOk)
-            .then(({ body }) => token = body.token);
+        return save({
+            name: 'joe blow',
+            password: 'abc'
+        }, 'auth/signup')
+            .then((body) => token = body.token);
     });
 
     it('signs up a user', () => {
