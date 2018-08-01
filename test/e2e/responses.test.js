@@ -47,8 +47,8 @@ describe('Responses API', () => {
                 mood: 0,
                 change: -30
             }],
-            continue: Types.ObjectId(),
-            stageId: [Types.ObjectId()]
+            continue: 'Asteroids-Direct',
+            stageId: ['Asteroids']
         }, 'responses', token)
             .then(data => {
                 halResponseOne = data;
@@ -62,7 +62,7 @@ describe('Responses API', () => {
 
     it('gets a response by query', () => {
         return request
-            .get('/api/responses?intent=direct&mood=-20')
+            .get('/api/responses?intent=direct&mood=-20&stage=Asteroids')
             .set('Authorization', token)
             .then(({ body }) => {
                 assert.isDefined(body.output);
