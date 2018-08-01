@@ -93,8 +93,8 @@ class Game {
         return this.api.getStage(this.ship.stage)
             .then(data => {
                 console.log('Excellent. Your identity has been verified. \n I will commence the debriefing of the current mission status...');
-                inquirer
-                    .prompt(prompt(data))
+                return inquirer
+                    .prompt(prompt('data.intro'))
                     .then(({ answer }) => {
                         this.generateResponse(answer);
                     });
@@ -104,22 +104,63 @@ class Game {
     generateResponse(input) {
         return this.api.parseIntent(input)
             .then(intent => {
-                return this.api.getResponse(intent);
+                return this.api.think(intent, this.ship.mood);
             })
             .then(body => {
-                let response;
-                if(body.continue) {
-                    response = body.output.response;
-                    console.log('MOVING ON TO STAGE', body.continue);
-                    return this.api.updateStage(body.continue)
-                        .then(() => inquirer.prompt(prompt(response)));
+                const response = body.output.response;
+                if(body.continue === '2a') {
+                    this.flyThroughAsteroids(body);
                 }
-                else return inquirer.prompt(prompt(body.output.response));
+                else if(body.continue === '2b') {
+                    this.flyAroundAsteroids(body);
+                }
+                else if(body.continue === '4') {
+                    this.arriveAtEarth(response);
+                }
+                else if(body.continue === '6') {
+                    this.die(response);
+                }
+                else return inquirer.prompt(prompt(response));
             })
             .then(({ answer }) => {
                 this.generateResponse(answer);
             });
     }
+
+    flyThroughAsteroids(body) {
+        // console.log(body.output.response);
+        // console.log('MOVING ON TO STAGE', body.continue);
+        // update stage #
+        // get stage info
+        // update ship stats
+
+
+        return this.api.updateStage(body.continue)
+            .then(() => inquirer.prompt(prompt('shields are low what do we do?')));
+    }
+
+    flyAroundAsteroids(body) {
+
+    }
+
+    arriveAtEarth(response) {
+        console.log(response);
+        console.log('\n\nYou WIN!');
+        // update stages with success
+        // this.api.updateLeaderboard;
+        this.api.deleteShip();
+    }
+
+    die(response) {
+        console.log(response);
+        console.log('\n\nYou died!');
+        // update stages with failure
+        this.api.deleteShip();
+    }
+
+
+
+
 }
 
 
