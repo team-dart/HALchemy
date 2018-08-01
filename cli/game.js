@@ -11,6 +11,7 @@ const prompt = (message) => {
         type: 'input',
         name: 'answer',
         message: message,
+        default: '?'
     };
 };
 
@@ -107,6 +108,7 @@ class Game {
                 return this.api.think(intent, this.ship.mood);
             })
             .then(body => {
+                this.ship.mood += body.output.change;
                 const response = body.output.response;
                 if(body.continue === '2a') {
                     this.flyThroughAsteroids(body);
