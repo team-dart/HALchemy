@@ -7,6 +7,30 @@ const getWit = require('../lib/util/wit');
 let token = '';
 
 
+
+function getResponse(intent, mood) {
+    
+    let response;
+    return request
+        .get(`${API_URL}/responses?intent=${intent}&mood=${mood}`)
+        .set('Authorization', token)
+        .then(({ body }) => body);
+}
+function getShipStats() {
+    return request 
+        .get(`${API_URL}/ships`)
+        .set('Authorization', token)
+        .then(({ body }) => {
+            return body;
+        });
+}
+function updateShipStats() {
+
+}
+function getSurvivalRate() {
+
+}
+
 const hal = {
     signup(credentials) {
         return request
@@ -49,47 +73,41 @@ const hal = {
                 else return intent[0].value;
             });
     },
+    getStage(stageName) {
+        return request
+            .get(`${API_URL}/stages/${stageName}`)
+            .set('Authorization', token)
+            .then(({ body }) => body);
+    },
     updateStage(stage) {
         return request
             .put(`${API_URL}/ships`)
             .set('Authorization', token)
             .send({ stage: stage });
     },
-    getResponse(input) {
-        if(input === 'stats') {
-            return request 
-                .get(`${API_URL}/ships`)
-                .set('Authorization', token)
-                .then(({ body }) => {
-                    return body;
-                });
-
+    think(intent, mood) {
+        if(intent === 'stats') {
+            return getShipStats();
+        }
+        else if(intent === 'increase shields') {
+            return updateShipStats();
+        }
+        else if(intent === 'survival rate') {
+            return getSurvivalRate();
         }
         else {
-            const query = {
-                intent: input,
-                mood: mood
-            };
             let response;
-            return request
-                .get(`${API_URL}/responses?intent=${query.intent}&mood=${mood}`)
-                .set('Authorization', token)
-                .then(({ body }) => {
+            return getResponse(intent, mood)
+                .then(body => {
                     response = body;
-                    mood += body.output.change;
-                    return this.updateMood(mood);
+                    return this.updateMood(mood + body.output.change);
                 })
                 .then(() => {
                     return response;
                 });
         }
     },
-    getStage(stageName) {
-        return request
-            .get(`${API_URL}/stages/${stageName}`)
-            .set('Authorization', token)
-
-    },
+    
     deleteShip() {
         return request
             .del(`${API_URL}/ships`)
@@ -98,6 +116,8 @@ const hal = {
     //updateLeaderboard() {}
 
 };
+
+
 
 
 const game = new Game(hal);
