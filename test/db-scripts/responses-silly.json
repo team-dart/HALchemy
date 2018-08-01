@@ -81,5 +81,6 @@
             "mood": 0,
             "change": 10
         }
-    ]
+    ],
+    "stages": ["Start", "Asteroids", "Asteroids-Avoid", "Asteroids-Direct", "Resources", "Earth"]
 }
