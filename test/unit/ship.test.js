@@ -6,6 +6,7 @@ describe('Ship model', () => {
 
     it('validates a good ship model', () => {
         const data = {
+            stage: '0',
             name: 'Space Titanic',
             oxygen: 100, 
             lifeSupport: 85, 

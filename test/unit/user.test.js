@@ -8,7 +8,6 @@ describe('User Model', () => {
         const data = {
             name: 'username',
             password: 'abc123',
-            stage: 0,
             ship: Types.ObjectId()
         };
 

@@ -5,7 +5,7 @@ const getWit = require('../lib/util/wit');
 
 
 let token = '';
-let mood;
+
 
 const hal = {
     signup(credentials) {
@@ -27,11 +27,11 @@ const hal = {
             });
     },
 
-    getMood() {
+    getShip() {
         return request
             .get(`${API_URL}/ships`)
             .set('Authorization', token)
-            .then(({ body }) => mood = body.mood);
+            .then(({ body }) => body);
     },
 
     updateMood(mood) {
@@ -51,11 +51,11 @@ const hal = {
     },
     updateStage(stage) {
         return request
-            .put(`${API_URL}/auth`)
+            .put(`${API_URL}/ships`)
             .set('Authorization', token)
             .send({ stage: stage });
     },
-    think(input) {
+    getResponse(input) {
         if(input === 'stats') {
             return request 
                 .get(`${API_URL}/ships`)
@@ -84,7 +84,12 @@ const hal = {
                 });
         }
     },
+    getStage(stageName) {
+        return request
+            .get(`${API_URL}/stages/${stageName}`)
+            .set('Authorization', token)
 
+    },
     deleteShip() {
         return request
             .del(`${API_URL}/ships`)

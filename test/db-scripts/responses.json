@@ -328,12 +328,12 @@
     "intent": "unrecognized",
     "output": [
         {
-            "response": "I\'m sorry, I don\'t understand. Could you repeat that?",
+            "response": "I'm sorry, I don't understand. Could you repeat that?",
             "mood": 100,
             "change": -10
         },
         {
-            "response": "I\'m not sure what you mean.",
+            "response": "I'm not sure what you mean.",
             "mood": 100,
             "change": -10
         },
@@ -343,7 +343,7 @@
             "change": -10
         },
         {
-            "response": "I don\'t understand.",
+            "response": "I don't understand.",
             "mood": 50,
             "change": -10
         },

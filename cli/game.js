@@ -31,8 +31,9 @@ const authPrompts = [
 class Game {
     constructor(api) {
         this.api = api;
-        this.mood = 100;
+        this.ship = {};
         this.signup = false;
+        this.token;
     }
 
     start() {
@@ -80,25 +81,30 @@ class Game {
                 else return this.api.signin({ name, password });
             })
             .then(() => {
-                return this.api.getMood();
+                return this.api.getShip();
             })
-            .then(() => {
+            .then(ship => {
+                this.ship = ship;
                 this.startDialogue();
             });
     }
 
     startDialogue() {
-        inquirer
-            .prompt(prompt('Excellent. Your identity has been verified. \n I will commence the debriefing of the current mission status...'))
-            .then(({ answer }) => {
-                this.generateResponse(answer);
+        return this.api.getStage(this.ship.stage)
+            .then(data => {
+                console.log('Excellent. Your identity has been verified. \n I will commence the debriefing of the current mission status...');
+                inquirer
+                    .prompt(prompt(data))
+                    .then(({ answer }) => {
+                        this.generateResponse(answer);
+                    });
             });
     }
 
     generateResponse(input) {
         return this.api.parseIntent(input)
             .then(intent => {
-                return this.api.think(intent);
+                return this.api.getResponse(intent);
             })
             .then(body => {
                 let response;
