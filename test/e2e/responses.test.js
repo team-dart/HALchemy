@@ -5,13 +5,14 @@ const { save } = request;
 const getWit = require('../../lib/util/wit');
 const { Types } = require('mongoose');
 
-describe('Responses API', () => {
+describe.only('Responses API', () => {
 
     beforeEach(() => dropCollection('users'));
     beforeEach(() => dropCollection('ships'));
     beforeEach(() => dropCollection('responses'));
 
     let halResponseOne;
+    let halResponseTwo;
     let token;
 
     beforeEach(() => {
@@ -48,10 +49,34 @@ describe('Responses API', () => {
                 change: -30
             }],
             continue: 'Asteroids-Direct',
-            stageId: ['Asteroids']
+            stages: ['Asteroids']
         }, 'responses', token)
             .then(data => {
                 halResponseOne = data;
+            });
+    });
+    beforeEach(() => {
+        return save({
+            intent: 'hi',
+            output: [{
+                response: 'Hello!',
+                mood: 100,
+                change: -30
+            },
+            {
+                response: 'Hi.',
+                mood: 50,
+                change: -30
+            },
+            {
+                response: 'Bye',
+                mood: 0,
+                change: -30
+            }],
+            stages: ['Asteroids', 'Asteroids-Direct', 'Asteroids-Avoid']
+        }, 'responses', token)
+            .then(data => {
+                halResponseTwo = data;
             });
     });
 
@@ -66,6 +91,7 @@ describe('Responses API', () => {
             .set('Authorization', token)
             .then(({ body }) => {
                 assert.isDefined(body.output);
+                assert.equal(body.intent, 'direct');
             });
     });
 
