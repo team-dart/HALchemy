@@ -25,6 +25,7 @@ describe('Ships API', () => {
             .get('/api/ships')
             .set('Authorization', token)
             .then(({ body }) => {
+                assert.equal(body.stage, 'Asteroids');
                 assert.isDefined(body);
                 ship = body;
             });

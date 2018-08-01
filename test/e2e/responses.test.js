@@ -3,9 +3,8 @@ const request = require('./request');
 const { dropCollection } = require('./db');
 const { save } = request;
 const getWit = require('../../lib/util/wit');
-const { Types } = require('mongoose');
 
-describe.only('Responses API', () => {
+describe('Responses API', () => {
 
     beforeEach(() => dropCollection('users'));
     beforeEach(() => dropCollection('ships'));
@@ -83,6 +82,7 @@ describe.only('Responses API', () => {
     it('saves a response', () => {
         assert.isOk(halResponseOne._id);
         assert.equal(halResponseOne.intent, 'direct');
+        assert.equal(halResponseTwo.intent, 'hi');
     });
 
     it('gets a response by query', () => {
