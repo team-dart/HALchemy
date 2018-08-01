@@ -93,8 +93,8 @@ class Game {
         return this.api.getStage(this.ship.stage)
             .then(data => {
                 console.log('Excellent. Your identity has been verified. \n I will commence the debriefing of the current mission status...');
-                return inquirer
-                    .prompt(prompt('data.intro'))
+                inquirer
+                    .prompt(prompt(data.intro))
                     .then(({ answer }) => {
                         this.generateResponse(answer);
                     });
