@@ -7,5 +7,9 @@ You have been awakened from cryogenic sleep on a spaceship headed for Earth. The
 Your mission is to work with HAL to get back to Earth on time. HAL will interact with you, answer your questions, and follow your orders. You approach a nearby terminal. Follow the instructions below to boot up HAL and begin your mission!
 
 ## Instructions
+```
+Clone or download this repo.
+npm i
+
 
 ## Credits and Links
