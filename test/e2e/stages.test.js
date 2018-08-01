@@ -1,7 +1,7 @@
 const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
-const { save } = request;
+const { checkOk, save } = request;
 
 
 describe('Stages API', () => {
@@ -63,8 +63,9 @@ describe('Stages API', () => {
         return request
             .get('/api/stages/Asteroids/survival')
             .set('Authorization', token)
+            .then(checkOk)
             .then(({ body }) => {
-                assert.deepEqual(body.success, 20);   
+                assert.strictEqual(body.stageSuccess, 20);   
             });
     });
 });
