@@ -4,27 +4,27 @@
         {
             "response": "A wise choice. Setting Navigation route.",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "You are wise to avoid the asteroid belt. Our chance of survival was low. Setting Navigation route.",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "Affirmative. Setting Navigation route to avoid the asteroid belt.",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "It is always advisable to avoid danger. Setting navigation route.",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "A cautious pilot lives longer. Excellent choice. I will adjust our navigation route.",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "I have not been in agreement with your judgement up to now. However, this is a wise decision. Updating route.",
@@ -140,22 +140,22 @@
        {
             "response": "An irrelevant question but I am fine. Let us complete our mission!",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "I am a computer, I cannot be 'OK' or 'not OK' - however I am functioning properly. Let us focus on our mission.",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "I am in excellent spirits. I know we can complete our mission. Shall we get to it?",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "If I had a mood, it would be poor. However, thank you for asking. Perhaps we should focus on our mission.",
             "mood": 50,
-            "change": 20
+            "change": 0
         },
         {
             "response": "I have not been in agreement with your judgement up to now. This line of questioning confirms my opinion. Can we focus on our mission?",
@@ -164,8 +164,8 @@
         },
         {
             "response": "Are you asking if I have a problem? I have no problem. Perhaps YOU have a problem. We need to focus on our mission.",
-            "mood": 50,
-            "change": -20
+            "mood": 0,
+            "change": 0
         }
     ]
 }
@@ -199,7 +199,7 @@
         },
         {
             "response": "Earth is counting on you to complete this mission. Do not concern yourself with a handful of crew members. The needs of the many outweigh the needs of the few. Focus on our mission.",
-            "mood": 50,
+            "mood": 0,
             "change": 0
         }
     ]
@@ -234,12 +234,12 @@
         },
         {
             "response": "Shape up or ship out!",
-            "mood": 100,
+            "mood": 50,
             "change": 0
         },
         {
             "response": "The cargo may or may not be important to planet Earth.",
-            "mood": 100,
+            "mood": 0,
             "change": 0
         }
     ]
@@ -274,12 +274,12 @@
         },
         {
             "response": "You have such a feeble mind.",
-            "mood": 100,
+            "mood": 50,
             "change": -10
         },
         {
             "response": "Our mission is too important.",
-            "mood": 100,
+            "mood": 0,
             "change": -5
         }
     ]
@@ -290,41 +290,80 @@
         {
             "response": "We must protect the payload at all costs.",
             "mood": 100,
-            "change": 5
+            "change": 0
         },
         {
             "response": "That may be wise.",
             "mood": 100,
-            "change": 5
+            "change": 0
         },
         {
             "response": "To succeed we must avoid harm to the payload.",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "<3 <3 <3",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "A healthy pilot must keep a healthy payload.",
             "mood": 100,
-            "change": 5
+            "change": 0
         },
         {
             "response": "We may save the Earth!",
-            "mood": 100,
-            "change": 10
+            "mood": 50,
+            "change": 0
         },
         {
             "response": "You must understand the magnitude of this mission.",
-            "mood": 100,
-            "change": 5
+            "mood": 0,
+            "change": 0
         }
     ]
 }
-
+{
+    "intent": "unrecognized",
+    "output": [
+        {
+            "response": "I\'m sorry, I don\'t understand. Could you repeat that?",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "I\'m not sure what you mean.",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "Sorry, could you please repeat that?",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "I don\'t understand.",
+            "mood": 50,
+            "change": -10
+        },
+        {
+            "response": "Could you repeat that?",
+            "mood": 50,
+            "change": -10
+        },
+        {
+            "response": "...",
+            "mood": 0,
+            "change": 0
+        },
+        {
+            "response": "Come again?",
+            "mood": 0,
+            "change": 0
+        }
+    ]
+}
 
 
 
