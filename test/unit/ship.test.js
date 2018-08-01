@@ -13,7 +13,7 @@ describe('Ship model', () => {
             fuel: 100,
             mood: 60,
             payload: 95,
-            hull: 100
+            shields: 100
         };
 
         const ship = new Ship(data);
@@ -33,7 +33,7 @@ describe('Ship model', () => {
         assert.equal(errors.fuel.kind, 'required');
         assert.equal(errors.mood.kind, 'required');
         assert.equal(errors.payload.kind, 'required');
-        assert.equal(errors.hull.kind, 'required');
+        assert.equal(errors.shields.kind, 'required');
     }); 
 
     it('validates fields that have max of 100', () => {
@@ -44,7 +44,7 @@ describe('Ship model', () => {
             fuel: 110,
             mood: 160,
             payload: 195,
-            hull: 160
+            shields: 160
         });
 
         const errors = getErrors(ship.validateSync(), 6);
@@ -53,7 +53,7 @@ describe('Ship model', () => {
         assert.equal(errors.fuel.kind, 'max');
         assert.equal(errors.mood.kind, 'max');
         assert.equal(errors.payload.kind, 'max');
-        assert.equal(errors.hull.kind, 'max');
+        assert.equal(errors.shields.kind, 'max');
     });
 
 });

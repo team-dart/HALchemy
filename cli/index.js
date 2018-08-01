@@ -1,6 +1,6 @@
 const Game = require('./game');
 const request = require('superagent');
-const API_URL = 'localhost:3000/api';
+const API_URL = 'https://halchemy.herokuapp.com/api';
 const getWit = require('../lib/util/wit');
 
 
@@ -48,14 +48,12 @@ const hal = {
                 return body;
             });
     },
-
     getShip() {
         return request
             .get(`${API_URL}/ships`)
             .set('Authorization', token)
             .then(({ body }) => body);
     },
-
     updateMood(mood) {
         return request
             .put(`${API_URL}/ships`)
@@ -63,7 +61,6 @@ const hal = {
             .send({ mood: mood })
             .then(({ body }) => mood = body.mood);
     },
-
     parseIntent(input) {
         return getWit(input)
             .then(intent => {
@@ -77,15 +74,18 @@ const hal = {
             .set('Authorization', token)
             .then(({ body }) => body);
     },
-    updateStage(stage) {
+    updateShip(ship) {
         return request
             .put(`${API_URL}/ships`)
             .set('Authorization', token)
-            .send({ stage: stage });
+            .send(ship);
     },
     think(intent, mood) {
         if(intent === 'stats') {
-            return getShipStats();
+            return getShipStats()
+                .then(({ name, oxygen, lifeSupport, fuel, shields }) => {
+                    return `The ${name} has shields at ${shields}%. Our fuel is down to ${fuel}%. Oxygen levels are only at ${oxygen}%. And the power to the crew's cryopods is currently ${lifeSupport}%.`;
+                });
         }
         else if(intent === 'increase shields') {
             return updateShipStats();
