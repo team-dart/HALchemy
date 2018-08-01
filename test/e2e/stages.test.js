@@ -47,4 +47,24 @@ describe('Stages API', () => {
                 assert.deepEqual(body, stage);   
             });
     });
+
+    it('updates a stage success', () => {
+        stage.success++;
+        return request 
+            .put('/api/stages/Asteroids')
+            .set('Authorization', token)
+            .send(stage)
+            .then(({ body }) => {
+                assert.deepEqual(body, stage);
+            });
+    });
+
+    it('gets survival percentage', () => {
+        return request
+            .get('/api/stages/Asteroids/survival')
+            .set('Authorization', token)
+            .then(({ body }) => {
+                assert.deepEqual(body.success, 20);   
+            });
+    });
 });
