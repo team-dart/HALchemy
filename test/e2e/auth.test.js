@@ -2,7 +2,7 @@ const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
 
-const { checkOk } = request;
+const { checkOk, save } = request;
 
 describe('Auth API', () => {
 
@@ -12,14 +12,11 @@ describe('Auth API', () => {
 
     let token;
     beforeEach(() => {
-        return request
-            .post('/api/auth/signup')
-            .send({
-                name: 'joe blow',
-                password: 'abc'
-            })
-            .then(checkOk)
-            .then(({ body }) => token = body.token);
+        return save({
+            name: 'joe blow',
+            password: 'abc'
+        }, 'auth/signup')
+            .then((body) => token = body.token);
     });
 
     it('signs up a user', () => {
@@ -71,14 +68,6 @@ describe('Auth API', () => {
                 assert.equal(res.status, 400);
                 assert.equal(res.body.error, 'Username already in use');
             });        
-    });
-
-    it('updates a user stage', () => {
-        return request
-            .put('/api/auth')
-            .set('Authorization', token)
-            .send({ stage: '2a' })
-            .then(({ body }) => assert.equal(body.stage, '2a'));
     });
 
     // it('Gives 401 on bad username signin', () => {
