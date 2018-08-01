@@ -1,6 +1,6 @@
 const Game = require('./game');
 const request = require('superagent');
-const API_URL = 'localhost:3000/api';
+const API_URL = 'ds023418.mlab.com:23418/api';
 const getWit = require('../lib/util/wit');
 
 
