@@ -17,6 +17,7 @@
     "db-load-response-local": "mongoimport -h localhost:27017 -d halchemy -c responses  --drop --file ./test/db-scripts/responses.json",
     "db-load-stage-heroku": "mongoimport -h ds023418.mlab.com:23418 -d heroku_pghxnmz8 -c stages -u heroku_pghxnmz8 -p 8rsomit7fcl091fttcv678e7e3 --file ./test/db-scripts/stages.json",
     "db-load-stage-local": "mongoimport -h localhost:27017 -d halchemy -c stages  --file ./test/db-scripts/stages.json",
+    "db-load-stage-local": "mongoimport -h localhost:27017 -d halchemy -c stages  --drop --file ./test/db-scripts/stages.json",
     "db-load-local": "npm run db-load-response-local && npm run db-load-stage-local",
     "db-load-heroku": "npm run db-load-response-heroku && npm run db-load-stage-heroku",
     "start": "node server.js",
