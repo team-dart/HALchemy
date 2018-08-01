@@ -1,36 +1,30 @@
 {
     "_id": "5b5f855ca94242c067ba626c",
-    "number": "0",
     "name": "Start",
     "intro":"You have been awakened from cryosleep on a spaceship headed for Earth. You are responsible for directing HAL, the ship's computer, to get the ship home safely, and on time, to Earth. You alone must do this."
 }
 {
     "_id": "5b5f855ca94242c067ba627c",
-    "number": "1",
     "name": "Asteroids",
     "intro":"You are approaching a dangerous asteroid belt. You could choose to avoid the asteroids, but that will take time, perhaps too much time. Do you dare navigate through the belt?"
 }
 {
     "_id": "5b5f855ca94242c067ba628c",
-    "number": "2b",
     "name": "Asteroids-Avoid",
     "intro":"You have chosen to avoid immediate danger by taking the longer, but safer, route around the asteroid belt. You continue to make your way towards Earth."
 }
 {
     "_id": "5b5f855ca94242c067ba629c",
-    "number": "2a",
     "name": "Asteroids-Direct",
     "intro":"You have chosen to find a direct route through the dangerous asteroid belt. You will have to hope the ship does not take too much damage. HAL can provide reports."
 }
 {
     "_id": "5b5f855ca94242c067ba630c",
-    "number": "4",
     "name": "Earth",
     "intro":"Your mission has succeeded! You and HAL have saved the day by returning to Earth just in time. HAL approves of your strategic thinking."
 }
 {
     "_id": "5b5f855ca94242c067ba631c",
-    "number": "6",
     "name": "Death",
     "intro":"Your mission has failed. Your ship, disabled, floats through space as your life support systems slowly shut down....."
 }

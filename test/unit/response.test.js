@@ -12,8 +12,8 @@ describe('Response model', () => {
                 mood: 100,
                 change: -35
             }],
-            continue: '2b',
-            stageId: Types.ObjectId()
+            continue: Types.ObjectId(),
+            stageId: [Types.ObjectId()]
         };
 
         const response = new Response(data);

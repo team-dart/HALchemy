@@ -93,6 +93,7 @@ class Game {
     startDialogue() {
         return this.api.getStage(this.ship.stage)
             .then(data => {
+                this.moodCheck();
                 console.log('Excellent. Your identity has been verified. \n I will commence the debriefing of the current mission status...');
                 inquirer
                     .prompt(prompt(data.intro))

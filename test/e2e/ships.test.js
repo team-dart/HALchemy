@@ -9,7 +9,6 @@ describe('Ships API', () => {
     beforeEach(() => dropCollection('ships'));
     beforeEach(() => dropCollection('users'));
     
-    
 
     let token;
     beforeEach(() => {
@@ -17,9 +16,7 @@ describe('Ships API', () => {
             name: 'N User',
             password: '60'
         }, 'auth/signup')
-            .then(body => {
-                token = body.token;
-            });
+            .then(body => token = body.token);
     });
 
     let ship;

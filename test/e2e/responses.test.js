@@ -44,11 +44,11 @@ describe('Responses API', () => {
             },
             {
                 response: 'I loathe you',
-                mood: 50,
+                mood: 0,
                 change: -30
             }],
-            continue: '2a',
-            stageId: Types.ObjectId()
+            continue: Types.ObjectId(),
+            stageId: [Types.ObjectId()]
         }, 'responses', token)
             .then(data => {
                 halResponseOne = data;
@@ -62,9 +62,11 @@ describe('Responses API', () => {
 
     it('gets a response by query', () => {
         return request
-            .get('/api/responses?intent=direct&mood=100')
+            .get('/api/responses?intent=direct&mood=-20')
             .set('Authorization', token)
-            .then(({ body }) => assert.isDefined(body.output));
+            .then(({ body }) => {
+                assert.isDefined(body.output);
+            });
     });
 
     it.skip('uses wit.ai', () => {
