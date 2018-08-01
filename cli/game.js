@@ -103,24 +103,30 @@ class Game {
     }
 
     generateResponse(input) {
+        
         return this.api.parseIntent(input)
             .then(intent => {
                 return this.api.think(intent, this.ship.mood);
             })
             .then(body => {
-                this.ship.mood += body.output.change;
-                const response = body.output.response;
-                if(body.continue === '2a') {
-                    this.flyThroughAsteroids(body);
+                this.moodCheck();
+                let response;
+                if(body.output) {
+                    response = body.output.response;
+                    this.ship.mood += body.output.change;
+                }
+                else response = body;
+                if(body.continue === 'Asteroids-Direct') {
+                    return this.flyThroughAsteroids(body);
                 }
                 else if(body.continue === '2b') {
-                    this.flyAroundAsteroids(body);
+                    return this.flyAroundAsteroids(body);
                 }
                 else if(body.continue === '4') {
-                    this.arriveAtEarth(response);
+                    return this.arriveAtEarth(response);
                 }
                 else if(body.continue === '6') {
-                    this.die(response);
+                    return this.die(response);
                 }
                 else return inquirer.prompt(prompt(response));
             })
@@ -130,19 +136,35 @@ class Game {
     }
 
     flyThroughAsteroids(body) {
-        // console.log(body.output.response);
-        // console.log('MOVING ON TO STAGE', body.continue);
-        // update stage #
-        // get stage info
-        // update ship stats
-
-
-        return this.api.updateStage(body.continue)
-            .then(() => inquirer.prompt(prompt('shields are low what do we do?')));
+        console.log(body.output.response);
+        this.ship.shields -= 10;
+        this.ship.oxygen -= 10;
+        this.ship.fuel -= 10;
+        this.ship.stage = body.continue;
+        
+        return this.api.updateShip(this.ship)
+            .then(() => {
+                return this.api.getStage('Asteroids-Direct');
+            })
+            .then(data => {
+                return inquirer.prompt(prompt(data.intro));
+            });
     }
 
     flyAroundAsteroids(body) {
-
+        console.log(body.output.response);
+        this.ship.shields -= 10;
+        this.ship.oxygen -= 10;
+        this.ship.fuel -= 10;
+        this.ship.stage = body.continue;
+        
+        return this.api.updateShip(this.ship)
+            .then(() => {
+                return this.api.getStage('Asteroids-Avoid');
+            })
+            .then(data => {
+                return inquirer.prompt(prompt(data.intro));
+            });
     }
 
     arriveAtEarth(response) {
@@ -155,12 +177,15 @@ class Game {
 
     die(response) {
         console.log(response);
-        console.log('\n\nYou died!');
+        console.log('\n\nGAME OVER');
         // update stages with failure
         this.api.deleteShip();
     }
 
-
+    moodCheck() {
+        console.log('MY MOOD IS: ', this.mood);
+        if(this.mood < 0) this.die('You are unfit to deliver our cargo back to Earth. Flooding cockpit with neurotoxin.');
+    }
 
 
 }
