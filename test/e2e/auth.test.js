@@ -73,14 +73,6 @@ describe('Auth API', () => {
             });        
     });
 
-    it('updates a user stage', () => {
-        return request
-            .put('/api/auth')
-            .set('Authorization', token)
-            .send({ stage: '2a' })
-            .then(({ body }) => assert.equal(body.stage, '2a'));
-    });
-
     // it('Gives 401 on bad username signin', () => {
     //     return request
     //         .post('/api/auth/signin')
