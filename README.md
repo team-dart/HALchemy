@@ -7,9 +7,28 @@ You have been awakened from cryogenic sleep on a spaceship headed for Earth. The
 Your mission is to work with HAL to get back to Earth on time. HAL will interact with you, answer your questions, and follow your orders. You approach a nearby terminal. Follow the instructions below to boot up HAL and begin your mission!
 
 ## Instructions
-```
 Clone or download this repo.
-npm i
 
+```
+npm i
+npm run db-load-heroku
+npm run play
+```
+Launch the game at <a href="https://halchemy.herokuapp.com/" target="_blank">https://halchemy.herokuapp.com/</a>
+
+## Development Notes
+HALchemy was written in Javascript with Node.js and using a MongoDB database with Mongoose. Tests are handled by Mocha using the Chai assertion library. 
+
+Project can be deployed to run locally, or as configured to run on a Heroku server. We are using various NPM packages including <a href="https://www.npmjs.com/package/inquirer" target="_blank">Inquirer</a>. 
+
+Check out our Package.json file for other dependencies. Team Dart is using <a href="https://wit.ai/" target="_blank">Wit.ai</a> for Natural Language Processing. 
 
 ## Credits and Links
+HALchemy was created by Team Dart, during the Summer 2018 Full-Stack Javascript Career Track program at <a href="https://www.alchemycodelab.com/" target="_bl;ank">Alchemy Code Lab</a> in Portland. 
+
+Team Dart is (in alphabetical order) Arthur Jen, Mark Myers and Sarah Rehmer. <br />Fork this project on Github <a href="https://github.com/team-dart/HALchemy" target="_blank">at this link</a>.
+
+The parallax starr background on the index page is from a <a href="https://codepen.io/saransh/pen/BKJun" target="_blank">Codepen by Saransh Sinha.
+
+
+
