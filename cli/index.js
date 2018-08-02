@@ -61,11 +61,11 @@ const hal = {
             .then(({ body }) => mood = body.mood);
     },
     parseIntent(input) {
-        return getWit(input)
-            .then(intent => {
-                if(!intent) return 'unrecognized';
-                else return intent[0].value;
-            });
+        return request
+            .post(`${API_URL}/responses/intent`)
+            .set('Authorization', token)
+            .send({ input })
+            .then(({ body }) => body);
     },
     getStage(stageName) {
         return request

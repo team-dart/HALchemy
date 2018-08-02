@@ -20,7 +20,10 @@ const authPrompts = [
     {
         type: 'input',
         name: 'name',
-        message: 'Please verify your username:'
+        message: 'Please verify your username:',
+        validation: function(val) {
+
+        }
     },
     {
         type: 'password',
@@ -191,7 +194,8 @@ class Game {
                 return this.api.deleteShip();
             })
             .then(() => {
-                return 'exit';
+                // return 'exit';
+                process.exit(1);
             });
     }
 
