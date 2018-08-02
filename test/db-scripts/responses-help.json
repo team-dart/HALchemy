@@ -1,0 +1,86 @@
+{   "intent": "help start",
+    "output": [
+        {
+            "response": "You can chat with me.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "You can chat with me.",
+            "mood": 50,
+            "change": 0
+        },
+        {
+            "response": "You can chat with me.",
+            "mood": 0,
+            "change": 0
+        }
+    ],
+    "stages": ["Start"]
+}
+
+{
+    "intent": "help asteroids",
+    "output": [
+        {
+            "response": "With the DIRECT route you risk damage. If you choose to AVOID the asteroids by taking the indirect route, we risk resources",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "Although you may save time by taking the DIRECT route through the asteroid belt, it may be safer to AVOID the belt, if we are to be assured of completing our mission.",
+            "mood": 50,
+            "change": 0
+        },
+        {
+            "response": "I cannot believe that you cannot make such a simple decision. Either AVOID the asteroids or take the DIRECT route through them, it is not that difficult.",
+            "mood": 0,
+            "change": 0
+        }    
+    ],
+        "stages": ["Asteroids"]
+}
+
+{
+    "intent": "help 2a direct",
+    "output": [
+        {   
+            "response": "We took some damage. We may need to redirect energy from cryptopods",
+            "mood": 100,
+            "change": 0
+        }
+        {   
+            "response": "We were struck. We may need to redirect energy from cryptopods",
+            "mood": 50,
+            "change": 0
+        }
+        {   
+            "response": "You are putting the mission at risk. We may need to redirect energy from cryptopods",
+            "mood": 0,
+            "change": 0
+        }
+    ],
+        "stages": ["Asteroids-Direct"]   
+}
+
+{
+    "intent": "help 2b avoid",
+    "output": [
+        {   
+            "response": "Resources are running low. We may need to eject the crew.",
+            "mood": 100,
+            "change": 0
+        }
+        {   
+            "response": "Resources are low. We may need to eject the crew.",
+            "mood": 50,
+            "change": 0
+        }
+        {   
+            "response": "Human! You are putting the mission at risk. We may need to redirect resources by ejecting the crew",
+            "mood": 0,
+            "change": 0
+        }
+    ],
+        "stages": ["Asteroids-Direct"]   
+}

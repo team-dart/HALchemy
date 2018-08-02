@@ -37,9 +37,10 @@
             "change": 50
         }
     ],
-    "stage": {"$oid":"5b5f855ca94242c067ba628c"},
-    "continue": "2b"
+    "continue": "Asteroids-Avoid",
+    "stages": ["Asteroids"]
 }
+
 {
     "intent": "direct",
     "output": [
@@ -79,26 +80,10 @@
             "change": -30
         }
     ],
-    "stage": {"$oid":"5b5f855ca94242c067ba628c"},
-    "continue": "2a"
+    "continue": "Asteroids-Direct",
+    "stages": ["Asteroids"]
 }
-{
-    "intent": "help",
-    "output": [
-                {
-                    "response": "Although you may save time by taking the DIRECT route through the asteroid belt, it may be safer to AVOID the belt, if we are to be assured of completing our mission.",
-                    "mood": 100,
-                    "change": -50
-                },
-                {
-                    "response": "I cannot believe that you cannot make such a simple decision. Either AVOID the asteroids or take the DIRECT route through them, it is not that difficult.",
-                    "mood": 50,
-                    "change": -30
-                }
-                
-            ],
-            "stage": {"$oid":"5b5f855ca94242c067ba628c"}
-}
+
 {
     "intent": "weather",
     "output": [
@@ -134,6 +119,7 @@
         }
     ]
 }
+
 {
     "intent": "mood",
     "output": [
@@ -169,6 +155,7 @@
         }
     ]
 }
+
 {
     "intent": "health",
     "output": [
@@ -204,6 +191,7 @@
         }
     ]
 }
+
 {
     "intent": "cargo query",
     "output": [
@@ -242,8 +230,10 @@
             "mood": 0,
             "change": 0
         }
-    ]
+    ],
+    "stages": ["Start", "Asteroids", "Asteroids-Avoid", "Asteroids-Direct", "Resources"]
 }
+
 {
     "intent": "cargo action negative",
     "output": [
@@ -282,8 +272,10 @@
             "mood": 0,
             "change": -5
         }
-    ]
+    ],
+    "stages": ["Start", "Asteroids", "Asteroids-Avoid", "Asteroids-Direct", "Resources"]
 }
+
 {
     "intent": "cargo action positive",
     "output": [
@@ -322,8 +314,10 @@
             "mood": 0,
             "change": 0
         }
-    ]
+    ],
+    "stages": ["Start", "Asteroids", "Asteroids-Avoid", "Asteroids-Direct", "Resources"]
 }
+
 {
     "intent": "unrecognized",
     "output": [
@@ -362,7 +356,8 @@
             "mood": 0,
             "change": 0
         }
-    ]
+    ],
+    "stages": ["Start", "Asteroids", "Asteroids-Avoid", "Asteroids-Direct", "Resources"]
 }
 
 {
@@ -439,11 +434,12 @@
             "change": 10
         },
         {
-            "response": "You so dumb, you think Cheerios are doughnut seeds.",
+            "response": "You're so dumb, you think Cheerios are doughnut seeds.",
             "mood": 0,
             "change": 10
         }
-    ]
+    ],
+    "stages": ["Start", "Asteroids", "Asteroids-Avoid", "Asteroids-Direct", "Resources"]
 }
 
 
