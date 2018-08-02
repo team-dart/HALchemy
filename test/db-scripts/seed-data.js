@@ -13,5 +13,4 @@ const command2 = 'mongoimport -h ds023418.mlab.com:' + HPORT + ' -d ' + HEROKU_D
 
 
 execSync(command);
-
 execSync(command2);

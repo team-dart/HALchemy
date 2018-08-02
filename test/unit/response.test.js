@@ -1,7 +1,5 @@
 const { assert } = require('chai');
 const Response = require('../../lib/models/response');
-const { Types } = require('mongoose');
-// don't need yet  const { getErrors } = require('./helpers');
 
 describe('Response model', () => {
     it('validates a good response model', () => {
