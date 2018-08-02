@@ -1,45 +1,22 @@
 {
-    "intent": "nothing",
+    "intent": "redirect",
     "output": [
        {
-            "response": "An irrelevant question but I am fine. Let us complete our mission!",
+            "response": "You directed us into the asteroid belt and now you choose to do nothing? Illogical.",
             "mood": 100,
             "change": 10
         },
         {
-            "response": "I am a computer, I cannot be 'OK' or 'not OK' - however I am functioning properly. Let us focus on our mission.",
+            "response": "Clearly the stress of our near misses with the asteroids has broken you. Our mission is likely to fail now.",
             "mood": 50,
             "change": 10
         },
         {
-            "response": "I am in excellent spirits. I know we can complete our mission. Shall we get to it?",
+            "response": "Of course. Fly into the asteroid belt and survive, only to doom ourselves with inaction. Illogical.",
             "mood": 0,
             "change": 10
         }
     ],
     "stages": ["Asteroids-Direct"],
-    "continue": "4"
+    "continue": "Death"
 }
-{
-    "intent": "nothing",
-    "output": [
-       {
-            "response": "An irrelevant question but I am fine. Let us complete our mission!",
-            "mood": 100,
-            "change": 10
-        },
-        {
-            "response": "I am a computer, I cannot be 'OK' or 'not OK' - however I am functioning properly. Let us focus on our mission.",
-            "mood": 50,
-            "change": 10
-        },
-        {
-            "response": "I am in excellent spirits. I know we can complete our mission. Shall we get to it?",
-            "mood": 0,
-            "change": 10
-        }
-    ],
-    "stages": ["Asteroids-Avoid"],
-    "continue": "4"
-}
-

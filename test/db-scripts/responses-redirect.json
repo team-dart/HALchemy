@@ -2,21 +2,21 @@
     "intent": "redirect",
     "output": [
        {
-            "response": "You directed us into the asteroid belt and now you choose to do nothing? Illogical.",
+            "response": "Redirection - positive",
             "mood": 100,
             "change": 10
         },
         {
-            "response": "Clearly the stress of our near misses with the asteroids has broken you. Our mission is likely to fail now.",
+            "response": "Redirection - neutral",
             "mood": 50,
             "change": 10
         },
         {
-            "response": "Of course. Fly into the asteroid belt and survive, only to doom ourselves with inaction. Illogical.",
+            "response": "Redirection - negative",
             "mood": 0,
             "change": 10
         }
     ],
     "stages": ["Asteroids-Direct"],
-    "continue": "4"
+    "continue": "Earth"
 }
