@@ -107,7 +107,7 @@ const hal = {
                 })
                 .then(() => {
                     if(response) return response;
-                    else return 'I do not have a response to that.';
+                    else return 'I\'m not sure what you mean.';
                 });
         }
     },
@@ -117,6 +117,7 @@ const hal = {
             .del(`${API_URL}/ships`)
             .set('Authorization', token);
     },
+    
     updateStage(stage, result) {
         return request
             .get(`${API_URL}/stages/${stage}/${result}`)
