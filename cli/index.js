@@ -1,8 +1,6 @@
 const Game = require('./game');
 const request = require('superagent');
-// const API_URL = 'https://halchemy.herokuapp.com/api';
-const API_URL = 'localhost:3000/api';
-const getWit = require('../lib/util/wit');
+const API_URL = 'https://halchemy.herokuapp.com/api';
 
 let token = '';
 
