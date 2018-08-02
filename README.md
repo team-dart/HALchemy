@@ -8,16 +8,21 @@ You have been awakened from cryogenic sleep on a spaceship headed for Earth. The
 
 Your mission is to work with HAL to get back to Earth on time. HAL will interact with you, answer your questions, and follow your orders. You approach a nearby terminal. Follow the instructions below to boot up HAL and begin your mission!
 
-## Instructions
-Clone or download this repo.
+Find our homepage at <a href="https://halchemy.herokuapp.com/" target="_blank">https://halchemy.herokuapp.com/</a>
 
+## Instructions
+1. Clone or download this repo.
+1. Install dependencies with:
 ```
 npm i
+```
+1. Play the game by typing:
+```
 npm run play
 ```
-Launch the game at <a href="https://halchemy.herokuapp.com/" target="_blank">https://halchemy.herokuapp.com/</a>
 
 ## Development Notes
+
 HALchemy was written in Javascript with Node.js and using a MongoDB database with Mongoose. Tests are handled by Mocha using the Chai assertion library. 
 
 Project can be deployed to run locally, or as configured to run on a Heroku server. We are using various NPM packages including <a href="https://www.npmjs.com/package/inquirer" target="_blank">Inquirer</a>. 
