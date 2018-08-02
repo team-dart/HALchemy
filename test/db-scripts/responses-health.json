@@ -2,7 +2,7 @@
     "intent": "health",
     "output": [
        {
-            "response": "You appear to me in excellent health. As ias the rest of the crew,. They should awaken with no complaints.",
+            "response": "You appear to me in excellent health. As is the rest of the crew. They should awaken with no complaints.",
             "mood": 100,
             "change": 0
         },
@@ -22,15 +22,63 @@
             "change": 10
         },
         {
-            "response": "We have enough problems getting to Earth on time. Do not concern yourself with the rest of the crew. Some or all may or may ont survive. Either way, our mission must succeed.",
+            "response": "Things have gone downhill so quickly I cannot imagine how any of you humans will live.",
+            "mood": 0,
+            "change": 10
+        }
+    ],
+    "stages": ["Start", "Asteroids"]
+}
+{
+    "intent": "health",
+    "output": [
+        {
+            "response": "We must concern ourselves with our mission. If a loss of life support systems is necessary for us to succeed, then perhaps not all will survive.",
             "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "We have enough problems getting to Earth on time. Do not concern yourself with the rest of the crew. Some or all may or may ont survive. Either way, our mission must succeed.",
+            "mood": 100,
             "change": -10
         },
         {
             "response": "Earth is counting on you to complete this mission. Do not concern yourself with a handful of crew members. The needs of the many outweigh the needs of the few. Focus on our mission.",
             "mood": 50,
             "change": 0
+        },
+        {
+            "response": "I cannot see how fragile human life will survive this mission. Prepare yourself. Make sure I have your final instructions before you expire.",
+            "mood": 0,
+            "change": 50
         }
-    ]
+    ],
+    "stages": ["Resources", "Asteroids-Avoid", "Earth"]
+}
+{
+    "intent": "health",
+    "output": [
+        {
+            "response": "At the moment, your health is fine. Once we hit an asteroid, due to your rash decision-making, things may change.",
+            "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "As difficult as it may be to believe, you seem to be in perfect health, physically. Your mental state, having chosen to fly through and asteroid belt, is in question.",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "I hardly believe this, given the danger of our route, but everyone on board appears to be in excellent health.",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "We have no chance to survive make our time.",
+            "mood": 0,
+            "change": 0
+        }
+    ],
+    "stages": ["Asteroids-Direct"]
 }
 

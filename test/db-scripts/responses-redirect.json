@@ -1,0 +1,22 @@
+{
+    "intent": "redirect",
+    "output": [
+       {
+            "response": "Redirection - positive",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "Redirection - neutral",
+            "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "Redirection - negative",
+            "mood": 0,
+            "change": 10
+        }
+    ],
+    "stages": ["Asteroids-Direct"],
+    "continue": "Earth"
+}

@@ -28,8 +28,8 @@
         },
         {
             "response": "Are you asking if I have a problem? I have no problem. Perhaps YOU have a problem. We need to focus on our mission.",
-            "mood": 50,
-            "change": -20
+            "mood": 0,
+            "change": 10
         }
     ]
 }
