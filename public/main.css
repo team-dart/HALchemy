@@ -57,7 +57,7 @@ html {
   
   #title {
     position: absolute;
-    top: 10%;
+    top: 15%;
     left: 0;
     right: 0;
     color: #FFF;
@@ -84,12 +84,30 @@ html {
     }
   }
   p {
-    position: absolute;
-    top: 50%;
+    
     font-family: 'Exo 2', sans-serif;
     font-size: 24px;
     color: #fff;
     margin-left: 15%;
     margin-right: 15%;
   }
-  
+
+  #text {
+    padding-top: 180px;
+  }
+
+  #intro span {
+    font-family: monospace;
+    font-size: 28px;
+    color: yellow;
+  }
+
+  #credits {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 18px;
+    color: rgb(196, 196, 196);
+  }
+
+  a {
+    color: cyan;
+  }
