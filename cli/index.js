@@ -1,16 +1,13 @@
 const Game = require('./game');
 const request = require('superagent');
-const API_URL = 'https://halchemy.herokuapp.com/api';
+const API_URL = 'localhost:3000/api';
 const getWit = require('../lib/util/wit');
-
 
 let token = '';
 
-
-
-function getResponse(intent, mood) {
+function getResponse(intent, mood, stage) {
     return request
-        .get(`${API_URL}/responses?intent=${intent}&mood=${mood}`)
+        .get(`${API_URL}/responses?intent=${intent}&mood=${mood}&stage=${stage}`)
         .set('Authorization', token)
         .then(({ body }) => body);
 }
@@ -23,7 +20,12 @@ function getShipStats() {
         });
 }
 function updateShipStats() {
-
+    return request
+        .put(`${API_URL}/ships`)
+        .set('Authorization', token)
+        .then(({ body }) => {
+            return body;
+        });
 }
 function getSurvivalRate() {
 
@@ -78,9 +80,10 @@ const hal = {
         return request
             .put(`${API_URL}/ships`)
             .set('Authorization', token)
-            .send(ship);
+            .send(ship)
+            .then(({ body }) => body);
     },
-    think(intent, mood) {
+    think(intent, mood, stage) {
         if(intent === 'stats') {
             return getShipStats()
                 .then(({ name, oxygen, lifeSupport, fuel, shields }) => {
@@ -95,7 +98,7 @@ const hal = {
         }
         else {
             let response;
-            return getResponse(intent, mood)
+            return getResponse(intent, mood, stage)
                 .then(body => {
                     response = body;
                     return this.updateMood(mood + body.output.change);
@@ -111,6 +114,13 @@ const hal = {
             .del(`${API_URL}/ships`)
             .set('Authorization', token);
     },
+    updateStage(stage, result) {
+        return request
+            .get(`${API_URL}/stages/${stage}/${result}`)
+            .set('Authorization', token)
+            .then(({ body }) => body);
+        
+    }
     //updateLeaderboard() {}
 
 };
