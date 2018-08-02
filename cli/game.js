@@ -138,7 +138,7 @@ class Game {
                     else if(body.continue === 'Death') {
                         return this.die(body);
                     }
-                    else return inquirer.prompt(prompt(chalk[this.color](response));
+                    else return inquirer.prompt(prompt(chalk[this.color](response)));
     
                 })
                 .then(({ answer }) => {
@@ -191,11 +191,7 @@ class Game {
                 return this.api.deleteShip();
             })
             .then(() => {
-<<<<<<< HEAD
                 return 'exit';
-=======
-                return inquirer.prompt(prompt(chalk[this.color]('Play again?')));
->>>>>>> master
             });
     }
 
@@ -211,11 +207,7 @@ class Game {
                 return this.api.deleteShip();
             })
             .then(() => {
-<<<<<<< HEAD
                 return 'exit';
-=======
-                return inquirer.prompt(prompt(chalk[this.color]('Play again?')));
->>>>>>> master
             });
     }
 
