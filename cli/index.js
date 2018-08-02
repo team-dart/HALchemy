@@ -101,10 +101,13 @@ const hal = {
             return getResponse(intent, mood, stage)
                 .then(body => {
                     response = body;
-                    return this.updateMood(mood + body.output.change);
+                    if(response) {
+                        return this.updateMood(mood + body.output.change);
+                    }
                 })
                 .then(() => {
-                    return response;
+                    if(response) return response;
+                    else return 'I do not have a response to that.';
                 });
         }
     },
