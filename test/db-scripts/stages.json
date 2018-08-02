@@ -1,37 +1,37 @@
 {
     "_id": "5b5f855ca94242c067ba6200",
     "name": "Start",
-    "intro":"You have been awakened from cryosleep on a spaceship headed for Earth. You are responsible for directing HAL, the ship's computer, to get the ship home safely, and on time, to Earth. You alone must do this."
+    "intro":"You're finally awake from your cryosleep. You may not remember, but you're on a ship headed for Earth. As resources are running low, the rest of the crew remains preserved in their cryopods. You alone are responsible for guiding me to get the ship home safely to Earth to deliver cargo that is crucial for the planet's survival."
 }
 {
     "_id": "5b5f855ca94242c067ba6210",
     "name": "Asteroids",
-    "success": 0,
-    "failure": 0,
-    "intro":"You are approaching a dangerous asteroid belt. You could choose to avoid the asteroids, but that will take time, perhaps too much time. Do you dare navigate through the belt?"
+    "success": 4,
+    "failure": 7,
+    "intro":"We are approaching a dangerous asteroid belt. You can choose to avoid the asteroids, but that will take time, perhaps too much time. Navigating through the belt is more direct, but there is much greater risk of damage. Which do you choose? Avoid or direct?"
 }
 {
     "_id": "5b5f855ca94242c067ba622a",
     "name": "Asteroids-Avoid",
-    "success": 0,
-    "failure": 0,
-    "intro":"You have chosen to avoid immediate danger by taking the longer, but safer, route around the asteroid belt. You continue to make your way towards Earth."
+    "success": 1,
+    "failure": 9,
+    "intro":"We avoided immediate danger by taking the longer, but safer, route around the asteroid belt. Gas and oxygen are running low, but we continue to make our way towards Earth."
 }
 {
     "_id": "5b5f855ca94242c067ba622b",
     "name": "Asteroids-Direct",
-    "success": 0,
-    "failure": 0,
-    "intro":"You have chosen to find a direct route through the dangerous asteroid belt. You will have to hope the ship does not take too much damage. HAL can provide reports."
+    "success": 2,
+    "failure": 14,
+    "intro":"You have chosen to find a direct route through the dangerous asteroid belt. We will have to hope that the ship does not take too much damage. I can provide reports upon request."
 }
 {
     "_id": "5b5f855ca94242c067ba6330",
     "name": "Earth",
-    "intro":"Your mission has succeeded! You and HAL have saved the day by returning to Earth just in time. HAL approves of your strategic thinking."
+    "intro":"Our mission has succeeded! You have saved the day by returning to Earth just in time. I approve of your strategic thinking."
 }
 {
     "_id": "5b5f855ca94242c067ba6340",
     "name": "Death",
-    "intro":"Your mission has failed. Your ship, disabled, floats through space as your life support systems slowly shut down....."
+    "intro":"Our mission has failed. The ship, disabled, floats through space as the life support systems slowly shut down....."
 }
 
