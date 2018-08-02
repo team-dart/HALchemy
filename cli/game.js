@@ -19,9 +19,12 @@ const authPrompts = [
         type: 'input',
         name: 'name',
         message: 'Please verify your username:',
-        // validation: function(val) {
-
-        // }
+        validation: function(value) {
+            if(!/\s/.test(value)) {
+                return true;
+            }
+            return 'Spaces are not allowed, you know.';
+        }
     },
     {
         type: 'password',
@@ -93,8 +96,8 @@ class Game {
                 else return this.api.getShip()
                     .then(ship => {
                         this.ship = ship;
-                        this.startDialogue();
-                    });
+                    })
+                    .then(() => this.startDialogue());
             });
             
     }
@@ -189,12 +192,13 @@ class Game {
             .then(stage => {
                 console.log(chalk[this.color](stage.intro));
                 console.log(chalk[this.color]('\n\nYou WIN!\n\n'));
-                return this.api.deleteShip();
+                return this.renewShip();
             })
+            
             .then(() => {
-                // return 'exit';
-                process.exit(1);
+                process.exit(0);
             });
+           
     }
 
     die(body) {
@@ -206,10 +210,10 @@ class Game {
             .then(stage => {
                 console.log(chalk[this.color](stage.intro));
                 console.log(chalk[this.color]('\n\nGAME OVER!\n\n'));
-                return this.api.deleteShip();
+                return this.renewShip();
             })
             .then(() => {
-                return 'exit';
+                process.exit(0);
             });
     }
 
@@ -221,17 +225,19 @@ class Game {
         else this.color = 'green';
     }
 
-    playAgain() {
-        return inquirer.prompt(prompt('Play again?'))
-            .then(({ answer }) => {
-                if(answer.match(/y/)) {
-                    return this.start();
-                }
-            });
-    }
-
-    exitCheck() {
-        return;
+    renewShip() {
+        this.ship = {
+            _id: this.ship._id,
+            name: this.ship.name,
+            stage: 'Asteroids',
+            oxygen: 50,
+            lifeSupport: 70,
+            fuel: 40,
+            mood: 100,
+            payload: 100,
+            shields: 80
+        };
+        return this.api.updateShip(this.ship);
     }
 }
 
