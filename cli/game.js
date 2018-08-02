@@ -1,10 +1,8 @@
 
 const inquirer = require('inquirer');
 const chalk = require('chalk');
-//const chalkAnimation = require('chalk-animation');
 const clear = require('clear');
 const figlet = require('figlet');
-
 
 
 const prompt = (message) => {

@@ -1,7 +1,7 @@
 const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
-const { checkOk,getToken } = request;
+const { checkOk, getToken } = request;
 
 
 describe('Ships API', () => {
