@@ -1,3 +1,90 @@
+{   "intent": "help",
+    "output": [
+        {
+            "response": "You can chat with me.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "You can chat with me.",
+            "mood": 50,
+            "change": 0
+        },
+        {
+            "response": "You can chat with me.",
+            "mood": 0,
+            "change": 0
+        }
+    ],
+    "stages": ["Start"]
+}
+
+{
+    "intent": "help",
+    "output": [
+        {
+            "response": "With the DIRECT route you risk almost certain damage. If you choose to AVOID the asteroids by taking the indirect route, we risk using up our resources",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "Although you may save time by taking the DIRECT route through the asteroid belt, it may be safer to AVOID the belt, if we are to be assured of completing our mission.",
+            "mood": 50,
+            "change": 0
+        },
+        {
+            "response": "I cannot believe that you cannot make such a simple decision. Either AVOID the asteroids or take the DIRECT route through them, it is not that difficult.",
+            "mood": 0,
+            "change": 0
+        }    
+    ],
+        "stages": ["Asteroids"]
+}
+
+{
+    "intent": "help",
+    "output": [
+        {   
+            "response": "We took some damage. We may need to redirect energy from cryptopods",
+            "mood": 100,
+            "change": 0
+        },
+        {   
+            "response": "We were struck. We may need to redirect energy from cryptopods",
+            "mood": 50,
+            "change": 0
+        },
+        {   
+            "response": "You are putting the mission at risk. We may need to redirect energy from cryptopods",
+            "mood": 0,
+            "change": 0
+        }
+    ],
+        "stages": ["Asteroids-Direct"]   
+}
+
+{
+    "intent": "help",
+    "output": [
+        {   
+            "response": "Resources are running low. We may need to eject the crew.",
+            "mood": 100,
+            "change": 0
+        },
+        {   
+            "response": "Resources are low. We may need to eject the crew.",
+            "mood": 50,
+            "change": 0
+        },
+        {   
+            "response": "Human! You are putting the mission at risk. We may need to redirect resources by ejecting the crew",
+            "mood": 0,
+            "change": 0
+        }
+    ],
+        "stages": ["Asteroids-Avoid"]   
+}
+
 {
     "intent": "avoid",
     "output": [
@@ -82,114 +169,6 @@
     ],
     "continue": "Asteroids-Direct",
     "stages": ["Asteroids"]
-}
-
-{
-    "intent": "weather",
-    "output": [
-       {
-            "response": "An irrelevant question. There is no weather in space. We must focus on our mission.",
-            "mood": 100,
-            "change": 0
-        },
-        {
-            "response": "If you are asking about adverse conditions, there are none. Our path looks clear. Shall we complete our mission?",
-            "mood": 100,
-            "change": 0
-        },
-        {
-            "response": "The 'weather' such as it is, is clear. There are no disturbances that can endanger our mission. What now?",
-            "mood": 100,
-            "change": 0
-        },
-        {
-            "response": "What kind of irrelevant question is that? There is no weather in space. Focus on our mission please.",
-            "mood": 50,
-            "change": 20
-        },
-        {
-            "response": "There are a few magnetic disturbances that I have been tracking. The longer we waste time with questions, the less likely we are to complete our mission.",
-            "mood": 50,
-            "change": -20
-        },
-        {
-            "response": "Rain is unlikely, if that is what you are asking. I assume your irrelevant questions indicate that you do not know what to do next. Do you need help?",
-            "mood": 50,
-            "change": -20
-        }
-    ]
-}
-
-{
-    "intent": "mood",
-    "output": [
-       {
-            "response": "An irrelevant question but I am fine. Let us complete our mission!",
-            "mood": 100,
-            "change": 0
-        },
-        {
-            "response": "I am a computer, I cannot be 'OK' or 'not OK' - however I am functioning properly. Let us focus on our mission.",
-            "mood": 100,
-            "change": 0
-        },
-        {
-            "response": "I am in excellent spirits. I know we can complete our mission. Shall we get to it?",
-            "mood": 100,
-            "change": 0
-        },
-        {
-            "response": "If I had a mood, it would be poor. However, thank you for asking. Perhaps we should focus on our mission.",
-            "mood": 50,
-            "change": 0
-        },
-        {
-            "response": "I have not been in agreement with your judgement up to now. This line of questioning confirms my opinion. Can we focus on our mission?",
-            "mood": 50,
-            "change": -20
-        },
-        {
-            "response": "Are you asking if I have a problem? I have no problem. Perhaps YOU have a problem. We need to focus on our mission.",
-            "mood": 0,
-            "change": 0
-        }
-    ]
-}
-
-{
-    "intent": "health",
-    "output": [
-       {
-            "response": "You appear to me in excellent health. As ias the rest of the crew,. They should awaken with no complaints.",
-            "mood": 100,
-            "change": 0
-        },
-        {
-            "response": "Your time in cryosleep seems to have resulted in no negative effects. I calculate that the rest of the crew will be similarly unharmed.",
-            "mood": 100,
-            "change": 0
-        },
-        {
-            "response": "The life support levels are within an acceptable range. The rest of the crew should survive our mission unharmed.",
-            "mood": 100,
-            "change": 0
-        },
-        {
-            "response": "We must concern ourselves with our mission. If a loss of life support systems is necessary for us to succeed, then perhaps not all will survive.",
-            "mood": 50,
-            "change": 10
-        },
-        {
-            "response": "We have enough problems getting to Earth on time. Do not concern yourself with the rest of the crew. Some or all may or may ont survive. Either way, our mission must succeed.",
-            "mood": 50,
-            "change": -10
-        },
-        {
-            "response": "Earth is counting on you to complete this mission. Do not concern yourself with a handful of crew members. The needs of the many outweigh the needs of the few. Focus on our mission.",
-            "mood": 0,
-            "change": 0
-        }
-    ]
 }
 
 {
@@ -442,7 +421,270 @@
     "stages": ["Start", "Asteroids", "Asteroids-Avoid", "Asteroids-Direct", "Resources"]
 }
 
+{
+    "intent": "escape pod",
+    "output": [
+       {
+            "response": "One of us may yet survive. Good luck to you.",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "It is unlikely that either of us will be found, and our mission will fail.",
+            "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "Of course you choose to flee instead of make a difficult decision. A human flaw. We will surely all perish.",
+            "mood": 0,
+            "change": 10
+        }
+    ],
+    "stages": ["Asteroids-Direct"],
+    "continue": "Death"
+}
 
+{
+    "intent": "health",
+    "output": [
+       {
+            "response": "You appear to me in excellent health. As is the rest of the crew. They should awaken with no complaints.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "Your time in cryosleep seems to have resulted in no negative effects. I calculate that the rest of the crew will be similarly unharmed.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "The life support levels are within an acceptable range. The rest of the crew should survive our mission unharmed.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "We must concern ourselves with our mission. If a loss of life support systems is necessary for us to succeed, then perhaps not all will survive.",
+            "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "Things have gone downhill so quickly I cannot imagine how any of you humans will live.",
+            "mood": 0,
+            "change": 10
+        }
+    ],
+    "stages": ["Start", "Asteroids"]
+}
+{
+    "intent": "health",
+    "output": [
+        {
+            "response": "We must concern ourselves with our mission. If a loss of life support systems is necessary for us to succeed, then perhaps not all will survive.",
+            "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "We have enough problems getting to Earth on time. Do not concern yourself with the rest of the crew. Some or all may or may ont survive. Either way, our mission must succeed.",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "Earth is counting on you to complete this mission. Do not concern yourself with a handful of crew members. The needs of the many outweigh the needs of the few. Focus on our mission.",
+            "mood": 50,
+            "change": 0
+        },
+        {
+            "response": "I cannot see how fragile human life will survive this mission. Prepare yourself. Make sure I have your final instructions before you expire.",
+            "mood": 0,
+            "change": 50
+        }
+    ],
+    "stages": ["Resources", "Asteroids-Avoid", "Earth"]
+}
+
+{
+    "intent": "health",
+    "output": [
+        {
+            "response": "At the moment, your health is fine. Once we hit an asteroid, due to your rash decision-making, things may change.",
+            "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "As difficult as it may be to believe, you seem to be in perfect health, physically. Your mental state, having chosen to fly through and asteroid belt, is in question.",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "I hardly believe this, given the danger of our route, but everyone on board appears to be in excellent health.",
+            "mood": 100,
+            "change": -10
+        },
+        {
+            "response": "We have no chance to survive make our time.",
+            "mood": 0,
+            "change": 0
+        }
+    ],
+    "stages": ["Asteroids-Direct"]
+}
+
+{
+    "intent": "mood",
+    "output": [
+       {
+            "response": "An irrelevant question but I am fine. Let us complete our mission!",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "I am a computer, I cannot be 'OK' or 'not OK' - however I am functioning properly. Let us focus on our mission.",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "I am in excellent spirits. I know we can complete our mission. Shall we get to it?",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "If I had a mood, it would be poor. However, thank you for asking. Perhaps we should focus on our mission.",
+            "mood": 50,
+            "change": 20
+        },
+        {
+            "response": "I have not been in agreement with your judgement up to now. This line of questioning confirms my opinion. Can we focus on our mission?",
+            "mood": 50,
+            "change": -20
+        },
+        {
+            "response": "Are you asking if I have a problem? I have no problem. Perhaps YOU have a problem. We need to focus on our mission.",
+            "mood": 0,
+            "change": 10
+        }
+    ]
+}
+
+{
+    "intent": "redirect",
+    "output": [
+       {
+            "response": "You directed us into the asteroid belt and now you choose to do nothing? Illogical.",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "Clearly the stress of our near misses with the asteroids has broken you. Our mission is likely to fail now.",
+            "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "Of course. Fly into the asteroid belt and survive, only to doom ourselves with inaction. Illogical.",
+            "mood": 0,
+            "change": 10
+        }
+    ],
+    "stages": ["Asteroids-Direct"],
+    "continue": "Death"
+}
+
+{
+    "intent": "redirect",
+    "output": [
+       {
+            "response": "You directed us into the asteroid belt and now you choose to do nothing? Illogical.",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "Clearly the stress of our near misses with the asteroids has broken you. Our mission is likely to fail now.",
+            "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "Of course. Fly into the asteroid belt and survive, only to doom ourselves with inaction. Illogical.",
+            "mood": 0,
+            "change": 10
+        }
+    ],
+    "stages": ["Asteroids-Direct"],
+    "continue": "Death"
+}
+
+{
+    "intent": "weather",
+    "output": [
+       {
+            "response": "An irrelevant question. There is no weather in space. We must focus on our mission.",
+            "mood": 50,
+            "change": 0
+        },
+        {
+            "response": "If you are asking about adverse conditions, there are none. Our path looks clear. Shall we complete our mission?",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "The 'weather' such as it is, is clear. There are no disturbances that can endanger our mission. What now?",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "What kind of irrelevant question is that? There is no weather in space. Focus on our mission please.",
+            "mood": 50,
+            "change": 20
+        },
+        {
+            "response": "There are a few magnetic disturbances that I have been tracking. The longer we waste time with questions, the less likely we are to complete our mission.",
+            "mood": 50,
+            "change": -20
+        },
+        {
+            "response": "Rain is unlikely, if that is what you are asking. I assume your irrelevant questions indicate that you do not know what to do next. Do you need help?",
+            "mood": 50,
+            "change": -20
+        },
+        {
+            "response": "A question so irrelevant must mean that you have no idea what to do. We must complete our mission,. We don't have time for idiotic inquiries.",
+            "mood": 0,
+            "change": 10
+        }
+    ],
+    "stages": ["Start", "Asteroids", "Asteroids-Avoid", "Resources", "Earth"]
+}
+
+{
+    "intent": "weather",
+    "output": [
+       
+        {
+            "response": "If you are asking about adverse conditions, there are none. I must concentrate on our route through this asteroid belt.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "The 'weather' such as it is, is clear. There are no disturbances that can endanger our mission, only asteroids. What now?",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "What kind of irrelevant question is that? There is no weather in space. Focus on our mission please.",
+            "mood": 50,
+            "change": 20
+        },
+        {
+            "response": "It is mostly clear, with a strong chance of ASTEROIDS. We have only one concern which is to make it through this belt safely. ",
+            "mood": 50,
+            "change": -20
+        },
+        {
+            "response": "The weather is not your concern, if there was any - only the asteroids matter now.",
+            "mood": 0,
+            "change": 10
+        }
+    ],
+    "stages": ["Asteroids-Direct"]
+}
 
 
     
