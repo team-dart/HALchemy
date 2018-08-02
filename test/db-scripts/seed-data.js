@@ -9,9 +9,8 @@ const HPORT = process.env.HPORT;
 
 const command = 'mongoimport -h ds023418.mlab.com:' + HPORT + ' -d ' + HEROKU_DBNAME + ' -c stages -u ' + HEROKU_USERNAME + ' -p ' + HEROKU_PASSWORD + ' --drop  --file ./stages.json';
 
-const command2 = 'mongoimport -h ds023418.mlab.com:' + HPORT + ' -d ' + HEROKU_DBNAME + ' -c stages -u ' + HEROKU_USERNAME + ' -p ' + HEROKU_PASSWORD + ' --drop  --file ./responses.json';
+const command2 = 'mongoimport -h ds023418.mlab.com:' + HPORT + ' -d ' + HEROKU_DBNAME + ' -c responses -u ' + HEROKU_USERNAME + ' -p ' + HEROKU_PASSWORD + ' --drop  --file ./responses.json';
 
 
 execSync(command);
-
 execSync(command2);
