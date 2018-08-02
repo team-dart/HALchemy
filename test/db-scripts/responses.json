@@ -449,7 +449,7 @@
        {
             "response": "A wise choice. Some of the crew may even survive, but our mission will succeed.",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "It is possible that the crew may not survive, but our mission is likely to succeed now. A bold choice.",

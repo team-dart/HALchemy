@@ -109,37 +109,40 @@ class Game {
     }
 
     generateResponse(input) {
-        this.moodCheck();
-        return this.api.parseIntent(input)
-            .then(intent => {
-                return this.api.think(intent, this.ship.mood, this.ship.stage);
-            })
-            .then(body => {
-                let response;
-                if(body.output) {
-                    response = body.output.response;
-                    this.ship.mood += body.output.change;
-                }
-                else response = body;
-
-                if(body.continue === 'Asteroids-Direct') {
-                    return this.flyThroughAsteroids(body);
-                }
-                else if(body.continue === 'Asteroids-Avoid') {
-                    return this.flyAroundAsteroids(body);
-                }
-                else if(body.continue === 'Earth') {
-                    return this.arriveAtEarth(body);
-                }
-                else if(body.continue === 'Death') {
-                    return this.die(body);
-                }
-                else return inquirer.prompt(prompt(response));
-
-            })
-            .then(({ answer }) => {
-                this.generateResponse(answer);
-            });
+        if(input === 'exit') return;
+        else {
+            this.moodCheck();
+            return this.api.parseIntent(input)
+                .then(intent => {
+                    return this.api.think(intent, this.ship.mood, this.ship.stage);
+                })
+                .then(body => {
+                    let response;
+                    if(body.output) {
+                        response = body.output.response;
+                        this.ship.mood += body.output.change;
+                    }
+                    else response = body;
+    
+                    if(body.continue === 'Asteroids-Direct') {
+                        return this.flyThroughAsteroids(body);
+                    }
+                    else if(body.continue === 'Asteroids-Avoid') {
+                        return this.flyAroundAsteroids(body);
+                    }
+                    else if(body.continue === 'Earth') {
+                        return this.arriveAtEarth(body);
+                    }
+                    else if(body.continue === 'Death') {
+                        return this.die(body);
+                    }
+                    else return inquirer.prompt(prompt(response));
+    
+                })
+                .then(({ answer }) => {
+                    this.generateResponse(answer);
+                });
+        }
     }
 
     flyThroughAsteroids(body) {
@@ -186,7 +189,7 @@ class Game {
                 return this.api.deleteShip();
             })
             .then(() => {
-                return inquirer.prompt(prompt('Play again?'));
+                return 'exit';
             });
     }
 
@@ -202,7 +205,7 @@ class Game {
                 return this.api.deleteShip();
             })
             .then(() => {
-                return inquirer.prompt(prompt('Play again?'));
+                return 'exit';
             });
     }
 
@@ -210,7 +213,18 @@ class Game {
         if(this.ship.mood < 0) this.die('You are unfit to deliver our cargo back to Earth. Flooding cockpit with neurotoxin.');
     }
 
+    playAgain() {
+        return inquirer.prompt(prompt('Play again?'))
+            .then(({ answer }) => {
+                if(answer.match(/y/)) {
+                    return this.start();
+                }
+            });
+    }
 
+    exitCheck() {
+        return;
+    }
 }
 
 
