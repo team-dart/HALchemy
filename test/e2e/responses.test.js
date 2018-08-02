@@ -1,9 +1,8 @@
 const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
-const { save } = request;
+const { getToken, save } = request;
 const getWit = require('../../lib/util/wit');
-const { Types } = require('mongoose');
 
 describe('Responses API', () => {
 
@@ -12,16 +11,12 @@ describe('Responses API', () => {
     beforeEach(() => dropCollection('responses'));
 
     let halResponseOne;
+    let halResponseTwo;
     let token;
 
     beforeEach(() => {
-        return save({
-            name: 'N User',
-            password: '60'
-        }, 'auth/signup')
-            .then(body => {
-                token = body.token;
-            });
+        return getToken()
+            .then(_token => token = _token);
     });
 
     beforeEach(() => {
@@ -48,16 +43,41 @@ describe('Responses API', () => {
                 change: -30
             }],
             continue: 'Asteroids-Direct',
-            stageId: ['Asteroids']
+            stages: ['Asteroids']
         }, 'responses', token)
             .then(data => {
                 halResponseOne = data;
+            });
+    });
+    beforeEach(() => {
+        return save({
+            intent: 'hi',
+            output: [{
+                response: 'Hello!',
+                mood: 100,
+                change: -30
+            },
+            {
+                response: 'Hi.',
+                mood: 50,
+                change: -30
+            },
+            {
+                response: 'Bye',
+                mood: 0,
+                change: -30
+            }],
+            stages: ['Asteroids', 'Asteroids-Direct', 'Asteroids-Avoid']
+        }, 'responses', token)
+            .then(data => {
+                halResponseTwo = data;
             });
     });
 
     it('saves a response', () => {
         assert.isOk(halResponseOne._id);
         assert.equal(halResponseOne.intent, 'direct');
+        assert.equal(halResponseTwo.intent, 'hi');
     });
 
     it('gets a response by query', () => {
@@ -66,6 +86,7 @@ describe('Responses API', () => {
             .set('Authorization', token)
             .then(({ body }) => {
                 assert.isDefined(body.output);
+                assert.equal(body.intent, 'direct');
             });
     });
 

@@ -93,7 +93,6 @@ class Game {
     startDialogue() {
         return this.api.getStage(this.ship.stage)
             .then(data => {
-                this.moodCheck();
                 console.log('Excellent. Your identity has been verified. \n I will commence the debriefing of the current mission status...');
                 inquirer
                     .prompt(prompt(data.intro))
@@ -104,32 +103,33 @@ class Game {
     }
 
     generateResponse(input) {
-        
+        this.moodCheck();
         return this.api.parseIntent(input)
             .then(intent => {
-                return this.api.think(intent, this.ship.mood);
+                return this.api.think(intent, this.ship.mood, this.ship.stage);
             })
             .then(body => {
-                this.moodCheck();
                 let response;
                 if(body.output) {
                     response = body.output.response;
                     this.ship.mood += body.output.change;
                 }
                 else response = body;
+
                 if(body.continue === 'Asteroids-Direct') {
                     return this.flyThroughAsteroids(body);
                 }
-                else if(body.continue === '2b') {
+                else if(body.continue === 'Asteroids-Avoid') {
                     return this.flyAroundAsteroids(body);
                 }
-                else if(body.continue === '4') {
+                else if(body.continue === 'Earth') {
                     return this.arriveAtEarth(response);
                 }
-                else if(body.continue === '6') {
+                else if(body.continue === 'Death') {
                     return this.die(response);
                 }
                 else return inquirer.prompt(prompt(response));
+
             })
             .then(({ answer }) => {
                 this.generateResponse(answer);
@@ -138,14 +138,14 @@ class Game {
 
     flyThroughAsteroids(body) {
         console.log(body.output.response);
-        this.ship.shields -= 10;
-        this.ship.oxygen -= 10;
-        this.ship.fuel -= 10;
+        this.ship.shields -= 50;
+        this.ship.oxygen -= 20;
+        this.ship.fuel -= 20;
         this.ship.stage = body.continue;
         
         return this.api.updateShip(this.ship)
             .then(() => {
-                return this.api.getStage('Asteroids-Direct');
+                return this.api.getStage(this.ship.stage);
             })
             .then(data => {
                 return inquirer.prompt(prompt(data.intro));
@@ -161,7 +161,7 @@ class Game {
         
         return this.api.updateShip(this.ship)
             .then(() => {
-                return this.api.getStage('Asteroids-Avoid');
+                return this.api.getStage(this.ship.stage);
             })
             .then(data => {
                 return inquirer.prompt(prompt(data.intro));
@@ -170,22 +170,21 @@ class Game {
 
     arriveAtEarth(response) {
         console.log(response);
-        console.log('\n\nYou WIN!');
-        // update stages with success
+        console.log('\n\nYou WIN!\n\n');
         // this.api.updateLeaderboard;
-        this.api.deleteShip();
+        return this.api.updateStage(this.ship.stage, 'success')
+            .then(() => this.api.deleteShip());
     }
 
     die(response) {
         console.log(response);
-        console.log('\n\nGAME OVER');
-        // update stages with failure
-        this.api.deleteShip();
+        console.log('\n\nGAME OVER\n\n');
+        return this.api.updateStage(this.ship.stage, 'failure')
+            .then(() => this.api.deleteShip());
     }
 
     moodCheck() {
-        console.log('MY MOOD IS: ', this.mood);
-        if(this.mood < 0) this.die('You are unfit to deliver our cargo back to Earth. Flooding cockpit with neurotoxin.');
+        if(this.ship.mood < 0) this.die('You are unfit to deliver our cargo back to Earth. Flooding cockpit with neurotoxin.');
     }
 
 
