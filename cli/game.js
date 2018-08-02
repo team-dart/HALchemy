@@ -19,9 +19,9 @@ const authPrompts = [
         type: 'input',
         name: 'name',
         message: 'Please verify your username:',
-        validation: function(val) {
+        // validation: function(val) {
 
-        }
+        // }
     },
     {
         type: 'password',
