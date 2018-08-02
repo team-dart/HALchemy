@@ -1,4 +1,5 @@
-{   "intent": "help start",
+{   
+    "intent": "help",
     "output": [
         {
             "response": "You can chat with me.",
@@ -20,7 +21,7 @@
 }
 
 {
-    "intent": "help asteroids",
+    "intent": "help",
     "output": [
         {
             "response": "With the DIRECT route you risk almost certain damage. If you choose to AVOID the asteroids by taking the indirect route, we risk using up our resources",
@@ -42,15 +43,15 @@
 }
 
 {
-    "intent": "help 2a direct",
+    "intent": "help",
     "output": [
         {   
-            "response": "We took some damage. We may need to redirect energy from cryptopods",
+            "response": "We took some damage. We may need to redirect energy from cryopods",
             "mood": 100,
             "change": 0
         }
         {   
-            "response": "We were struck. We may need to redirect energy from cryptopods",
+            "response": "We were struck. We may need to redirect energy from cryopods",
             "mood": 50,
             "change": 0
         }
@@ -60,11 +61,11 @@
             "change": 0
         }
     ],
-        "stages": ["Asteroids-Direct"]   
+    "stages": ["Asteroids-Direct"]   
 }
 
 {
-    "intent": "help 2b avoid",
+    "intent": "help",
     "output": [
         {   
             "response": "Resources are running low. We may need to eject the crew.",
@@ -82,5 +83,5 @@
             "change": 0
         }
     ],
-        "stages": ["Asteroids-Avoid"]   
+    "stages": ["Asteroids-Avoid"]   
 }

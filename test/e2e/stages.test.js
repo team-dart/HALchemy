@@ -4,7 +4,7 @@ const { dropCollection } = require('./db');
 const { getToken, checkOk, save } = request;
 
 
-describe('Stages API', () => {
+describe.only('Stages API', () => {
     
     beforeEach(() => dropCollection('ships'));
     beforeEach(() => dropCollection('users'));
@@ -68,7 +68,7 @@ describe('Stages API', () => {
             .set('Authorization', token)
             .then(checkOk)
             .then(({ body }) => {
-                assert.strictEqual(body.stageSuccess, 20);   
+                assert.strictEqual(body.stageSuccess, 20);
             });
     });
 });

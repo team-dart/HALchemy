@@ -101,10 +101,13 @@ const hal = {
             return getResponse(intent, mood, stage)
                 .then(body => {
                     response = body;
-                    return this.updateMood(mood + body.output.change);
+                    if(response) {
+                        return this.updateMood(mood + body.output.change);
+                    }
                 })
                 .then(() => {
-                    return response;
+                    if(response) return response;
+                    else return 'I\'m not sure what you mean.';
                 });
         }
     },
@@ -114,9 +117,10 @@ const hal = {
             .del(`${API_URL}/ships`)
             .set('Authorization', token);
     },
+    
     updateStage(stage, result) {
         return request
-            .get(`${API_URL}/stages/${stage}/${result}`)
+            .put(`${API_URL}/stages/${stage}/${result}`)
             .set('Authorization', token)
             .then(({ body }) => body);
         

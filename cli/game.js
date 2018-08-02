@@ -123,10 +123,10 @@ class Game {
                     return this.flyAroundAsteroids(body);
                 }
                 else if(body.continue === 'Earth') {
-                    return this.arriveAtEarth(response);
+                    return this.arriveAtEarth(body);
                 }
                 else if(body.continue === 'Death') {
-                    return this.die(response);
+                    return this.die(body);
                 }
                 else return inquirer.prompt(prompt(response));
 
@@ -156,7 +156,7 @@ class Game {
         console.log(body.output.response);
         this.ship.shields -= 10;
         this.ship.oxygen -= 10;
-        this.ship.fuel -= 10;
+        this.ship.fuel = 5;
         this.ship.stage = body.continue;
         
         return this.api.updateShip(this.ship)
@@ -168,19 +168,36 @@ class Game {
             });
     }
 
-    arriveAtEarth(response) {
-        console.log(response);
-        console.log('\n\nYou WIN!\n\n');
-        // this.api.updateLeaderboard;
+    arriveAtEarth(body) {
+        console.log(body.output.response);
         return this.api.updateStage(this.ship.stage, 'success')
-            .then(() => this.api.deleteShip());
+            .then(() => {
+                return this.api.getStage(body.continue);
+            })
+            .then(stage => {
+                console.log(stage.intro);
+                console.log('\n\nYou WIN!\n\n');
+                return this.api.deleteShip();
+            })
+            .then(() => {
+                return inquirer.prompt(prompt('Play again?'));
+            });
     }
 
-    die(response) {
-        console.log(response);
-        console.log('\n\nGAME OVER\n\n');
+    die(body) {
+        console.log(body.output.response);
         return this.api.updateStage(this.ship.stage, 'failure')
-            .then(() => this.api.deleteShip());
+            .then(() => {
+                return this.api.getStage(body.continue);
+            })
+            .then(stage => {
+                console.log(stage.intro);
+                console.log('\n\nGAME OVER!\n\n');
+                return this.api.deleteShip();
+            })
+            .then(() => {
+                return inquirer.prompt(prompt('Play again?'));
+            });
     }
 
     moodCheck() {
