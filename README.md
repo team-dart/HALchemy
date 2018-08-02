@@ -12,11 +12,11 @@ Find our homepage at <a href="https://halchemy.herokuapp.com/" target="_blank">h
 
 ## Instructions
 1. Clone or download this repo.
-1. Install dependencies with:
+2. Install dependencies with:
 ```
 npm i
 ```
-1. Play the game by typing:
+3. Play the game by typing:
 ```
 npm run play
 ```
