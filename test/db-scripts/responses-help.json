@@ -82,5 +82,5 @@
             "change": 0
         }
     ],
-        "stages": ["Asteroids-Direct"]   
+        "stages": ["Asteroids-Avoid"]   
 }
