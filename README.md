@@ -28,7 +28,7 @@ HALchemy was created by Team Dart, during the Summer 2018 Full-Stack Javascript 
 
 Team Dart is (in alphabetical order) Arthur Jen, Mark Myers and Sarah Rehmer. <br />Fork this project on Github <a href="https://github.com/team-dart/HALchemy" target="_blank">at this link</a>.
 
-The parallax starr background on the index page is from a <a href="https://codepen.io/saransh/pen/BKJun" target="_blank">Codepen by Saransh Sinha.
+The parallax star background on the index page is from a <a href="https://codepen.io/saransh/pen/BKJun" target="_blank">Codepen by Saransh Sinha.
 
 
 
