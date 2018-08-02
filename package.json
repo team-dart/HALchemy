@@ -16,7 +16,7 @@
     "db-load-responses": "mongoimport -h localhost:27017 -d halchemy -c responses  --drop --file ./test/db-scripts/responses.json",
     "db-load-stages": "mongoimport -h localhost:27017 -d halchemy -c stages  --drop --file ./test/db-scripts/stages.json",
     "db-load": "npm run db-load-responses && npm run db-load-stages",
-    "db-load-heroku": "node seed-data.js",
+    "db-load-heroku": "node ./test/db-scripts/seed-data.js",
     "start": "node server.js",
     "start:watch": "nodemon server.js",
     "play": "node cli/index.js"

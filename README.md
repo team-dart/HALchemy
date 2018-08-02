@@ -11,8 +11,10 @@ Clone or download this repo.
 
 ```
 npm i
+npm run db-load-heroku
 npm run play
 ```
+Launch the game at <a href="https://halchemy.herokuapp.com/" target="_blank">https://halchemy.herokuapp.com/</a>
 
 ## Development Notes
 HALchemy was written in Javascript with Node.js and using a MongoDB database with Mongoose. Tests are handled by Mocha using the Chai assertion library. 
