@@ -123,10 +123,10 @@ class Game {
                     return this.flyAroundAsteroids(body);
                 }
                 else if(body.continue === 'Earth') {
-                    return this.arriveAtEarth(response);
+                    return this.arriveAtEarth(body);
                 }
                 else if(body.continue === 'Death') {
-                    return this.die(response);
+                    return this.die(body);
                 }
                 else return inquirer.prompt(prompt(response));
 
@@ -168,12 +168,18 @@ class Game {
             });
     }
 
-    arriveAtEarth(response) {
-        console.log(response);
-        console.log('\n\nYou WIN!\n\n');
+    arriveAtEarth(body) {
+        console.log(body.output.response);
         // this.api.updateLeaderboard;
-        return this.api.getStage(this.ship.stage, 'success')
-            .then(() => this.api.deleteShip());
+        return this.api.updateStage(this.ship.stage, 'success')
+            .then(() => {
+                return this.api.getStage(body.continue);
+            })
+            .then(stage => {
+                console.log(stage.intro);
+                console.log('\n\nYou WIN!\n\n');
+                this.api.deleteShip();
+            });
     }
 
     die(response) {

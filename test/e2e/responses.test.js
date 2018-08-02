@@ -89,7 +89,7 @@ describe('Responses API', () => {
                 assert.equal(body.intent, 'direct');
             });
     });
-    it.only('does not get a response if at a different stage', () => {
+    it('does not get a response if at a different stage', () => {
         return request
             .get('/api/responses?intent=direct&mood=40&stage=Asteroids-Direct')
             .set('Authorization', token)

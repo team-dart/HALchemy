@@ -120,7 +120,7 @@ const hal = {
     
     updateStage(stage, result) {
         return request
-            .get(`${API_URL}/stages/${stage}/${result}`)
+            .put(`${API_URL}/stages/${stage}/${result}`)
             .set('Authorization', token)
             .then(({ body }) => body);
         

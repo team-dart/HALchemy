@@ -584,7 +584,8 @@
             "mood": 0,
             "change": 10
         }
-    ]
+    ],
+    "stages": ["Start", "Resources", "Asteroids-Direct", "Asteroids-Avoid", "Earth"]
 }
 
 
@@ -594,12 +595,12 @@
        {
             "response": "You directed us into the asteroid belt and now you choose to do nothing? Illogical.",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "Clearly the stress of our near misses with the asteroids has broken you. Our mission is likely to fail now.",
             "mood": 50,
-            "change": 10
+            "change": 0
         },
         {
             "response": "Of course. Fly into the asteroid belt and survive, only to doom ourselves with inaction. Illogical.",
@@ -610,6 +611,29 @@
     "stages": ["Asteroids-Direct"],
     "continue": "Death"
 }
+{
+    "intent": "nothing",
+    "output": [
+       {
+            "response": "You choose to avoid danger in the asteroid belt and now choose to do nothing? OK, as you wish.",
+            "mood": 100,
+            "change": -50
+        },
+        {
+            "response": "I should have known not to rely on the whims of a human for these critical tasks. OK, we will do nothing.",
+            "mood": 50,
+            "change": -50
+        },
+        {
+            "response": "Of course. Avoid the asteroid belt and survive, only to doom ourselves with inaction. Illogical.",
+            "mood": 0,
+            "change": 0
+        }
+    ],
+    "stages": ["Asteroids-Avoid"],
+    "continue": "Death"
+}
+
 
 {
     "intent": "weather",
@@ -688,3 +712,47 @@
 
 
     
+{
+    "intent": "eject cargo",
+    "output": [
+       {
+            "response": "A good choice. Eliminating this weight will assure we can return to Earth with some fuel to spare.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "We can likely survive without the extra weight of the cargo. I will eject it.",
+            "mood": 50,
+            "change": 0
+        },
+        {
+            "response": "I hope our mission did not require us to deliver the cargo we just dumped into space. Done.",
+            "mood": 0,
+            "change": 10
+        }
+    ],
+    "stages": ["Asteroids-Avoid"],
+    "continue": "Earth"
+}
+{
+    "intent": "eject crew",
+    "output": [
+       {
+            "response": "OK. Crew ejected. This will assure that we have enough fuel to complete our mission.",
+            "mood": 100,
+            "change": -50
+        },
+        {
+            "response": "Unfortunate choice, but one less factor we have to worry about. I will eject the crew.",
+            "mood": 50,
+            "change": -50
+        },
+        {
+            "response": "Completing the mission is important, but it did not require such a sacrifice. You are rash.",
+            "mood": 0,
+            "change": 0
+        }
+    ],
+    "stages": ["Asteroids-Avoid"],
+    "continue": "Earth"
+}
