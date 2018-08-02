@@ -1,7 +1,7 @@
 const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
-const { checkOk, save } = request;
+const { getToken, checkOk, save } = request;
 
 
 describe('Stages API', () => {
@@ -13,13 +13,8 @@ describe('Stages API', () => {
     
     let token;
     beforeEach(() => {
-        return save({
-            name: 'N User',
-            password: '60'
-        }, 'auth/signup')
-            .then(body => {
-                token = body.token;
-            });
+        return getToken()
+            .then(_token => token = _token);
     });
 
     let stage;
@@ -41,7 +36,7 @@ describe('Stages API', () => {
 
     it('gets a stage by name', () => {
         return request
-            .get('/api/stages/Asteroids')
+            .get(`/api/stages/${stage.name}`)
             .set('Authorization', token)
             .then(({ body }) => {
                 assert.deepEqual(body, stage);   
@@ -51,9 +46,17 @@ describe('Stages API', () => {
     it('updates a stage success', () => {
         stage.success++;
         return request 
-            .put('/api/stages/Asteroids')
+            .put(`/api/stages/${stage.name}/success`)
             .set('Authorization', token)
-            .send(stage)
+            .then(({ body }) => {
+                assert.deepEqual(body, stage);
+            });
+    });
+    it('updates a stage failure', () => {
+        stage.failure++;
+        return request 
+            .put(`/api/stages/${stage.name}/failure`)
+            .set('Authorization', token)
             .then(({ body }) => {
                 assert.deepEqual(body, stage);
             });
