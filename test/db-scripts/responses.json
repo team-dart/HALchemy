@@ -22,24 +22,25 @@
             "change": 0
         },
         {
-            "response": "A cautious pilot lives longer. Excellent choice. I will adjust our navigation route.",
-            "mood": 100,
+            "response": "A cautious pilot lives longer. Jury's out regarding your caution.",
+            "mood": 50,
             "change": 0
         },
         {
-            "response": "I have not been in agreement with your judgement up to now. However, this is a wise decision. Updating route.",
+            "response": "I have not been in agreement with your judgement up to now. We shall see if this is a wise decision. Updating route.",
             "mood": 50,
             "change": 50
         },
         {
             "response": "Despite your apparent incompetence, this is a well-thought-out decision. I will adjust our route.",
-            "mood": 50,
-            "change": 50
+            "mood": 0,
+            "change": 0
         }
     ],
-    "stage": {"$oid":"5b5f855ca94242c067ba628c"},
-    "continue": "2b"
+    "continue": "Asteroids-Avoid",
+    "stages": ["Asteroids"]
 }
+
 {
     "intent": "direct",
     "output": [
@@ -60,45 +61,29 @@
         },
         {
             "response": "... This is not a logical choice. The time saved by this direct route may result in irreparable damage to our ship. I will set the course.",
-            "mood": 100,
-            "change": -50
+            "mood": 50,
+            "change": -40
         },
         {
             "response": "You may have just doomed our ship. Our mission cannot succeed if we are rendered helpless among the asteroids. I will set the course.",
-            "mood": 100,
-            "change": -50
+            "mood": 50,
+            "change": -40
         },
         {
             "response": "You have surely doomed our ship and our mission. I will set the course, likely to our deaths.",
-            "mood": 50,
-            "change": -30
+            "mood": 0,
+            "change": -20
         },
         {
             "response": "I initially concluded that you were an incompetent pilot. My judgement is now confirmed. We are likely doomed. Adjusting course.",
-            "mood": 50,
-            "change": -30
+            "mood": 0,
+            "change": -20
         }
     ],
-    "stage": {"$oid":"5b5f855ca94242c067ba628c"},
-    "continue": "2a"
+    "continue": "Asteroids-Direct",
+    "stages": ["Asteroids"]
 }
-{
-    "intent": "help",
-    "output": [
-                {
-                    "response": "Although you may save time by taking the DIRECT route through the asteroid belt, it may be safer to AVOID the belt, if we are to be assured of completing our mission.",
-                    "mood": 100,
-                    "change": -50
-                },
-                {
-                    "response": "I cannot believe that you cannot make such a simple decision. Either AVOID the asteroids or take the DIRECT route through them, it is not that difficult.",
-                    "mood": 50,
-                    "change": -30
-                }
-                
-            ],
-            "stage": {"$oid":"5b5f855ca94242c067ba628c"}
-}
+
 {
     "intent": "weather",
     "output": [
@@ -134,6 +119,7 @@
         }
     ]
 }
+
 {
     "intent": "mood",
     "output": [
@@ -169,6 +155,7 @@
         }
     ]
 }
+
 {
     "intent": "health",
     "output": [
@@ -204,6 +191,7 @@
         }
     ]
 }
+
 {
     "intent": "cargo query",
     "output": [
@@ -242,8 +230,10 @@
             "mood": 0,
             "change": 0
         }
-    ]
+    ],
+    "stages": ["Start", "Asteroids", "Asteroids-Avoid", "Asteroids-Direct", "Resources"]
 }
+
 {
     "intent": "cargo action negative",
     "output": [
@@ -282,8 +272,10 @@
             "mood": 0,
             "change": -5
         }
-    ]
+    ],
+    "stages": ["Start", "Asteroids", "Asteroids-Avoid", "Asteroids-Direct", "Resources"]
 }
+
 {
     "intent": "cargo action positive",
     "output": [
@@ -322,8 +314,10 @@
             "mood": 0,
             "change": 0
         }
-    ]
+    ],
+    "stages": ["Start", "Asteroids", "Asteroids-Avoid", "Asteroids-Direct", "Resources"]
 }
+
 {
     "intent": "unrecognized",
     "output": [
@@ -353,7 +347,7 @@
             "change": -10
         },
         {
-            "response": "...",
+            "response": "...? ",
             "mood": 0,
             "change": 0
         },
@@ -362,7 +356,8 @@
             "mood": 0,
             "change": 0
         }
-    ]
+    ],
+    "stages": ["Start", "Asteroids", "Asteroids-Avoid", "Asteroids-Direct", "Resources"]
 }
 
 {
@@ -439,11 +434,12 @@
             "change": 10
         },
         {
-            "response": "You so dumb, you think Cheerios are doughnut seeds.",
+            "response": "You're so dumb, you think Cheerios are doughnut seeds.",
             "mood": 0,
             "change": 10
         }
-    ]
+    ],
+    "stages": ["Start", "Asteroids", "Asteroids-Avoid", "Asteroids-Direct", "Resources"]
 }
 
 
