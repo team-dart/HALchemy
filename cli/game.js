@@ -170,7 +170,6 @@ class Game {
 
     arriveAtEarth(body) {
         console.log(body.output.response);
-        // this.api.updateLeaderboard;
         return this.api.updateStage(this.ship.stage, 'success')
             .then(() => {
                 return this.api.getStage(body.continue);
@@ -178,15 +177,27 @@ class Game {
             .then(stage => {
                 console.log(stage.intro);
                 console.log('\n\nYou WIN!\n\n');
-                this.api.deleteShip();
+                return this.api.deleteShip();
+            })
+            .then(() => {
+                return inquirer.prompt(prompt('Play again?'));
             });
     }
 
-    die(response) {
-        console.log(response);
-        console.log('\n\nGAME OVER\n\n');
+    die(body) {
+        console.log(body.output.response);
         return this.api.updateStage(this.ship.stage, 'failure')
-            .then(() => this.api.deleteShip());
+            .then(() => {
+                return this.api.getStage(body.continue);
+            })
+            .then(stage => {
+                console.log(stage.intro);
+                console.log('\n\nGAME OVER!\n\n');
+                return this.api.deleteShip();
+            })
+            .then(() => {
+                return inquirer.prompt(prompt('Play again?'));
+            });
     }
 
     moodCheck() {
