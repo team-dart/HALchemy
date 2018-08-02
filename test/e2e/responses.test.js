@@ -1,7 +1,7 @@
 const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
-const { getToken, save } = request;
+const { getToken, save, checkOk } = request;
 const getWit = require('../../lib/util/wit');
 
 describe('Responses API', () => {
@@ -102,6 +102,21 @@ describe('Responses API', () => {
     it.skip('uses wit.ai', () => {
         return getWit('what\'s the status report?')
             .then(data => assert.equal(data[0].value, 'stats'));
+    });
+   
+    it.only('gets an intent', () => {
+        const data = {
+            input: 'weather?'
+        };
+        return request
+            .post('/api/responses/intent')
+            .set('Authorization', token)
+            .send(data)
+            .then(checkOk)
+            .then(({ body }) => {
+                console.log(body);
+                assert.equal(body, 'weather');
+            });
     });
 
 });

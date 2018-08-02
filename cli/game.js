@@ -18,7 +18,10 @@ const authPrompts = [
     {
         type: 'input',
         name: 'name',
-        message: 'Please verify your username:'
+        message: 'Please verify your username:',
+        validation: function(val) {
+
+        }
     },
     {
         type: 'password',
@@ -69,7 +72,7 @@ class Game {
                     this.askAuth();
                 }
                 else {
-                    console.log(chalk.redBright('It is imperative that you answer the question.'));
+                    console.log(chalk.yellowBright('It is imperative that you answer the question.'));
                     this.askAuthChoice();
                 }
             });
@@ -189,7 +192,8 @@ class Game {
                 return this.api.deleteShip();
             })
             .then(() => {
-                return 'exit';
+                // return 'exit';
+                process.exit(1);
             });
     }
 
