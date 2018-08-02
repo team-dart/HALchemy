@@ -585,7 +585,7 @@
             "change": 10
         }
     ],
-    "stages": ["Start", "Resources", "Asteroids-Direct", "Asteroids-Avoid", "Earth"]
+    "stages": ["Start", "Resources", "Asteroids", "Asteroids-Direct", "Asteroids-Avoid", "Earth"]
 }
 
 
