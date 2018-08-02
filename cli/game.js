@@ -33,7 +33,7 @@ class Game {
     constructor(api) {
         this.api = api;
         this.ship = {};
-        this.signup = false;
+        this.signup;
         this.token;
     }
 
@@ -56,6 +56,7 @@ class Game {
                 answer = answer.toLowerCase();
                 if(answer.match(/n/)) {
                     console.log('I have retrieved our previous communication logs. I will still need to run a mental diagnostic.');
+                    this.signup = false;
                     this.askAuth();
                 }
                 else if(answer.match(/maybe/)) {
@@ -81,13 +82,18 @@ class Game {
                 if(this.signup) return this.api.signup({ name, password });
                 else return this.api.signin({ name, password });
             })
-            .then(() => {
-                return this.api.getShip();
-            })
-            .then(ship => {
-                this.ship = ship;
-                this.startDialogue();
+            .then(error => {
+                if(error.error) {
+                    console.log(error.error);
+                    return this.askAuthChoice();
+                }
+                else return this.api.getShip()
+                    .then(ship => {
+                        this.ship = ship;
+                        this.startDialogue();
+                    });
             });
+            
     }
 
     startDialogue() {

@@ -45,9 +45,10 @@ const hal = {
         return request
             .post(`${API_URL}/auth/signin`)
             .send(credentials)
-            .then(({ body }) => {
-                token = body.token;
-                return body;
+            .then(res => {
+                if(res.error) return res.error;
+                token = res.body.token;
+                return res.body;
             });
     },
     getShip() {
