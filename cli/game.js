@@ -71,7 +71,7 @@ class Game {
                     this.askAuth();
                 }
                 else {
-                    console.log(chalk.redBright('It is imperative that you answer the question.'));
+                    console.log(chalk.yellowBright('It is imperative that you answer the question.'));
                     this.askAuthChoice();
                 }
             });

@@ -20,16 +20,11 @@ function getShipStats() {
             return body;
         });
 }
-function updateShipStats() {
+function getSurvivalRate(stage) {
     return request
-        .put(`${API_URL}/ships`)
+        .get(`${API_URL}/stages/${stage}/survival`)
         .set('Authorization', token)
-        .then(({ body }) => {
-            return body;
-        });
-}
-function getSurvivalRate() {
-
+        .then(({ body }) => body);
 }
 
 const hal = {
@@ -92,11 +87,11 @@ const hal = {
                     return `The ${name} has shields at ${shields}%. Our fuel is down to ${fuel}%. Oxygen levels are only at ${oxygen}%. And the power to the crew's cryopods is currently ${lifeSupport}%.`;
                 });
         }
-        else if(intent === 'increase shields') {
-            return updateShipStats();
-        }
         else if(intent === 'survival rate') {
-            return getSurvivalRate();
+            return getSurvivalRate(stage)
+                .then(({ stageSuccess }) => {
+                    return `I calculate the odds of survival to be exactly ${stageSuccess}%.`;
+                });
         }
         else {
             let response;
