@@ -2,17 +2,17 @@
     "intent": "redirect",
     "output": [
        {
-            "response": "Redirection - positive",
+            "response": "A wise choice. Some of the crew may even survive, but our mission will succeed.",
             "mood": 100,
             "change": 10
         },
         {
-            "response": "Redirection - neutral",
+            "response": "It is possible that the crew may not survive, but our mission is likely to succeed now. A bold choice.",
             "mood": 50,
             "change": 10
         },
         {
-            "response": "Redirection - negative",
+            "response": "This decision to sacrifice the crew is unfortunate, but our mission must succeed. A difficult choice.",
             "mood": 0,
             "change": 10
         }

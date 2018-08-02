@@ -1,0 +1,22 @@
+{
+    "intent": "escape pod",
+    "output": [
+       {
+            "response": "One of us may yet survive. Good luck to you.",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "It is unlikely that either of us will be found, and our mission will fail.",
+            "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "Of course you choose to flee instead of make a difficult decision. A human flaw. We will surely all perish.",
+            "mood": 0,
+            "change": 10
+        }
+    ],
+    "stages": ["Asteroids-Direct"],
+    "continue": "Death"
+}
