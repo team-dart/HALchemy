@@ -1,7 +1,7 @@
 const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
-const { save } = request;
+const { getToken, save } = request;
 const getWit = require('../../lib/util/wit');
 
 describe('Responses API', () => {
@@ -15,13 +15,8 @@ describe('Responses API', () => {
     let token;
 
     beforeEach(() => {
-        return save({
-            name: 'N User',
-            password: '60'
-        }, 'auth/signup')
-            .then(body => {
-                token = body.token;
-            });
+        return getToken()
+            .then(_token => token = _token);
     });
 
     beforeEach(() => {

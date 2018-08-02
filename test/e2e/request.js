@@ -22,10 +22,10 @@ request.save = (data, path, token = '') => {
 };
 
 request.getToken = () => request
-    .post('/api/signup')
+    .post('/api/auth/signup')
     .send({
-        name: 'Benedict Q. Cumberbatch',
-        password: 'abc123'
+        name: 'joe blow',
+        password: 'abc'
     })
     .then(({ body }) => body.token);
 

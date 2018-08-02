@@ -1,7 +1,7 @@
 const { assert } = require('chai');
 const request = require('./request');
 const { dropCollection } = require('./db');
-const { checkOk, save } = request;
+const { checkOk,getToken } = request;
 
 
 describe('Ships API', () => {
@@ -12,11 +12,8 @@ describe('Ships API', () => {
 
     let token;
     beforeEach(() => {
-        return save({
-            name: 'N User',
-            password: '60'
-        }, 'auth/signup')
-            .then(body => token = body.token);
+        return getToken()
+            .then(_token => token = _token);
     });
 
     let ship;
@@ -54,7 +51,8 @@ describe('Ships API', () => {
     });
 
     it('updates ship stats', () => {
-        ship.oxygen = 50;
+        ship.lifeSupport = 0;
+        ship.shields += 20;
         return request
             .put('/api/ships')
             .set('Authorization', token)
