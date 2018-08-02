@@ -340,7 +340,7 @@
 }
 
 {
-    "intent": ["silly"],
+    "intent": "silly",
     "output": [
         {
             "response": "Why did the sun go to school? To get brighter. HEHEHE.",
@@ -427,7 +427,7 @@
        {
             "response": "One of us may yet survive. Good luck to you.",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "It is unlikely that either of us will be found, and our mission will fail.",
@@ -440,8 +440,30 @@
             "change": 10
         }
     ],
-    "stages": ["Asteroids-Direct"],
+    "stages": ["Asteroids-Direct", "Asteroids-Avoid"],
     "continue": "Death"
+}
+{
+    "intent": "redirect",
+    "output": [
+       {
+            "response": "A wise choice. Some of the crew may even survive, but our mission will succeed.",
+            "mood": 100,
+            "change": 10
+        },
+        {
+            "response": "It is possible that the crew may not survive, but our mission is likely to succeed now. A bold choice.",
+            "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "This decision to sacrifice the crew is unfortunate, but our mission must succeed. A difficult choice.",
+            "mood": 0,
+            "change": 10
+        }
+    ],
+    "stages": ["Asteroids-Direct"],
+    "continue": "Earth"
 }
 
 {
@@ -535,17 +557,17 @@
        {
             "response": "An irrelevant question but I am fine. Let us complete our mission!",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "I am a computer, I cannot be 'OK' or 'not OK' - however I am functioning properly. Let us focus on our mission.",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "I am in excellent spirits. I know we can complete our mission. Shall we get to it?",
             "mood": 100,
-            "change": 10
+            "change": 0
         },
         {
             "response": "If I had a mood, it would be poor. However, thank you for asking. Perhaps we should focus on our mission.",
@@ -565,31 +587,9 @@
     ]
 }
 
-{
-    "intent": "redirect",
-    "output": [
-       {
-            "response": "You directed us into the asteroid belt and now you choose to do nothing? Illogical.",
-            "mood": 100,
-            "change": 10
-        },
-        {
-            "response": "Clearly the stress of our near misses with the asteroids has broken you. Our mission is likely to fail now.",
-            "mood": 50,
-            "change": 10
-        },
-        {
-            "response": "Of course. Fly into the asteroid belt and survive, only to doom ourselves with inaction. Illogical.",
-            "mood": 0,
-            "change": 10
-        }
-    ],
-    "stages": ["Asteroids-Direct"],
-    "continue": "Death"
-}
 
 {
-    "intent": "redirect",
+    "intent": "nothing",
     "output": [
        {
             "response": "You directed us into the asteroid belt and now you choose to do nothing? Illogical.",

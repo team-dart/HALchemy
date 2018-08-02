@@ -156,7 +156,7 @@ class Game {
         console.log(body.output.response);
         this.ship.shields -= 10;
         this.ship.oxygen -= 10;
-        this.ship.fuel -= 10;
+        this.ship.fuel = 5;
         this.ship.stage = body.continue;
         
         return this.api.updateShip(this.ship)
@@ -172,7 +172,7 @@ class Game {
         console.log(response);
         console.log('\n\nYou WIN!\n\n');
         // this.api.updateLeaderboard;
-        return this.api.updateStage(this.ship.stage, 'success')
+        return this.api.getStage(this.ship.stage, 'success')
             .then(() => this.api.deleteShip());
     }
 
