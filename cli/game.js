@@ -48,7 +48,7 @@ class Game {
             )
         );
         inquirer
-            .prompt(prompt(chalk.yellowBright('Hello. My name is HAL.')))
+            .prompt(prompt(chalk.yellowBright('Hello. My name is HAL. You\'re finally awake from your cryosleep. You may not remember, but you\'re on a ship headed for Earth. As resources are running low, the rest of the crew remains preserved in their cryopods. You alone are responsible for guiding me to get the ship home safely to Earth to deliver cargo that is crucial for the planet\'s survival.')))
             .then(() => this.askAuthChoice());
     }
 
@@ -218,7 +218,7 @@ class Game {
         if(mood < 0) this.die('You are unfit to deliver our cargo back to Earth. Flooding cockpit with neurotoxin.');
         if(mood > 80) this.color = 'yellow';
         else if(mood < 40) this.color = 'red';
-        else this.color = 'blue';
+        else this.color = 'green';
     }
 
     playAgain() {
