@@ -23,7 +23,7 @@
     "intent": "help asteroids",
     "output": [
         {
-            "response": "With the DIRECT route you risk damage. If you choose to AVOID the asteroids by taking the indirect route, we risk resources",
+            "response": "With the DIRECT route you risk almost certain damage. If you choose to AVOID the asteroids by taking the indirect route, we risk using up our resources",
             "mood": 100,
             "change": 0
         },
