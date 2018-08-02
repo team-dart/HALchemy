@@ -13,7 +13,6 @@ Clone or download this repo.
 
 ```
 npm i
-npm run db-load-heroku
 npm run play
 ```
 Launch the game at <a href="https://halchemy.herokuapp.com/" target="_blank">https://halchemy.herokuapp.com/</a>
