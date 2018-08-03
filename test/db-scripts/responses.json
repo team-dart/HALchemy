@@ -721,12 +721,12 @@
             "change": 0
         },
         {
-            "response": "We can likely survive without the extra weight of the cargo. I will eject it.",
+            "response": "We can likely survive without the extra weight of the cryopods. I will eject it.",
             "mood": 50,
             "change": 0
         },
         {
-            "response": "I hope our mission did not require us to deliver the cargo we just dumped into space. Done.",
+            "response": "Our mission did not require us to bring the crew home. Done.",
             "mood": 0,
             "change": 10
         }
