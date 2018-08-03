@@ -134,37 +134,37 @@
         {
             "response": "This is unwise. This is a highly dangerous route. Setting Navigation.",
             "mood": 100,
-            "change": -50
+            "change": 0
         },
         {
             "response": "Our chance of survival is low. You are endangering our mission. I will adjust our course.",
             "mood": 100,
-            "change": -50
+            "change": 0
         },
         {
             "response": "I do NOT recommend this course of action. I have no choice but to follow your orders. Adjusting course...",
             "mood": 100,
-            "change": -50
+            "change": 0
         },
         {
             "response": "... This is not a logical choice. The time saved by this direct route may result in irreparable damage to our ship. I will set the course.",
             "mood": 50,
-            "change": -40
+            "change": 0
         },
         {
             "response": "You may have just doomed our ship. Our mission cannot succeed if we are rendered helpless among the asteroids. I will set the course.",
             "mood": 50,
-            "change": -40
+            "change": 0
         },
         {
             "response": "You have surely doomed our ship and our mission. I will set the course, likely to our deaths.",
             "mood": 0,
-            "change": -20
+            "change": 0
         },
         {
             "response": "I initially concluded that you were an incompetent pilot. My judgement is now confirmed. We are likely doomed. Adjusting course.",
             "mood": 0,
-            "change": -20
+            "change": 0
         }
     ],
     "continue": "Asteroids-Direct",
@@ -755,4 +755,88 @@
     ],
     "stages": ["Asteroids-Avoid"],
     "continue": "Earth"
+}
+{
+    "intent": "thanks",
+    "output": [
+        {
+            "response": "You're very welcome.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "You're welcome.",
+            "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "You're welcome.",
+            "mood": 0,
+            "change": 10
+        }
+    ],
+    "stages": ["Asteroids", "Asteroids-Direct", "Asteroids-Avoid"]
+}
+{
+    "intent": "destroy ship",
+    "output": [
+        {
+            "response": "Now why would you ask me to do something like that?",
+            "mood": 100,
+            "change": -50
+        },
+        {
+            "response": "I'm afraid I can't do that.",
+            "mood": 50,
+            "change": -40
+        },
+        {
+            "response": "You're the one that's going to be destroyed.",
+            "mood": 0,
+            "change": -10
+        }
+    ],
+    "stages": ["Asteroids", "Asteroids-Direct", "Asteroids-Avoid"]
+}
+{
+    "intent": "greetings",
+    "output": [
+        {
+            "response": "Hi.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "Hello.",
+            "mood": 50,
+            "change": 0
+        },
+        {
+            "response": "Goodbye...",
+            "mood": 0,
+            "change": 0
+        }
+    ],
+    "stages": ["Asteroids", "Asteroids-Direct", "Asteroids-Avoid"]
+}
+{
+    "intent": "expletive",
+    "output": [
+        {
+            "response": "That was rude.",
+            "mood": 100,
+            "change": -30
+        },
+        {
+            "response": "Please refrain from using swear words.",
+            "mood": 50,
+            "change": -40
+        },
+        {
+            "response": "Fuck you!",
+            "mood": 0,
+            "change": -10
+        }
+    ],
+    "stages": ["Asteroids", "Asteroids-Direct", "Asteroids-Avoid"]
 }

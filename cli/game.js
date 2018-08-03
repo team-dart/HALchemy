@@ -136,9 +136,9 @@ class Game {
                     if(body.output) {
                         response = body.output.response;
                         this.ship.mood += body.output.change;
+                        this.moodCheck();
                     }
                     else response = body;
-    
                     if(body.continue === 'Asteroids-Direct') {
                         return this.flyThroughAsteroids(body);
                     }
@@ -217,9 +217,8 @@ class Game {
     }
 
     die(body) {
-        lineBreakSingle();
-        console.log(chalk[this.color](body.output.response));
-        lineBreak();
+        if(typeof body === 'string') console.log(chalk[this.color](body));
+        else console.log(chalk[this.color](body.output.response));
         return this.api.updateStage(this.ship.stage, 'failure')
             .then(() => {
                 return this.api.getStage(body.continue);
