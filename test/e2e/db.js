@@ -1,6 +1,5 @@
 const connect = require('../../lib/util/connect');
 connect('mongodb://localhost:27017/halchemy_test');
-//connect('mongodb://localhost:27017/halchemy_test');
 const mongoose = require('mongoose');
 
 after(() => {
