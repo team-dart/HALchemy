@@ -1,7 +1,7 @@
 const Game = require('./game');
 const request = require('superagent');
 const API_URL = 'https://halchemy.herokuapp.com/api';
-
+// const API_URL = 'localhost:3000/api';
 let token = '';
 
 function getResponse(intent, mood, stage) {
@@ -120,7 +120,6 @@ const hal = {
             .then(({ body }) => body);
         
     }
-    //updateLeaderboard() {}
 
 };
 
