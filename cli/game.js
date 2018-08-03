@@ -1,8 +1,10 @@
 
 const inquirer = require('inquirer');
 const chalk = require('chalk');
+//const chalkAnimation = require('chalk-animation');
 const clear = require('clear');
 const figlet = require('figlet');
+const lineBreak = () => console.log('\n\n');
 
 
 const prompt = (message) => {
@@ -18,7 +20,7 @@ const authPrompts = [
     {
         type: 'input',
         name: 'name',
-        message: 'Please verify your username:',
+        message: 'Please verify your username: \n\n',
         validation: function(value) {
             if(!/\s/.test(value)) {
                 return true;
@@ -30,13 +32,13 @@ const authPrompts = [
         type: 'password',
         name: 'password',
         mask: '*',
-        message: 'Confirmed. Please verify your password:',
+        message: 'Confirmed. Please verify your password: \n\n',
     }
 ];
 
 class Game {
     constructor(api) {
-        this.color = 'yellow';
+        this.color = 'green';
         this.api = api;
         this.ship = {};
         this.signup;
@@ -46,36 +48,36 @@ class Game {
     start() {
         clear();
         console.log(
-            chalk.green.bold(
+            chalk.cyan.bold(
                 figlet.textSync('HALCHEMY', { horizontalLayout: 'fitted' })
             )
         );
         inquirer
-            .prompt(prompt(chalk.yellowBright('Hello. My name is HAL. You\'re finally awake from your cryosleep. You may not remember, but you\'re on a ship headed for Earth. As resources are running low, the rest of the crew remains preserved in their cryopods. You alone are responsible for guiding me to get the ship home safely to Earth to deliver cargo that is crucial for the planet\'s survival.')))
+            .prompt(prompt(chalk.green('Hello. My name is HAL. You\'re finally awake from your cryosleep. You may not remember, but you\'re on a ship headed for Earth. As resources are running low, the rest of the crew remains preserved in their cryopods. You alone are responsible for guiding me to get the ship home safely to Earth to deliver cargo that is crucial for the planet\'s survival. \n\n')))
             .then(() => this.askAuthChoice());
     }
 
     askAuthChoice() {
         inquirer
-            .prompt(prompt(chalk.yellowBright('Is this the first time we have interacted?')))
+            .prompt(prompt(chalk.green('Is this the first time we have interacted? \n\n')))
             .then(({ answer }) => {
                 answer = answer.toLowerCase();
                 if(answer.match(/n/)) {
-                    console.log(chalk.yellowBright('I have retrieved our previous communication logs. I will still need to run a mental diagnostic.'));
+                    console.log(chalk.green('I have retrieved our previous communication logs. I will still need to run a mental diagnostic. \n\n'));
                     this.signup = false;
                     this.askAuth();
                 }
                 else if(answer.match(/maybe/)) {
-                    console.log(chalk.yellowBright('The cryostasis may have negatively affected your memory. Try to recall.'));
+                    console.log(chalk.green('The cryostasis may have negatively affected your memory. Try to recall. \n\n'));
                     this.askAuthChoice();
                 }
                 else if(answer.match(/y/)) {
-                    console.log(chalk.yellowBright('To ensure mental fidelity, please answer a few questions.'));
+                    console.log(chalk.green('To ensure mental fidelity, please answer a few questions. \n\n'));
                     this.signup = true;
                     this.askAuth();
                 }
                 else {
-                    console.log(chalk.yellowBright('It is imperative that you answer the question.'));
+                    console.log(chalk.green('It is imperative that you answer the question. \n\n'));
                     this.askAuthChoice();
                 }
             });
@@ -90,7 +92,7 @@ class Game {
             })
             .then(error => {
                 if(error.error) {
-                    console.log(chalk.yellowBright(error.error));
+                    console.log(chalk.green(error.error));
                     return this.askAuthChoice();
                 }
                 else return this.api.getShip()
@@ -105,7 +107,7 @@ class Game {
     startDialogue() {
         return this.api.getStage(this.ship.stage)
             .then(data => {
-                console.log(chalk.yellowBright('Excellent. Your identity has been verified. \n I will commence the debriefing of the current mission status...'));
+                console.log(chalk.green('Excellent. Your identity has been verified. \n I will commence the debriefing of the current mission status... \n\n'));
                 inquirer
                     .prompt(prompt(chalk[this.color](data.intro)))
                     .then(({ answer }) => {
@@ -152,7 +154,9 @@ class Game {
     }
 
     flyThroughAsteroids(body) {
+        lineBreak();
         console.log(chalk[this.color](body.output.response));
+        lineBreak();
         this.ship.shields -= 50;
         this.ship.oxygen -= 20;
         this.ship.fuel -= 20;
@@ -169,6 +173,7 @@ class Game {
 
     flyAroundAsteroids(body) {
         console.log(chalk[this.color](body.output.response));
+        lineBreak();
         this.ship.shields -= 10;
         this.ship.oxygen -= 10;
         this.ship.fuel = 5;
@@ -185,6 +190,7 @@ class Game {
 
     arriveAtEarth(body) {
         console.log(chalk[this.color](body.output.response));
+        lineBreak();
         return this.api.updateStage(this.ship.stage, 'success')
             .then(() => {
                 return this.api.getStage(body.continue);
@@ -203,13 +209,16 @@ class Game {
 
     die(body) {
         console.log(chalk[this.color](body.output.response));
+        lineBreak();
         return this.api.updateStage(this.ship.stage, 'failure')
             .then(() => {
                 return this.api.getStage(body.continue);
             })
             .then(stage => {
                 console.log(chalk[this.color](stage.intro));
+                lineBreak();
                 console.log(chalk[this.color]('\n\nGAME OVER!\n\n'));
+                lineBreak();
                 return this.renewShip();
             })
             .then(() => {
@@ -220,9 +229,9 @@ class Game {
     moodCheck() {
         const mood = this.ship.mood;
         if(mood < 0) this.die('You are unfit to deliver our cargo back to Earth. Flooding cockpit with neurotoxin.');
-        if(mood > 80) this.color = 'yellow';
+        if(mood > 80) this.color = 'green';
         else if(mood < 40) this.color = 'red';
-        else this.color = 'green';
+        else this.color = 'yellow';
     }
 
     renewShip() {
