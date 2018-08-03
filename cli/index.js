@@ -4,28 +4,8 @@ const API_URL = 'https://halchemy.herokuapp.com/api';
 // const API_URL = 'localhost:3000/api';
 let token = '';
 
-function getResponse(intent, mood, stage) {
-    return request
-        .get(`${API_URL}/responses?intent=${intent}&mood=${mood}&stage=${stage}`)
-        .set('Authorization', token)
-        .then(({ body }) => body);
-}
-function getShipStats() {
-    return request 
-        .get(`${API_URL}/ships`)
-        .set('Authorization', token)
-        .then(({ body }) => {
-            return body;
-        });
-}
-function getSurvivalRate(stage) {
-    return request
-        .get(`${API_URL}/stages/${stage}/survival`)
-        .set('Authorization', token)
-        .then(({ body }) => body);
-}
-
 const hal = {
+
     signup(credentials) {
         return request
             .post(`${API_URL}/auth/signup`)
@@ -35,6 +15,7 @@ const hal = {
                 return body;
             });
     },
+
     signin(credentials) {
         return request
             .post(`${API_URL}/auth/signin`)
@@ -45,12 +26,14 @@ const hal = {
                 return res.body;
             });
     },
+
     getShip() {
         return request
             .get(`${API_URL}/ships`)
             .set('Authorization', token)
             .then(({ body }) => body);
     },
+
     updateMood(mood) {
         return request
             .put(`${API_URL}/ships`)
@@ -58,13 +41,7 @@ const hal = {
             .send({ mood: mood })
             .then(({ body }) => mood = body.mood);
     },
-    parseIntent(input) {
-        return request
-            .post(`${API_URL}/responses/intent`)
-            .set('Authorization', token)
-            .send({ input })
-            .then(({ body }) => body);
-    },
+
     getStage(stageName) {
         return request
             .get(`${API_URL}/stages/${stageName}`)
@@ -78,22 +55,31 @@ const hal = {
             .send(ship)
             .then(({ body }) => body);
     },
+
+    parseIntent(input) {
+        return request
+            .post(`${API_URL}/responses/intent`)
+            .set('Authorization', token)
+            .send({ input })
+            .then(({ body }) => body);
+    },
+    
     think(intent, mood, stage) {
         if(intent === 'stats') {
-            return getShipStats()
+            return this.getShipStats()
                 .then(({ name, oxygen, lifeSupport, fuel, shields }) => {
                     return `The ${name} has shields at ${shields}%. Our fuel is down to ${fuel}%. Oxygen levels are only at ${oxygen}%. And the power to the crew's cryopods is currently ${lifeSupport}%.`;
                 });
         }
         else if(intent === 'survival rate') {
-            return getSurvivalRate(stage)
+            return this.getSurvivalRate(stage)
                 .then(({ stageSuccess }) => {
                     return `I calculate the odds of survival to be exactly ${stageSuccess}%.`;
                 });
         }
         else {
             let response;
-            return getResponse(intent, mood, stage)
+            return this.getResponse(intent, mood, stage)
                 .then(body => {
                     response = body;
                     if(response) {
@@ -107,10 +93,27 @@ const hal = {
         }
     },
     
-    deleteShip() {
+    getResponse(intent, mood, stage) {
         return request
-            .del(`${API_URL}/ships`)
-            .set('Authorization', token);
+            .get(`${API_URL}/responses?intent=${intent}&mood=${mood}&stage=${stage}`)
+            .set('Authorization', token)
+            .then(({ body }) => body);
+    },
+
+    getShipStats() {
+        return request 
+            .get(`${API_URL}/ships`)
+            .set('Authorization', token)
+            .then(({ body }) => {
+                return body;
+            });
+    },
+
+    getSurvivalRate(stage) {
+        return request
+            .get(`${API_URL}/stages/${stage}/survival`)
+            .set('Authorization', token)
+            .then(({ body }) => body);
     },
     
     updateStage(stage, result) {
@@ -118,12 +121,9 @@ const hal = {
             .put(`${API_URL}/stages/${stage}/${result}`)
             .set('Authorization', token)
             .then(({ body }) => body);
-        
     }
 
 };
-
-
 
 
 const game = new Game(hal);

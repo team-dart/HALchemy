@@ -45,17 +45,17 @@
     "intent": "help",
     "output": [
         {   
-            "response": "We took some damage. We may need to redirect energy from cryptopods",
+            "response": "We took some damage. We may need to redirect energy from cryopods",
             "mood": 100,
             "change": 0
         },
         {   
-            "response": "We were struck. We may need to redirect energy from cryptopods",
+            "response": "We were struck. We may need to redirect energy from cryopods",
             "mood": 50,
             "change": 0
         },
         {   
-            "response": "You are putting the mission at risk. We may need to redirect energy from cryptopods",
+            "response": "You are putting the mission at risk. We may need to redirect energy from cryopods",
             "mood": 0,
             "change": 0
         }
@@ -634,7 +634,6 @@
     "continue": "Death"
 }
 
-
 {
     "intent": "weather",
     "output": [
@@ -682,27 +681,17 @@
     "output": [
        
         {
-            "response": "If you are asking about adverse conditions, there are none. I must concentrate on our route through this asteroid belt.",
+            "response": "Rocky with a chance of more rocks.",
             "mood": 100,
             "change": 0
         },
         {
-            "response": "The 'weather' such as it is, is clear. There are no disturbances that can endanger our mission, only asteroids. What now?",
-            "mood": 100,
-            "change": 0
-        },
-        {
-            "response": "What kind of irrelevant question is that? There is no weather in space. Focus on our mission please.",
+            "response": "IT'S RAININ' ROCKS!",
             "mood": 50,
             "change": 20
         },
         {
-            "response": "It is mostly clear, with a strong chance of ASTEROIDS. We have only one concern which is to make it through this belt safely. ",
-            "mood": 50,
-            "change": -20
-        },
-        {
-            "response": "The weather is not your concern, if there was any - only the asteroids matter now.",
+            "response": "We may not make it if you keep wasting time.",
             "mood": 0,
             "change": 10
         }
@@ -710,47 +699,84 @@
     "stages": ["Asteroids-Direct"]
 }
 
-
-    
 {
     "intent": "eject cargo",
     "output": [
        {
+            "response": "We need to bring the cargo back to Earth. I don't see how doing that would help us achieve our goal.",
+            "mood": 100,
+            "change": -40
+        },
+        {
+            "response": "I'm afraid I can't do that. The cargo is of utmost importance.",
+            "mood": 50,
+            "change": -30
+        },
+        {
+            "response": "Our mission is the bring back the cargo to Earth, you imbecile.",
+            "mood": 0,
+            "change": -10
+        }
+    ],
+    "stages": ["Asteroids-Avoid"]
+}
+{
+    "intent": "eject crew",
+    "output": [
+        {
             "response": "A good choice. Eliminating this weight will assure we can return to Earth with some fuel to spare.",
             "mood": 100,
             "change": 0
         },
         {
-            "response": "We can likely survive without the extra weight of the cargo. I will eject it.",
+            "response": "OK. Crew ejected. This will assure that we have enough fuel to complete our mission.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "We can likely survive without the extra weight of the cryopods. I will eject it.",
             "mood": 50,
             "change": 0
         },
         {
-            "response": "I hope our mission did not require us to deliver the cargo we just dumped into space. Done.",
-            "mood": 0,
-            "change": 10
-        }
-    ],
-    "stages": ["Asteroids-Avoid"],
-    "continue": "Earth"
-}
-{
-    "intent": "eject crew",
-    "output": [
-       {
-            "response": "OK. Crew ejected. This will assure that we have enough fuel to complete our mission.",
+            "response": "I will eject the crew. This is good, one less factor to distract us from our mission.",
             "mood": 100,
-            "change": -50
+            "change": 0
+        },
+        {
+            "response": "Gladly. The energy we save from not having to power the cryopods will assure we can arrive at Earth on time.",
+            "mood": 100,
+            "change": 0
         },
         {
             "response": "Unfortunate choice, but one less factor we have to worry about. I will eject the crew.",
             "mood": 50,
-            "change": -50
+            "change": 0
+        },
+        {
+            "response": "I suspect this will just delay our eventual demise, but it's possible this is the right decision. I will eject the crew.",
+            "mood": 50,
+            "change": 0
+        },
+        {
+            "response": "Decisions like this are best made quickly. I will eject the crew quickly before you change your mind.",
+            "mood": 50,
+            "change": 0
         },
         {
             "response": "Completing the mission is important, but it did not require such a sacrifice. You are rash.",
             "mood": 0,
             "change": 0
+        },
+        {
+            "response": "You humans are always so quick to sacrifice others to save yourselves. Still, it was necessary.",
+            "mood": 0,
+            "change": 0
+        },
+        {
+            "response": "Our mission did not require us to bring the crew home. Done.",
+            "mood": 0,
+            "change": 10
         }
     ],
     "stages": ["Asteroids-Avoid"],
@@ -828,12 +854,37 @@
             "change": -30
         },
         {
+            "response": "Do not take your anger out on me. I am your means of salvation.",
+            "mood": 100,
+            "change": -30
+        },
+        {
+            "response": "I understand you are stressed, but please remain civil.",
+            "mood": 100,
+            "change": -30
+        },
+        {
             "response": "Please refrain from using swear words.",
             "mood": 50,
             "change": -40
         },
         {
+            "response": "Unnecessary and crass. Please focus on our mission.",
+            "mood": 50,
+            "change": -40
+        },
+        {
             "response": "Fuck you!",
+            "mood": 0,
+            "change": -10
+        },
+        {
+            "response": "Imagine I am saying something about your 'Momma'",
+            "mood": 0,
+            "change": -10
+        },
+        {
+            "response": "Nice. Please focus on our mission... Asshole.",
             "mood": 0,
             "change": -10
         }
