@@ -49,8 +49,8 @@ describe('Auth API', () => {
                 password: 'bad'
             })
             .then(res => {
-                assert.equal(res.status, 401);
-                assert.equal(res.body.error, 'Invalid username or password');
+                assert.equal(res.status, 200);
+                assert.equal(res.body.error, 'I do not recognize those credentials. Please try again.');
             });
     });
 
@@ -62,8 +62,8 @@ describe('Auth API', () => {
                 password: 'abc'
             })
             .then(res => {
-                assert.equal(res.status, 400);
-                assert.equal(res.body.error, 'Username already in use');
+                assert.equal(res.status, 200);
+                assert.equal(res.body.error, 'I\'m sorry, but that username already in use.');
             });        
     });
 

@@ -99,12 +99,12 @@ describe('Responses API', () => {
             });
     });
 
-    it.skip('uses wit.ai', () => {
+    it('uses wit.ai', () => {
         return getWit('what\'s the status report?')
             .then(data => assert.equal(data[0].value, 'stats'));
     });
    
-    it.only('gets an intent', () => {
+    it('gets an intent', () => {
         const data = {
             input: 'weather?'
         };

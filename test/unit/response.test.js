@@ -11,7 +11,7 @@ describe('Response model', () => {
                 change: -35
             }],
             continue: 'Asteroids',
-            stageId: ['Start']
+            stages: ['Start']
         };
 
         const response = new Response(data);
