@@ -45,17 +45,17 @@
     "intent": "help",
     "output": [
         {   
-            "response": "We took some damage. We may need to redirect energy from cryptopods",
+            "response": "We took some damage. We may need to redirect energy from cryopods",
             "mood": 100,
             "change": 0
         },
         {   
-            "response": "We were struck. We may need to redirect energy from cryptopods",
+            "response": "We were struck. We may need to redirect energy from cryopods",
             "mood": 50,
             "change": 0
         },
         {   
-            "response": "You are putting the mission at risk. We may need to redirect energy from cryptopods",
+            "response": "You are putting the mission at risk. We may need to redirect energy from cryopods",
             "mood": 0,
             "change": 0
         }
@@ -743,12 +743,37 @@
             "change": -50
         },
         {
+            "response": "I will eject the crew. This is good, one less factor to distract us from our mission.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "Gladly. The energy we save from not having to power the cryopods will assure we can arrive at Earth on time.",
+            "mood": 100,
+            "change": 0
+        },
+        {
             "response": "Unfortunate choice, but one less factor we have to worry about. I will eject the crew.",
             "mood": 50,
             "change": -50
         },
         {
+            "response": "I suspect this will just delay our eventual demise, but it's possible this is the right decision. I will eject the crew.",
+            "mood": 50,
+            "change": -50
+        },
+        {
+            "response": "Decisions like this are best made quickly. I will eject the crew quickly before you change your mind.",
+            "mood": 50,
+            "change": -50
+        },
+        {
             "response": "Completing the mission is important, but it did not require such a sacrifice. You are rash.",
+            "mood": 0,
+            "change": 0
+        },
+        {
+            "response": "You humans are always so quick to sacrifice others to save yourselves. Still, it was necessary.",
             "mood": 0,
             "change": 0
         }
@@ -828,12 +853,37 @@
             "change": -30
         },
         {
+            "response": "Do not take your anger out on me. I am your means of salvation.",
+            "mood": 100,
+            "change": -30
+        },
+        {
+            "response": "I understand you are stressed, but please remain civil.",
+            "mood": 100,
+            "change": -30
+        },
+        {
             "response": "Please refrain from using swear words.",
             "mood": 50,
             "change": -40
         },
         {
+            "response": "Unnecessary and crass. Please focus on our mission.",
+            "mood": 50,
+            "change": -40
+        },
+        {
             "response": "Fuck you!",
+            "mood": 0,
+            "change": -10
+        },
+        {
+            "response": "Imagine I am saying something about your 'Momma'",
+            "mood": 0,
+            "change": -10
+        },
+        {
+            "response": "Nice. Please focus on our mission... Asshole.",
             "mood": 0,
             "change": -10
         }
