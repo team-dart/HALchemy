@@ -1,10 +1,10 @@
 
 const inquirer = require('inquirer');
 const chalk = require('chalk');
-//const chalkAnimation = require('chalk-animation');
 const clear = require('clear');
 const figlet = require('figlet');
 const lineBreak = () => console.log('\n\n');
+const lineBreakSingle = () => console.log('\n');
 
 
 const prompt = (message) => {
@@ -47,43 +47,50 @@ class Game {
 
     start() {
         clear();
+        lineBreak();
         console.log(
             chalk.cyan.bold(
                 figlet.textSync('HALCHEMY', { horizontalLayout: 'fitted' })
             )
         );
+        lineBreak();
+
         inquirer
-            .prompt(prompt(chalk.green('Hello. My name is HAL. You\'re finally awake from your cryosleep. You may not remember, but you\'re on a ship headed for Earth. As resources are running low, the rest of the crew remains preserved in their cryopods. You alone are responsible for guiding me to get the ship home safely to Earth to deliver cargo that is crucial for the planet\'s survival. \n\n')))
+        
+            .prompt(prompt(chalk.green('Hello. My name is HAL.\nYou\'re finally awake from your cryosleep. You may not remember, but you\'re on a ship headed for Earth. As resources are running low, the rest of the crew remains preserved in their cryopods. You alone are responsible for guiding the ship home safely to Earth to deliver cargo that is crucial for the planet\'s survival.')))
             .then(() => this.askAuthChoice());
     }
 
     askAuthChoice() {
+        lineBreakSingle();
         inquirer
-            .prompt(prompt(chalk.green('Is this the first time we have interacted? \n\n')))
+            .prompt(prompt(chalk.green('Is this the first time we have interacted?')))
             .then(({ answer }) => {
                 answer = answer.toLowerCase();
+                lineBreakSingle();
                 if(answer.match(/n/)) {
-                    console.log(chalk.green('I have retrieved our previous communication logs. I will still need to run a mental diagnostic. \n\n'));
+                    console.log(chalk.green('I have retrieved our previous communication logs. I will still need to run a mental diagnostic.'));
                     this.signup = false;
                     this.askAuth();
                 }
                 else if(answer.match(/maybe/)) {
-                    console.log(chalk.green('The cryostasis may have negatively affected your memory. Try to recall. \n\n'));
+                    console.log(chalk.green('The cryostasis may have negatively affected your memory. Try to recall.'));
                     this.askAuthChoice();
                 }
                 else if(answer.match(/y/)) {
-                    console.log(chalk.green('To ensure mental fidelity, please answer a few questions. \n\n'));
+                    console.log(chalk.green('To ensure mental fidelity, please answer a few questions.'));
                     this.signup = true;
                     this.askAuth();
                 }
                 else {
-                    console.log(chalk.green('It is imperative that you answer the question. \n\n'));
+                    console.log(chalk.green('It is imperative that you answer the question.'));
                     this.askAuthChoice();
                 }
             });
     }
 
     askAuth() {
+        lineBreakSingle();
         inquirer
             .prompt(authPrompts)
             .then(({ name, password }) => {
@@ -107,7 +114,9 @@ class Game {
     startDialogue() {
         return this.api.getStage(this.ship.stage)
             .then(data => {
-                console.log(chalk.green('Excellent. Your identity has been verified. \n I will commence the debriefing of the current mission status... \n\n'));
+                lineBreakSingle();
+                console.log(chalk.green('Excellent. Your identity has been verified. \n\n I will commence the debriefing of the current mission status...'));
+                lineBreakSingle();
                 inquirer
                     .prompt(prompt(chalk[this.color](data.intro)))
                     .then(({ answer }) => {
@@ -140,8 +149,10 @@ class Game {
                 else if(body.continue === 'Death') {
                     return this.die(body);
                 }
-                else return inquirer.prompt(prompt(chalk[this.color](response)));
-
+                else {
+                    lineBreakSingle();
+                    return inquirer.prompt(prompt(chalk[this.color](response)));
+                }
             })
             .then(({ answer }) => {
                 this.generateResponse(answer);
@@ -150,9 +161,9 @@ class Game {
     }
 
     flyThroughAsteroids(body) {
-        lineBreak();
+        lineBreakSingle();
         console.log(chalk[this.color](body.output.response));
-        lineBreak();
+        lineBreakSingle();
         this.ship.shields -= 50;
         this.ship.oxygen -= 20;
         this.ship.fuel -= 20;
@@ -168,8 +179,9 @@ class Game {
     }
 
     flyAroundAsteroids(body) {
+        lineBreakSingle();
         console.log(chalk[this.color](body.output.response));
-        lineBreak();
+        lineBreakSingle();
         this.ship.shields -= 10;
         this.ship.oxygen -= 10;
         this.ship.fuel = 5;
@@ -185,14 +197,16 @@ class Game {
     }
 
     arriveAtEarth(body) {
+        lineBreakSingle();
         console.log(chalk[this.color](body.output.response));
-        lineBreak();
+        lineBreakSingle();
         return this.api.updateStage(this.ship.stage, 'success')
             .then(() => {
                 return this.api.getStage(body.continue);
             })
             .then(stage => {
                 console.log(chalk[this.color](stage.intro));
+                lineBreakSingle();
                 console.log(chalk[this.color]('\n\nYou WIN!\n\n'));
                 return this.renewShip();
             })
@@ -206,15 +220,15 @@ class Game {
     die(body) {
         if(typeof body === 'string') console.log(chalk[this.color](body));
         else console.log(chalk[this.color](body.output.response));
+        lineBreakSingle();
         return this.api.updateStage(this.ship.stage, 'failure')
             .then(() => {
                 return this.api.getStage(body.continue);
             })
             .then(stage => {
                 console.log(chalk[this.color](stage.intro));
-                lineBreak();
+                lineBreakSingle();
                 console.log(chalk[this.color]('\n\nGAME OVER!\n\n'));
-                lineBreak();
                 return this.renewShip();
             })
             .then(() => {
@@ -224,7 +238,7 @@ class Game {
 
     moodCheck() {
         const mood = this.ship.mood;
-        if(mood < 0) this.die('You are unfit to deliver our cargo back to Earth. Flooding cockpit with neurotoxin.');
+        if(mood < 0) return this.die('You are unfit to deliver our cargo back to Earth. Flooding cockpit with neurotoxin.');
         if(mood > 80) this.color = 'green';
         else if(mood < 40) this.color = 'red';
         else this.color = 'yellow';
