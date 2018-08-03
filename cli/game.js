@@ -5,6 +5,7 @@ const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
 const lineBreak = () => console.log('\n\n');
+const lineBreakSingle = () => console.log('\n');
 
 
 const prompt = (message) => {
@@ -47,12 +48,16 @@ class Game {
 
     start() {
         clear();
+        lineBreak();
         console.log(
             chalk.cyan.bold(
                 figlet.textSync('HALCHEMY', { horizontalLayout: 'fitted' })
             )
         );
+        lineBreak();
+
         inquirer
+        
             .prompt(prompt(chalk.green('Hello. My name is HAL. You\'re finally awake from your cryosleep. You may not remember, but you\'re on a ship headed for Earth. As resources are running low, the rest of the crew remains preserved in their cryopods. You alone are responsible for guiding me to get the ship home safely to Earth to deliver cargo that is crucial for the planet\'s survival. \n\n')))
             .then(() => this.askAuthChoice());
     }
@@ -107,7 +112,9 @@ class Game {
     startDialogue() {
         return this.api.getStage(this.ship.stage)
             .then(data => {
-                console.log(chalk.green('Excellent. Your identity has been verified. \n I will commence the debriefing of the current mission status... \n\n'));
+                lineBreakSingle();
+                console.log(chalk.green('Excellent. Your identity has been verified. \n\n I will commence the debriefing of the current mission status...'));
+                lineBreakSingle();
                 inquirer
                     .prompt(prompt(chalk[this.color](data.intro)))
                     .then(({ answer }) => {
@@ -154,7 +161,7 @@ class Game {
     }
 
     flyThroughAsteroids(body) {
-        lineBreak();
+        lineBreakSingle();
         console.log(chalk[this.color](body.output.response));
         lineBreak();
         this.ship.shields -= 50;
@@ -172,6 +179,7 @@ class Game {
     }
 
     flyAroundAsteroids(body) {
+        lineBreakSingle();
         console.log(chalk[this.color](body.output.response));
         lineBreak();
         this.ship.shields -= 10;
@@ -189,6 +197,7 @@ class Game {
     }
 
     arriveAtEarth(body) {
+        lineBreakSingle();
         console.log(chalk[this.color](body.output.response));
         lineBreak();
         return this.api.updateStage(this.ship.stage, 'success')
@@ -208,6 +217,7 @@ class Game {
     }
 
     die(body) {
+        lineBreakSingle();
         console.log(chalk[this.color](body.output.response));
         lineBreak();
         return this.api.updateStage(this.ship.stage, 'failure')
@@ -216,9 +226,8 @@ class Game {
             })
             .then(stage => {
                 console.log(chalk[this.color](stage.intro));
-                lineBreak();
+                lineBreakSingle();
                 console.log(chalk[this.color]('\n\nGAME OVER!\n\n'));
-                lineBreak();
                 return this.renewShip();
             })
             .then(() => {
