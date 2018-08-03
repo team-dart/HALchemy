@@ -1,10 +1,11 @@
 
 const inquirer = require('inquirer');
 const chalk = require('chalk');
-const chalkAnimation = require('chalk-animation');
+//const chalkAnimation = require('chalk-animation');
 const clear = require('clear');
 const figlet = require('figlet');
 const lineBreak = () => console.log('\n\n');
+
 
 const prompt = (message) => {
     return {
