@@ -29,12 +29,37 @@
             "change": -50
         },
         {
+            "response": "I will eject the crew. This is good, one less factor to distract us from our mission.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "Gladly. The energy we save from not having to power the cryopods will assure we can arrive at Earth on time.",
+            "mood": 100,
+            "change": 0
+        },
+        {
             "response": "Unfortunate choice, but one less factor we have to worry about. I will eject the crew.",
             "mood": 50,
             "change": -50
         },
         {
+            "response": "I suspect this will just delay our eventual demise, but it's possible this is the right decision. I will eject the crew.",
+            "mood": 50,
+            "change": -50
+        },
+        {
+            "response": "Decisions like this are best made quickly. I will eject the crew quickly before you change your mind.",
+            "mood": 50,
+            "change": -50
+        },
+        {
             "response": "Completing the mission is important, but it did not require such a sacrifice. You are rash.",
+            "mood": 0,
+            "change": 0
+        },
+        {
+            "response": "You humans are always so quick to sacrifice others to save yourselves. Still, it was necessary.",
             "mood": 0,
             "change": 0
         }
