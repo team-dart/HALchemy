@@ -891,3 +891,24 @@
     ],
     "stages": ["Asteroids", "Asteroids-Direct", "Asteroids-Avoid"]
 }
+{
+    "intent": "sorry",
+    "output": [
+        {
+            "response": "No worries.",
+            "mood": 100,
+            "change": 0
+        },
+        {
+            "response": "It's okay.",
+            "mood": 50,
+            "change": 10
+        },
+        {
+            "response": "Apology accepted.",
+            "mood": 0,
+            "change": 10
+        }
+    ],
+    "stages": ["Asteroids", "Asteroids-Direct", "Asteroids-Avoid"]
+}
