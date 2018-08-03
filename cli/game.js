@@ -21,11 +21,11 @@ const authPrompts = [
         type: 'input',
         name: 'name',
         message: 'Please verify your username: \n\n',
-        validation: function(value) {
-            if(!/\s/.test(value)) {
+        validate: function(value) {
+            if(!/\s/.test(value) && value.length > 0) {
                 return true;
             }
-            return 'Spaces are not allowed, you know.';
+            return 'That\'s not a valid username, you know.';
         }
     },
     {
@@ -117,40 +117,36 @@ class Game {
     }
 
     generateResponse(input) {
-        if(input === 'exit') return;
-        else {
-            this.moodCheck();
-            return this.api.parseIntent(input)
-                .then(intent => {
-                    return this.api.think(intent, this.ship.mood, this.ship.stage);
-                })
-                .then(body => {
-                    let response;
-                    if(body.output) {
-                        response = body.output.response;
-                        this.ship.mood += body.output.change;
-                        this.moodCheck();
-                    }
-                    else response = body;
-                    if(body.continue === 'Asteroids-Direct') {
-                        return this.flyThroughAsteroids(body);
-                    }
-                    else if(body.continue === 'Asteroids-Avoid') {
-                        return this.flyAroundAsteroids(body);
-                    }
-                    else if(body.continue === 'Earth') {
-                        return this.arriveAtEarth(body);
-                    }
-                    else if(body.continue === 'Death') {
-                        return this.die(body);
-                    }
-                    else return inquirer.prompt(prompt(chalk[this.color](response)));
-    
-                })
-                .then(({ answer }) => {
-                    this.generateResponse(answer);
-                });
-        }
+        return this.api.parseIntent(input)
+            .then(intent => this.api.think(intent, this.ship.mood, this.ship.stage))
+            .then(body => {
+                let response;
+                if(body.output) {
+                    response = body.output.response;
+                    this.ship.mood += body.output.change;
+                    this.moodCheck();
+                }
+                else response = body;
+                
+                if(body.continue === 'Asteroids-Direct') {
+                    return this.flyThroughAsteroids(body);
+                }
+                else if(body.continue === 'Asteroids-Avoid') {
+                    return this.flyAroundAsteroids(body);
+                }
+                else if(body.continue === 'Earth') {
+                    return this.arriveAtEarth(body);
+                }
+                else if(body.continue === 'Death') {
+                    return this.die(body);
+                }
+                else return inquirer.prompt(prompt(chalk[this.color](response)));
+
+            })
+            .then(({ answer }) => {
+                this.generateResponse(answer);
+            });
+        
     }
 
     flyThroughAsteroids(body) {

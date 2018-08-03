@@ -8,30 +8,30 @@
     "name": "Asteroids",
     "success": 4,
     "failure": 7,
-    "intro":"We are approaching a dangerous asteroid belt. You can choose to avoid the asteroids, but that will take time, perhaps too much time. Navigating through the belt is more direct, but there is much greater risk of damage. Which do you choose? Avoid or direct?"
+    "intro":"We are approaching a dangerous asteroid belt. You can choose to avoid the asteroids, but that will take time, perhaps too much time. Navigating through the belt is more direct, but there is much greater risk of damage. What do you think?"
 }
 {
     "_id": "5b5f855ca94242c067ba622a",
     "name": "Asteroids-Avoid",
     "success": 1,
     "failure": 9,
-    "intro":"We avoided immediate danger by taking the longer, but safer, route around the asteroid belt. Gas and oxygen are running low, but we continue to make our way towards Earth."
+    "intro":"We avoided immediate danger by taking the longer, but safer, route around the asteroid belt. However, fuel has reached a critical level. We need to make a decision or we won't make it."
 }
 {
     "_id": "5b5f855ca94242c067ba622b",
     "name": "Asteroids-Direct",
     "success": 2,
     "failure": 14,
-    "intro":"You have chosen to find a direct route through the dangerous asteroid belt. We will have to hope that the ship does not take too much damage. I can provide reports upon request."
+    "intro":"You have chosen to find a direct route through the dangerous asteroid belt. However, we are sustaining heavy damage to our shields. I don't believe we are going to make it at this rate without some drastic measures."
 }
 {
     "_id": "5b5f855ca94242c067ba6330",
     "name": "Earth",
-    "intro":"Our mission has succeeded! You have saved the day by returning to Earth just in time. I approve of your strategic thinking."
+    "intro":"Our mission has succeeded! You have saved the day by delivering the cargo to Earth just in time. I approve of your strategic thinking."
 }
 {
     "_id": "5b5f855ca94242c067ba6340",
     "name": "Death",
-    "intro":"Our mission has failed. The ship, disabled, floats through space as the life support systems slowly shut down....."
+    "intro":"Our mission has failed."
 }
 
