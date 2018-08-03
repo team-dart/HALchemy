@@ -117,6 +117,7 @@ class Game {
                 lineBreakSingle();
                 console.log(chalk.green('Excellent. Your identity has been verified. \n\n I will commence the debriefing of the current mission status...'));
                 lineBreakSingle();
+                this.moodCheck();
                 inquirer
                     .prompt(prompt(chalk[this.color](data.intro)))
                     .then(({ answer }) => {
