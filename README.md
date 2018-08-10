@@ -1,6 +1,8 @@
 # HALchemy
 ## A CLI chatbot space survival game.
 
+// initial commit
+
 ![halchemy screen capture](/public/halchemy-screenshot.png)
 
 ## Intro
