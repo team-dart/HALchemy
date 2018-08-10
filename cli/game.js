@@ -112,6 +112,8 @@ class Game {
     }
 
     startDialogue() {
+        // The client doesn't get to choose the state,
+        // you need to have an api method to _get the logged in users current stage_
         return this.api.getStage(this.ship.stage)
             .then(data => {
                 lineBreakSingle();
@@ -127,9 +129,12 @@ class Game {
     }
 
     generateResponse(input) {
+        // These need to be combined into _one call to the server_.
+        // User text goes in...
         return this.api.parseIntent(input)
             .then(intent => this.api.think(intent, this.ship.mood, this.ship.stage))
             .then(body => {
+                // ... and server gives response
                 let response;
                 if(body.output) {
                     response = body.output.response;
@@ -165,6 +170,7 @@ class Game {
         lineBreakSingle();
         console.log(chalk[this.color](body.output.response));
         lineBreakSingle();
+        // see how the client can set the ship levels to whatever they want?
         this.ship.shields -= 50;
         this.ship.oxygen -= 20;
         this.ship.fuel -= 20;
